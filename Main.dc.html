@@ -1,0 +1,1124 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Alex Cerqueira — Service Design &amp; Research</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Portfolio of Alex Cerqueira — Service Design, UX Research, Product Strategy, Systems Thinking and AI.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Alex Cerqueira — Service Design &amp; Research">
+<meta property="og:description" content="Portfolio of Alex Cerqueira — Service Design, UX Research, Product Strategy, Systems Thinking and AI.">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+:root{--bg:#F8F8F6;--ink:#171717;--mute:#666666;--line:#DADAD6;--bg2:#EFEFEB;--accent:#3155E7;--ink2:#3A3A38;--faint:#8A8A85;--hdr:rgba(248,248,246,.88);--logo:#4A4A48;--fab:#E6E6E2;--sans:'Geist','Helvetica Neue',Helvetica,Arial,sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;--ease:cubic-bezier(.16,1,.3,1);--ease2:cubic-bezier(.65,0,.35,1);--gx:clamp(20px,4.4vw,72px);--gut:24px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--ink);text-decoration:none}a:hover{color:var(--ink)}
+*,*::before,*::after{box-sizing:border-box}
+::selection{background:var(--ink);color:var(--bg)}
+:focus-visible{outline:1.5px solid var(--accent);outline-offset:5px}
+h1,h2,h3,p,ul,ol,figure,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+
+.site{position:relative;overflow-x:clip;background:var(--bg);color:var(--ink);min-height:100vh;transition:background-color 500ms var(--ease),color 500ms var(--ease)}
+.site[data-theme="dark"]{--bg:#121212;--ink:#EDEDEA;--mute:#A3A39E;--line:#2E2E2C;--bg2:#1D1D1C;--accent:#7D95FF;--ink2:#CFCFCB;--faint:#85857F;--hdr:rgba(18,18,18,.86);--logo:#2B2B29;--fab:#262624}
+.site[data-theme="dark"] ::selection{background:var(--ink);color:var(--bg)}
+.fab{position:fixed;right:24px;bottom:24px;z-index:70;width:52px;height:70px;border-radius:26px;background:var(--fab);color:var(--ink);display:flex;align-items:center;justify-content:center;transition:background-color 500ms var(--ease),color 500ms var(--ease),transform 500ms var(--ease)}
+.fab:hover{transform:translateY(-3px)}
+.fab svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.fab .bulb{transition:fill 400ms}
+.site[data-theme="dark"] .fab .bulb{fill:currentColor}
+.fab .rays{transition:opacity 400ms,transform 500ms var(--ease);transform-origin:12px 9px}
+.site[data-theme="light"] .fab .rays{opacity:.9}
+.site[data-theme="dark"] .fab .rays{opacity:1;transform:scale(1.08)}
+.net{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block}
+.layer{position:relative;z-index:1}
+.g{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);padding-inline:var(--gx)}
+.mono{font-family:var(--mono);font-size:11px;line-height:1.5;letter-spacing:.06em;text-transform:uppercase;font-weight:400}
+.mute{color:var(--mute)}
+.eyebrow{display:flex;gap:14px;align-items:baseline;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.eyebrow b{font-weight:400;color:var(--ink)}
+.ph{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.skip{position:absolute;left:var(--gx);top:-60px;z-index:100;background:var(--ink);color:var(--bg);padding:10px 14px}
+.skip:focus{top:12px;color:var(--bg)}
+
+/* micro-interactions */
+.ul{position:relative;display:inline-block}
+.ul::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform 500ms var(--ease)}
+a:hover .ul::after,a:focus-visible .ul::after,button:hover .ul::after{transform:scaleX(1);transform-origin:left}
+.arr{display:inline-block;transition:transform 500ms var(--ease)}
+a:hover .arr.se,a:focus-visible .arr.se{transform:translate(5px,5px)}
+a:hover .arr.ne,a:focus-visible .arr.ne{transform:translate(5px,-5px)}
+a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
+
+/* reveal language: line mask, rise, wipe */
+.ln{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
+.li{display:block;transition:transform 1000ms var(--ease);transition-delay:calc(var(--d,0) * 80ms)}
+.up{transition:opacity 900ms var(--ease),transform 900ms var(--ease);transition-delay:calc(var(--d,0) * 80ms)}
+.wipe{transition:clip-path 1200ms var(--ease2);transition-delay:calc(var(--d,0) * 80ms)}
+.d1{--d:1}.d2{--d:2}.d3{--d:3}.d4{--d:4}.d5{--d:5}.d6{--d:6}.d7{--d:7}
+.js .rv:not(.is-in) .li{transform:translateY(110%)}
+.js .rv:not(.is-in) .up,.js .up.rv:not(.is-in){opacity:0;transform:translateY(14px)}
+.js .rv:not(.is-in) .wipe,.js .wipe.rv:not(.is-in){clip-path:inset(100% 0 0 0)}
+
+/* header */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:60;transition:background-color 500ms var(--ease)}
+.hdr-in{display:flex;align-items:center;justify-content:space-between;padding:26px var(--gx);transition:padding 500ms var(--ease)}
+.hdr.is-scrolled{background:var(--hdr)}
+.hdr.is-scrolled .hdr-in{padding-block:14px}
+.logo{display:inline-flex;align-items:center;justify-content:center;min-height:44px;width:165px;height:70px;margin:-26px 0 -26px calc(-1 * var(--gx));background:var(--logo);color:#FFFFFF;transition:width 500ms var(--ease),height 500ms var(--ease),margin 500ms var(--ease),background-color 500ms var(--ease),color 500ms var(--ease)}
+.logo-mark{display:block;height:24px;width:auto;fill:currentColor;transition:height 500ms var(--ease)}
+.hdr.is-scrolled .logo{width:38px;height:44px;margin:-14px 0;background:transparent;color:var(--ink)}
+.hdr.is-scrolled .logo-mark{height:18px}
+.nav{display:flex;gap:clamp(22px,2.8vw,44px)}
+.nav a{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:8px 0;color:var(--mute);transition:color 300ms}
+.nav a:hover,.nav a:focus-visible{color:var(--ink)}
+.menu-btn{display:none;min-height:44px;min-width:44px;font-family:var(--mono);font-size:11px;letter-spacing:.08em}
+.mmenu{position:fixed;inset:0;z-index:55;background:var(--bg);padding:120px var(--gx) 40px;display:flex;flex-direction:column;justify-content:space-between;clip-path:inset(0 0 0 0);transition:clip-path 700ms var(--ease2),visibility 0s linear 0s}
+.mmenu[data-open="false"]{clip-path:inset(0 0 100% 0);visibility:hidden;transition:clip-path 600ms var(--ease2),visibility 0s linear 600ms}
+.mmenu ol{display:flex;flex-direction:column;gap:4px}
+.mmenu a{display:flex;align-items:baseline;gap:18px;font-size:clamp(40px,11vw,60px);letter-spacing:-.045em;font-weight:320;line-height:1.12;min-height:44px}
+
+/* hero */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:120px}
+.hero-g{row-gap:0}
+.hero .eyebrow{grid-column:1/7;margin-bottom:clamp(28px,5vh,56px)}
+.h-hero{grid-column:1/9;font-size:clamp(46px,6vw,104px);line-height:.96;letter-spacing:-.055em;font-weight:300}
+.kw{background-image:linear-gradient(currentColor,currentColor);background-size:0% 1px;background-repeat:no-repeat;background-position:0 92%;transition:background-size 600ms var(--ease);cursor:default}
+.kw:hover{background-size:100% 1px}
+.hero-sub{grid-column:1/6;padding-top:clamp(28px,4.5vh,48px)}
+.lead{font-size:clamp(18px,1.35vw,20px);line-height:1.5;letter-spacing:-.01em;color:var(--ink2);max-width:31em}
+.ctas{display:flex;flex-wrap:wrap;gap:12px 36px;margin-top:36px}
+.cta{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;display:inline-flex;align-items:center;gap:10px;min-height:44px}
+.cta.pri{color:var(--accent)}.cta.pri:hover{color:var(--accent)}
+.hero-foot{padding-block:clamp(40px,7vh,72px) 28px;align-items:end}
+.hero-foot .f1{grid-column:1/6}
+.hero-foot .f2{grid-column:7/13;justify-self:end;display:flex;gap:12px;align-items:center}
+.cue{display:block;width:1px;height:28px;background:var(--line);position:relative;overflow:hidden}
+.cue::after{content:"";position:absolute;left:0;top:0;width:1px;height:10px;background:var(--ink);animation:cue 2.2s var(--ease2) infinite}
+@keyframes cue{0%{transform:translateY(-10px)}100%{transform:translateY(28px)}}
+
+/* sections */
+.sec{position:relative;scroll-margin-top:40px}
+.shead{padding-top:clamp(120px,20vh,220px);padding-bottom:clamp(56px,9vh,104px);row-gap:28px}
+.shead .eyebrow{grid-column:1/13}
+.h-sec{grid-column:1/9;font-size:clamp(36px,4.6vw,76px);line-height:1;letter-spacing:-.05em;font-weight:300}
+.s-sup{grid-column:1/6;color:var(--mute);font-size:clamp(17px,1.25vw,19px);max-width:28em}
+
+/* selected work */
+.hs-run{position:relative}
+.hs-stick{overflow-x:auto;padding-block:8px 24px}
+.js .hs-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding-block:56px 0}
+.hs-track{display:flex;gap:clamp(24px,3.4vw,56px);padding-inline:var(--gx);will-change:transform;width:max-content}
+.project{flex:0 0 auto;width:min(60vw,1040px);display:block;position:relative;cursor:pointer;transition:opacity 700ms var(--ease)}
+.js .project{opacity:.38}
+.js .project.is-on{opacity:1}
+.p-fig{position:relative;overflow:hidden;background:var(--bg2);aspect-ratio:16/9;max-height:56vh;width:100%}
+.p-in{position:absolute;inset:0 -6%;transition:transform 900ms var(--ease);will-change:transform}
+.hs-ui{display:flex;align-items:center;gap:20px;padding:clamp(28px,5vh,48px) var(--gx) 0}
+.hs-bar{flex:0 1 220px;height:1px;background:var(--line);position:relative}
+.hs-bar i{position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(0)}
+.hs-hint{margin-left:auto}
+.project:hover .p-in,.project:focus-visible .p-in{transform:scale(1.02)}
+.p-in svg{display:block;width:100%;height:100%}
+.p-fig .ph{position:absolute;left:18px;bottom:16px}
+.p-dot{position:absolute;right:18px;top:18px;width:8px;height:8px;border-radius:50%;background:var(--accent);transform:scale(0);transition:transform 500ms var(--ease)}
+.project:hover .p-dot,.project:focus-visible .p-dot{transform:scale(1)}
+.p-meta{display:grid;grid-template-columns:48px 1fr auto;column-gap:16px;row-gap:8px;padding-top:22px;align-items:baseline}
+.p-num{font-family:var(--mono);font-size:11px;color:var(--mute)}
+.p-title{font-size:clamp(24px,2.3vw,38px);line-height:1.08;letter-spacing:-.035em;font-weight:340;transition:transform 600ms var(--ease)}
+.project:hover .p-title,.project:focus-visible .p-title{transform:translateX(8px)}
+.p-tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);white-space:nowrap}
+.p-desc{grid-column:2/4;color:var(--mute);font-size:16px;max-width:34em;transition:color 500ms}
+.project:hover .p-desc{color:var(--ink2)}
+.p-ctx{grid-column:2/4;display:flex;gap:18px;flex-wrap:wrap;opacity:0;transform:translateY(-4px);transition:opacity 500ms var(--ease),transform 500ms var(--ease)}
+.project:hover .p-ctx,.project:focus-visible .p-ctx{opacity:1;transform:none}
+.vz .l{stroke:var(--ink);stroke-opacity:.22;stroke-width:1;fill:none}
+.vz .l2{stroke:var(--ink);stroke-opacity:.5;stroke-width:1;fill:none}
+.vz .f{fill:var(--ink);fill-opacity:.7}
+.vz .b{fill:var(--bg);stroke:var(--ink);stroke-opacity:.5;stroke-width:1}
+.vz .a{fill:var(--accent)}
+
+.cursor{position:fixed;left:0;top:0;z-index:80;pointer-events:none;width:0;height:0}
+.cursor span{position:absolute;left:-40px;top:-40px;width:80px;height:80px;border-radius:50%;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;transform:scale(0);transition:transform 450ms var(--ease)}
+.cursor.on span{transform:scale(1)}
+@media (hover:none),(pointer:coarse){.cursor{display:none}}
+@media (hover:hover) and (pointer:fine){.project{cursor:none}}
+
+/* approach — sticky scrollytelling, the diagram is drawn by the network */
+.appr-run{height:440vh;position:relative}
+.appr-stick{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center}
+.appr-g{width:100%;align-items:center}
+.appr-l{grid-column:1/5;display:flex;flex-direction:column;gap:clamp(28px,5vh,48px)}
+.stg li+li{margin-top:2px}
+.stg button{display:grid;grid-template-columns:36px 1fr;align-items:baseline;width:100%;min-height:44px;padding:6px 0;color:var(--faint);transition:color 500ms var(--ease)}
+.stg button:hover{color:var(--ink)}
+.stg .n{font-family:var(--mono);font-size:11px}
+.stg .t{font-size:clamp(22px,2vw,30px);letter-spacing:-.03em;font-weight:330;transition:transform 600ms var(--ease)}
+.stg button[aria-current="step"]{color:var(--ink)}
+.stg button[aria-current="step"] .n{color:var(--accent)}
+.stg button[aria-current="step"] .t{transform:translateX(8px)}
+.sp{display:grid;min-height:150px}
+.sp>div{grid-area:1/1;opacity:0;transform:translateY(10px);transition:opacity 600ms var(--ease),transform 600ms var(--ease);pointer-events:none}
+.sp[data-stage="1"] .s1,.sp[data-stage="2"] .s2,.sp[data-stage="3"] .s3,.sp[data-stage="4"] .s4,.sp[data-stage="5"] .s5{opacity:1;transform:none;pointer-events:auto}
+.sp p{font-size:17px;line-height:1.55;max-width:26em}
+.sp .m{margin-top:14px;color:var(--mute)}
+.appr-bar{height:1px;background:var(--line);position:relative;max-width:320px}
+.appr-bar i{position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(0)}
+
+/* expertise */
+.exp-g{padding-bottom:clamp(120px,18vh,200px)}
+.exp{grid-column:1/7}
+.exp li{padding:clamp(18px,2.4vw,30px) 0;cursor:default;transition:opacity 500ms var(--ease)}
+.exp:hover li:not(:hover){opacity:.32}
+.exp .row{display:grid;grid-template-columns:48px 1fr;align-items:baseline}
+.exp .n{font-family:var(--mono);font-size:11px;color:var(--mute)}
+.exp h3{font-size:clamp(32px,4vw,64px);line-height:1;letter-spacing:-.05em;font-weight:300;transition:transform 700ms var(--ease)}
+.exp li:hover h3{transform:translateX(10px)}
+.exp p{grid-column:2;margin-top:12px;color:var(--mute);font-size:16px;max-width:30em}
+.exp .m{grid-column:2;margin-top:8px;color:var(--faint)}
+
+/* writing */
+.wl{border-top:1px solid var(--line)}
+.w-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);padding:30px var(--gx);border-bottom:1px solid var(--line);align-items:baseline;transition:opacity 500ms var(--ease)}
+.wl:hover .w-row:not(:hover),.wl:focus-within .w-row:not(:focus-visible){opacity:.4}
+.w-row{padding-block:24px}
+.w-row .n{grid-column:1/2;color:var(--mute)}
+.w-row .t{grid-column:2/9;font-size:clamp(19px,1.6vw,26px);letter-spacing:-.03em;line-height:1.25;font-weight:340;transition:transform 600ms var(--ease)}
+.w-row:hover .t{transform:translateX(8px)}
+.w-row .p{grid-column:9/12;color:var(--mute)}
+.w-row .a{grid-column:12/13;justify-self:end}
+.w-bar{padding-bottom:28px;row-gap:16px;align-items:end}
+.w-filters{grid-column:1/10;display:flex;flex-wrap:wrap;gap:4px 26px}
+.w-f{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);min-height:44px;position:relative;transition:color 300ms}
+.w-f:hover{color:var(--ink)}
+.w-f[aria-pressed="true"]{color:var(--ink)}
+.w-f[aria-pressed="true"]::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:1px;background:var(--ink)}
+.w-count{grid-column:10/13;justify-self:end;padding-bottom:12px}
+.w-foot{padding-top:32px;padding-bottom:clamp(120px,18vh,200px);row-gap:16px;align-items:baseline}
+.w-foot .a{grid-column:1/8;justify-self:start}
+.w-foot .b{grid-column:9/13;justify-self:end}
+
+/* books */
+.book{padding-bottom:clamp(120px,18vh,200px);row-gap:48px;align-items:end}
+.cover{grid-column:1/5;aspect-ratio:2/3;position:relative;background:var(--bg2)}
+.cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform 900ms var(--ease)}
+.cover:hover .cover-img{transform:scale(1.02)}
+.cover{overflow:hidden}
+.syn{grid-column:2;color:var(--ink2);line-height:1.6}
+.syn p+p{margin-top:.8em}
+.book-info{grid-column:6/12}
+.book-title{font-size:clamp(32px,3.4vw,58px);line-height:1.02;letter-spacing:-.045em;font-weight:300;margin:20px 0 32px}
+.book-title span{display:block;color:var(--mute)}
+.kv{display:grid;grid-template-columns:auto 1fr;column-gap:32px;row-gap:10px;margin-bottom:36px;font-size:16px}
+.kv dt{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);padding-top:3px}
+
+/* about */
+.about{padding-bottom:clamp(120px,18vh,200px);row-gap:48px;align-items:start}
+.portrait{grid-column:1/6;aspect-ratio:4/5;position:relative;background:var(--bg2)}
+.portrait{overflow:hidden}
+.portrait-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block;transition:transform 1200ms var(--ease)}
+.portrait:hover .portrait-img{transform:scale(1.02)}
+.about-t{grid-column:7/13;padding-top:8px}
+.about-t p{font-size:clamp(17px,1.25vw,19px);line-height:1.65;margin-bottom:1.1em;max-width:31em;color:var(--ink2)}
+.about-t p.first{font-size:clamp(22px,1.9vw,30px);line-height:1.35;letter-spacing:-.025em;color:var(--ink);font-weight:340}
+.about-t .kv{margin-top:40px}
+
+/* contact */
+.contact{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding-top:clamp(120px,18vh,200px)}
+.c-top{row-gap:28px}
+.c-top .eyebrow{grid-column:1/13}
+.h-xl{grid-column:1/9;font-size:clamp(52px,8.2vw,148px);line-height:.92;letter-spacing:-.06em;font-weight:300}
+.c-space{display:none}
+.c-bot{padding-block:56px clamp(48px,8vh,88px);row-gap:36px;align-items:end}
+.c-bot .lead{grid-column:1/5;color:var(--mute)}
+.c-links{grid-column:1/6;margin-top:clamp(24px,4vh,40px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.c-links li+li{border-top:1px solid var(--line)}
+.c-links a,.c-links .row{display:grid;grid-template-columns:96px 1fr auto;gap:16px;align-items:baseline;padding:16px 0;min-height:44px}
+.c-links .big{font-size:clamp(20px,1.8vw,28px);letter-spacing:-.03em;font-weight:340}
+
+.ftr{padding-block:28px 32px;row-gap:12px;align-items:baseline;border-top:1px solid var(--line)}
+.ftr .f1{grid-column:1/4}.ftr .f2{grid-column:4/8}.ftr .f3{grid-column:8/9}.ftr .f4{grid-column:9/11}.ftr .f5{grid-column:11/13;justify-self:end}
+
+/* tablet — 8 columns */
+@media (max-width:1080px){
+  :root{--gut:20px}
+  .g,.w-row{grid-template-columns:repeat(8,minmax(0,1fr))}
+  .hero .eyebrow{grid-column:1/9}.h-hero{grid-column:1/9}.hero-sub{grid-column:1/6}
+  .hero-foot .f1{grid-column:1/5}.hero-foot .f2{grid-column:5/9}
+  .h-sec{grid-column:1/9}.s-sup{grid-column:1/7}
+  .project{width:72vw}
+  .appr-l{grid-column:1/4}
+  .exp{grid-column:1/6}
+  .w-row .n{grid-column:1/2}.w-row .t{grid-column:2/8}.w-row .p{display:none}.w-row .a{grid-column:8/9}
+  .w-filters{grid-column:1/9}.w-count{grid-column:1/9;justify-self:start}
+  .w-foot .a{grid-column:1/6}.w-foot .b{grid-column:6/9}
+  .cover{grid-column:1/4}.book-info{grid-column:4/9}
+  .portrait{grid-column:1/4}.about-t{grid-column:4/9}
+  .h-xl{grid-column:1/8}.c-bot .lead{grid-column:1/9}.c-links{grid-column:1/6}
+  .ftr .f1{grid-column:1/5}.ftr .f2{grid-column:5/9}.ftr .f3{grid-column:1/3}.ftr .f4{grid-column:3/6}.ftr .f5{grid-column:6/9}
+}
+@media (max-width:860px){
+  .nav{display:none}.menu-btn{display:block}
+}
+/* mobile — 4 columns; the network sits above the text in every section */
+@media (max-width:680px){
+  :root{--gut:16px}
+  body{font-size:16px}
+  .g,.w-row{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .g>*{grid-column:1/-1 !important}
+  .hdr-in{padding-block:18px}
+  .logo{width:116px;height:60px;margin:-18px 0 -18px calc(-1 * var(--gx))}
+  .logo-mark{height:20px}
+  .hdr.is-scrolled .logo{margin:-18px 0}
+  .fab{right:16px;bottom:16px;width:44px;height:60px;border-radius:22px}
+  .hero{padding-top:52svh}
+  .h-hero{font-size:clamp(40px,11.5vw,56px)}
+  .hero-foot .f2{justify-self:start !important}
+  .shead{padding-top:120px;padding-bottom:48px}
+  .project{width:82vw}
+  .p-fig{aspect-ratio:4/3}
+  .hs-hint{display:none}
+  .p-meta{grid-template-columns:36px 1fr}
+  .p-tag{grid-column:2}
+  .p-desc,.p-ctx{grid-column:2}
+  .p-ctx{opacity:1;transform:none}
+  .appr-run{height:340vh}
+  .appr-stick{align-items:flex-end;padding-bottom:28px}
+  .appr-l{gap:20px}
+  .stg{display:flex;gap:4px}
+  .stg li+li{margin-top:0}
+  .stg button{grid-template-columns:1fr;padding:6px 8px 6px 0}
+  .stg .t{display:none}
+  .stg .n{font-size:13px}
+  .sp{min-height:180px}
+  .exp-g{padding-top:0}
+  .exp-wrap{padding-top:46svh}
+  .w-row{padding-block:22px;row-gap:8px}
+  .w-row .n{display:none}.w-row .t{grid-column:1/5 !important}.w-row .p{display:block;grid-column:1/4 !important;grid-row:2}.w-row .a{grid-column:4/5 !important;grid-row:2}
+  .w-filters{gap:0 18px}
+  .w-foot .b{justify-self:start !important}
+  .cover{max-width:260px}
+  .portrait{max-width:400px}
+  .contact{padding-top:120px}
+  .ftr .f5{justify-self:start !important}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:1ms !important;transition-delay:0ms !important;animation:none !important}
+}
+</style>
+</helmet>
+
+<div class="site" ref="{{refRoot}}" data-theme="{{theme}}">
+<canvas class="net" ref="{{refCv}}" role="img" aria-label="The Research Network: pontos de evidência que, ao longo da página, se conectam em rede, linha do tempo, blueprint de serviço, lentes de atuação e, no fim, em um sistema organizado."></canvas>
+<a class="skip" href="#main">Pular para o conteúdo</a>
+
+<header class="hdr" ref="{{refHeader}}">
+  <div class="hdr-in">
+    <a class="logo" href="#top" aria-label="Alex Cerqueira — voltar ao início"><svg class="logo-mark" viewBox="146 255 468 252" role="img" aria-hidden="true" focusable="false"><path d="M229.56 503.28C205.213 503.28 185.707 497.707 171.04 486.56C156.667 475.413 149.48 459.72 149.48 439.48C149.48 419.24 155.493 403.547 167.52 392.4C179.84 380.96 198.76 372.747 224.28 367.76L304.8 352.36C304.8 334.173 300.547 320.68 292.04 311.88C283.533 302.787 270.92 298.24 254.2 298.24C239.24 298.24 227.507 301.613 219 308.36C210.493 314.813 204.627 324.493 201.4 337.4L153.44 334.32C157.84 310.853 168.693 292.373 186 278.88C203.6 265.387 226.333 258.64 254.2 258.64C285.88 258.64 309.933 267.147 326.36 284.16C343.08 300.88 351.44 324.493 351.44 355V446.08C351.44 451.653 352.32 455.613 354.08 457.96C356.133 460.013 359.36 461.04 363.76 461.04H372.12V498C370.653 498.293 368.307 498.587 365.08 498.88C361.853 499.173 358.48 499.32 354.96 499.32C344.987 499.32 336.333 497.707 329 494.48C321.96 491.253 316.68 485.973 313.16 478.64C309.64 471.013 307.88 460.893 307.88 448.28L312.72 450.48C310.373 460.747 305.24 469.84 297.32 477.76C289.693 485.68 279.867 491.987 267.84 496.68C256.107 501.08 243.347 503.28 229.56 503.28ZM237.04 466.32C251.12 466.32 263.147 463.68 273.12 458.4C283.093 452.827 290.867 445.2 296.44 435.52C302.013 425.84 304.8 414.84 304.8 402.52V387.56L236.16 400.76C222.08 403.4 212.107 407.653 206.24 413.52C200.667 419.093 197.88 426.28 197.88 435.08C197.88 445.053 201.253 452.827 208 458.4C215.04 463.68 224.72 466.32 237.04 466.32ZM506.141 503.28C483.848 503.28 464.341 498.293 447.621 488.32C430.901 478.347 417.995 464.12 408.901 445.64C399.808 427.16 395.261 405.6 395.261 380.96C395.261 356.32 399.808 334.907 408.901 316.72C417.995 298.24 430.901 284.013 447.621 274.04C464.341 263.773 483.848 258.64 506.141 258.64C525.208 258.64 542.075 262.013 556.741 268.76C571.701 275.213 583.728 284.747 592.821 297.36C602.208 309.973 608.221 325.373 610.861 343.56L562.021 346.2C559.675 330.947 553.515 319.36 543.541 311.44C533.568 303.227 521.101 299.12 506.141 299.12C486.488 299.12 471.088 306.453 459.941 321.12C449.088 335.493 443.661 355.44 443.661 380.96C443.661 406.48 449.088 426.573 459.941 441.24C471.088 455.613 486.488 462.8 506.141 462.8C521.101 462.8 533.568 458.693 543.541 450.48C553.515 441.973 559.675 429.213 562.021 412.2L610.861 414.84C608.221 432.733 602.208 448.28 592.821 461.48C583.728 474.68 571.701 484.947 556.741 492.28C542.075 499.613 525.208 503.28 506.141 503.28Z"></path></svg></a>
+    <nav aria-label="Navegação principal">
+      <ul class="nav">
+        <li><a href="#work">WORK</a></li>
+        <li><a href="#approach">APPROACH</a></li>
+        <li><a href="#writing">WRITING</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+      </ul>
+    </nav>
+    <button class="menu-btn" type="button" aria-controls="mmenu" aria-expanded="{{menuOpen}}" onClick="{{toggleMenu}}">{{menuLabel}}</button>
+  </div>
+</header>
+
+<div class="mmenu" id="mmenu" data-open="{{menuOpen}}">
+  <nav aria-label="Navegação móvel">
+    <ol>
+      <li><a href="#work" onClick="{{closeMenu}}"><span class="mono mute">01</span>Work</a></li>
+      <li><a href="#approach" onClick="{{closeMenu}}"><span class="mono mute">02</span>Approach</a></li>
+      <li><a href="#writing" onClick="{{closeMenu}}"><span class="mono mute">04</span>Writing</a></li>
+      <li><a href="#about" onClick="{{closeMenu}}"><span class="mono mute">06</span>About</a></li>
+      <li><a href="#contact" onClick="{{closeMenu}}"><span class="mono mute">07</span>Contact</a></li>
+    </ol>
+  </nav>
+  <p class="mono mute">Service Design · Research · Strategy</p>
+</div>
+
+<main id="main" class="layer">
+
+<!-- HERO -->
+<section class="hero sec" id="top" ref="{{refHero}}" aria-labelledby="hero-title">
+  <div class="g hero-g rv" ref="{{rv}}">
+    <p class="eyebrow up d1"><b>Alex Cerqueira</b>Service Design &amp; Research</p>
+    <h1 class="h-hero" id="hero-title">
+      <span class="ln"><span class="li d1">Entender <span class="kw" onMouseEnter="{{hiPeople}}" onMouseLeave="{{hiOff}}">pessoas.</span></span></span>
+      <span class="ln"><span class="li d2">Conectar <span class="kw" onMouseEnter="{{hiSystems}}" onMouseLeave="{{hiOff}}">sistemas.</span></span></span>
+      <span class="ln"><span class="li d3">Transformar <span class="kw" onMouseEnter="{{hiExp}}" onMouseLeave="{{hiOff}}">experiências.</span></span></span>
+    </h1>
+    <div class="hero-sub">
+      <p class="lead up d5">Investigo comportamentos, identifico oportunidades e conecto pessoas, negócios e tecnologia para projetar melhores produtos e serviços.</p>
+      <div class="ctas up d6">
+        <a class="cta pri" href="#work"><span class="ul">EXPLORAR PROJETOS</span> <span class="arr se" aria-hidden="true">↘</span></a>
+        <a class="cta" href="#approach"><span class="ul">CONHECER MINHA ABORDAGEM</span> <span class="arr se" aria-hidden="true">↘</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="g hero-foot rv" ref="{{rv}}">
+    <p class="mono mute f1 up d6">Research · Strategy · Systems Thinking · AI</p>
+    <p class="mono mute f2 up d7">Scroll <span class="cue" aria-hidden="true"></span></p>
+  </div>
+</section>
+
+<!-- 01 SELECTED WORK -->
+<section class="sec" id="work" ref="{{refWork}}" aria-labelledby="work-title">
+  <div class="g shead rv" ref="{{rv}}">
+    <p class="eyebrow up"><b>01</b>Selected Work</p>
+    <h2 class="h-sec" id="work-title"><span class="ln"><span class="li d1">Da complexidade à clareza.</span></span></h2>
+    <p class="s-sup up d3">Projetos e investigações que conectam evidências, decisões e experiências.</p>
+  </div>
+
+  <div class="hs-run" ref="{{refHs}}">
+    <div class="hs-stick">
+      <div class="hs-track" ref="{{refTrack}}">
+      <a class="project rv" href="Case.dc.html" ref="{{pan}}" onFocus="{{focus0}}" onMouseEnter="{{cursorOn}}" onMouseLeave="{{cursorOff}}" aria-label="Estudo de caso 01 — Service Design (conteúdo provisório)">
+        <figure class="p-fig wipe">
+          <div class="p-in" ref="{{par}}">
+            <svg class="vz" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <line class="l" x1="400" y1="340" x2="1200" y2="340"></line>
+              <line class="l" x1="400" y1="450" x2="1200" y2="450"></line>
+              <line class="l" x1="400" y1="560" x2="1200" y2="560"></line>
+              <rect class="b" x="500" y="330" width="20" height="20"></rect>
+              <rect class="b" x="700" y="330" width="20" height="20"></rect>
+              <rect class="b" x="900" y="440" width="20" height="20"></rect>
+              <rect class="b" x="700" y="550" width="20" height="20"></rect>
+              <rect class="b" x="1100" y="550" width="20" height="20"></rect>
+              <path class="l2" d="M710 350 V550 M910 450 C1000 450 1020 560 1100 560"></path>
+              <circle class="a" cx="1110" cy="560" r="5"></circle>
+            </svg>
+          </div>
+          <span class="p-dot" aria-hidden="true"></span>
+          <span class="ph">Imagem do projeto · placeholder</span>
+        </figure>
+        <div class="p-meta">
+          <span class="p-num up">01</span>
+          <h3 class="p-title up d1">[Nome do projeto 01]</h3>
+          <span class="p-tag up d2">Service Design · [Ano]</span>
+          <p class="p-desc up d3">[Descrição curta — qual problema foi investigado e qual decisão a pesquisa ajudou a tomar.]</p>
+          <p class="p-ctx mono mute"><span>Contexto [—]</span><span>Papel [—]</span><span>View case ↗</span></p>
+        </div>
+      </a>
+      <a class="project rv" href="Case.dc.html" ref="{{pan}}" onFocus="{{focus1}}" onMouseEnter="{{cursorOn}}" onMouseLeave="{{cursorOff}}" aria-label="Estudo de caso 02 — UX Research (conteúdo provisório)">
+        <figure class="p-fig wipe">
+          <div class="p-in" ref="{{par}}">
+            <svg class="vz" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <circle class="l" cx="720" cy="430" r="170"></circle>
+              <circle class="l" cx="920" cy="490" r="140"></circle>
+              <circle class="f" cx="680" cy="390" r="4"></circle><circle class="f" cx="740" cy="370" r="4"></circle><circle class="f" cx="700" cy="470" r="4"></circle><circle class="f" cx="630" cy="440" r="4"></circle>
+              <circle class="f" cx="930" cy="460" r="4"></circle><circle class="f" cx="980" cy="520" r="4"></circle><circle class="f" cx="900" cy="560" r="4"></circle>
+              <circle class="a" cx="830" cy="470" r="5"></circle>
+            </svg>
+          </div>
+          <span class="p-dot" aria-hidden="true"></span>
+          <span class="ph">Imagem do projeto · placeholder</span>
+        </figure>
+        <div class="p-meta">
+          <span class="p-num up">02</span>
+          <h3 class="p-title up d1">[Nome do projeto 02]</h3>
+          <span class="p-tag up d2">UX Research · [Ano]</span>
+          <p class="p-desc up d3">[Descrição curta — quem foi pesquisado, que padrões emergiram e o que mudou a partir deles.]</p>
+          <p class="p-ctx mono mute"><span>Contexto [—]</span><span>Papel [—]</span><span>View case ↗</span></p>
+        </div>
+      </a>
+      <a class="project rv" href="Case.dc.html" ref="{{pan}}" onFocus="{{focus2}}" onMouseEnter="{{cursorOn}}" onMouseLeave="{{cursorOff}}" aria-label="Estudo de caso 03 — Research &amp; AI (conteúdo provisório)">
+        <figure class="p-fig wipe">
+          <div class="p-in" ref="{{par}}">
+            <svg class="vz" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path class="l2" d="M300 540 C500 400 620 420 800 520 S1120 640 1300 380"></path>
+              <circle class="b" cx="300" cy="540" r="8"></circle><circle class="b" cx="800" cy="520" r="8"></circle><circle class="b" cx="1300" cy="380" r="8"></circle>
+              <circle class="a" cx="800" cy="520" r="5"></circle>
+            </svg>
+          </div>
+          <span class="p-dot" aria-hidden="true"></span>
+          <span class="ph">Imagem do projeto · placeholder</span>
+        </figure>
+        <div class="p-meta">
+          <span class="p-num up">03</span>
+          <h3 class="p-title up d1">[Nome do projeto 03]</h3>
+          <span class="p-tag up d2">Research &amp; AI · [Ano]</span>
+          <p class="p-desc up d3">[Descrição curta — como pesquisa e IA foram combinadas e qual evidência sustentou a decisão.]</p>
+          <p class="p-ctx mono mute"><span>Contexto [—]</span><span>Papel [—]</span><span>View case ↗</span></p>
+        </div>
+      </a>
+      </div>
+      <div class="hs-ui mono" aria-hidden="true">
+        <span ref="{{refHsCount}}">01 / 03</span>
+        <span class="hs-bar"><i ref="{{refHsBar}}"></i></span>
+        <span class="hs-hint mute">Role para avançar →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 APPROACH -->
+<section class="sec" id="approach" aria-labelledby="approach-title">
+  <div class="g shead rv" ref="{{rv}}">
+    <p class="eyebrow up"><b>02</b>Approach</p>
+    <h2 class="h-sec" id="approach-title"><span class="ln"><span class="li d1">Curiosidade como ponto de partida.</span></span><span class="ln"><span class="li d2">Evidências como direção.</span></span></h2>
+    <p class="s-sup up d3">Role a página: as evidências se organizam em um blueprint vivo, conectando pessoas, negócio, tecnologia e sistemas a cada etapa.</p>
+  </div>
+  <div class="appr-run" ref="{{refAppr}}">
+    <div class="appr-stick">
+      <div class="g appr-g">
+        <div class="appr-l">
+          <ol class="stg" aria-label="Etapas da abordagem">
+            <sc-for list="{{stages}}" as="s" hint-placeholder-count="5">
+              <li><button type="button" aria-current="{{s.cur}}" aria-label="{{s.aria}}" onClick="{{s.go}}"><span class="n">{{s.n}}</span><span class="t">{{s.name}}</span></button></li>
+            </sc-for>
+          </ol>
+          <div class="sp" data-stage="{{stage}}" aria-live="polite">
+            <div class="s1"><p><strong style="font-weight: 500">Understand.</strong> Contexto, pessoas, objetivos e restrições. Antes de qualquer solução, entender o que está em jogo e para quem.</p><p class="m mono">Desk research · Stakeholders · Observação</p></div>
+            <div class="s2"><p><strong style="font-weight: 500">Explore.</strong> Investigar comportamentos, necessidades e fricções no uso real — e as tecnologias e sistemas que os condicionam.</p><p class="m mono">Campo · Entrevistas · Dados</p></div>
+            <div class="s3"><p><strong style="font-weight: 500">Connect.</strong> Cruzar evidências dispersas, encontrar padrões e formular insights que expliquem o porquê dos comportamentos.</p><p class="m mono">Síntese · Jornadas · Ecossistemas</p></div>
+            <div class="s4"><p><strong style="font-weight: 500">Design.</strong> Converter insights em oportunidades, conceitos de serviço e decisões que equilibrem pessoas, negócio e tecnologia.</p><p class="m mono">Cocriação · Blueprint · Protótipos</p></div>
+            <div class="s5"><p><strong style="font-weight: 500">Validate.</strong> Testar com quem usa, medir se a mudança gera valor e devolver o aprendizado ao próximo ciclo.</p><p class="m mono">Testes · Experimentos · Indicadores</p></div>
+          </div>
+          <div class="appr-bar" aria-hidden="true"><i ref="{{refBar}}"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 EXPERTISE -->
+<section class="sec" id="expertise" ref="{{refExp}}" aria-labelledby="expertise-title">
+  <div class="g shead rv" ref="{{rv}}">
+    <p class="eyebrow up"><b>03</b>Expertise</p>
+    <h2 class="h-sec" id="expertise-title"><span class="ln"><span class="li d1">Different lenses.</span></span><span class="ln"><span class="li d2">One connected perspective.</span></span></h2>
+  </div>
+  <div class="exp-wrap">
+    <div class="g exp-g">
+      <ol class="exp">
+        <li class="rv" ref="{{lens}}" data-k="0" onMouseEnter="{{lensOn0}}" onMouseLeave="{{lensOff}}">
+          <div class="row up"><span class="n">A</span><h3>Service Design</h3><p>Serviços de ponta a ponta: pessoas, canais, processos internos e as relações que sustentam cada experiência.</p><p class="m mono">Blueprints · Ecossistemas · Jornadas</p></div>
+        </li>
+        <li class="rv" ref="{{lens}}" data-k="1" onMouseEnter="{{lensOn1}}" onMouseLeave="{{lensOff}}">
+          <div class="row up"><span class="n">B</span><h3>UX Research</h3><p>Pesquisa como base de decisão: entender comportamentos e necessidades antes de definir soluções.</p><p class="m mono">Entrevistas · Campo · Usabilidade · Síntese</p></div>
+        </li>
+        <li class="rv" ref="{{lens}}" data-k="2" onMouseEnter="{{lensOn2}}" onMouseLeave="{{lensOff}}">
+          <div class="row up"><span class="n">C</span><h3>Strategy &amp; Discovery</h3><p>Enquadrar o problema certo, conectar evidências a objetivos de negócio e priorizar oportunidades.</p><p class="m mono">Enquadramento · Oportunidades · Priorização</p></div>
+        </li>
+        <li class="rv" ref="{{lens}}" data-k="3" onMouseEnter="{{lensOn3}}" onMouseLeave="{{lensOff}}">
+          <div class="row up"><span class="n">D</span><h3>AI &amp; Emerging Experiences</h3><p>Como a inteligência artificial transforma a pesquisa, os produtos e a relação entre pessoas e tecnologia.</p><p class="m mono">IA na pesquisa · Confiança · Prototipação</p></div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 04 WRITING -->
+<section class="sec" id="writing" ref="{{refWriting}}" aria-labelledby="writing-title">
+  <div class="g shead rv" ref="{{rv}}">
+    <p class="eyebrow up"><b>04</b>Writing</p>
+    <h2 class="h-sec" id="writing-title"><span class="ln"><span class="li d1">Pensar. Investigar. Compartilhar.</span></span></h2>
+    <p class="s-sup up d3">Reflexões sobre pesquisa, sistemas, tecnologia e o futuro das experiências digitais.</p>
+  </div>
+  <div class="g w-bar rv" ref="{{rv}}">
+    <div class="w-filters up" role="group" aria-label="Filtrar por publicação">
+      <sc-for list="{{filters}}" as="f" hint-placeholder-count="6">
+        <button type="button" class="w-f" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}} <span class="mute">{{f.count}}</span></button>
+      </sc-for>
+    </div>
+    <p class="mono mute w-count up d1">{{artShown}} de {{artTotal}} textos</p>
+  </div>
+  <ul class="wl" aria-live="polite">
+    <sc-for list="{{articles}}" as="a" hint-placeholder-count="8">
+      <li><a class="w-row" href="{{a.u}}" target="_blank" rel="noopener noreferrer"><span class="mono n">{{a.n}}</span><span class="t">{{a.t}}</span><span class="mono p">{{a.p}}</span><span class="a arr ne" aria-hidden="true">↗</span></a></li>
+    </sc-for>
+  </ul>
+  <div class="g w-foot">
+    <sc-if value="{{hasMore}}" hint-placeholder-val="{{true}}">
+      <button type="button" class="cta a" onClick="{{toggleAll}}" aria-expanded="{{allOpen}}"><span class="ul">{{moreLabel}}</span> <span aria-hidden="true">{{moreSign}}</span></button>
+    </sc-if>
+    <a class="mono b" href="https://medium.com/@alexcerqueirabr" target="_blank" rel="noopener noreferrer"><span class="ul">Perfil no Medium</span> <span class="arr ne" aria-hidden="true">↗</span></a>
+  </div>
+</section>
+
+<!-- 05 BOOKS -->
+<section class="sec" id="books" aria-labelledby="books-title">
+  <div class="g shead rv" ref="{{rv}}">
+    <p class="eyebrow up"><b>05</b>Books</p>
+    <h2 class="h-sec" id="books-title"><span class="ln"><span class="li d1">Ideias que se tornam conhecimento.</span></span></h2>
+  </div>
+  <div class="g book rv" ref="{{rv}}">
+    <figure class="cover wipe">
+      <img class="cover-img" src="./assets/da4ba484c81d1d47374a612c037243e9.webp" alt="Capa do livro AI e UX — Um ensaio sobre a transformação na pesquisa para produtos digitais, Editora UX" loading="lazy">
+    </figure>
+    <div class="book-info">
+      <p class="eyebrow up d1">Livro · Ensaio · 2024</p>
+      <h3 class="book-title up d2">AI e UX<span>Um ensaio sobre a transformação na pesquisa para produtos digitais</span></h3>
+      <dl class="kv up d3">
+        <dt>Autor</dt><dd>Alex Cerqueira</dd>
+        <dt>Ano</dt><dd>2024</dd>
+        <dt>Editora</dt><dd>Editora UX</dd>
+        <dt>Sinopse</dt><dd class="syn"><p>O livro aborda e analisa uma perspectiva conceitual de evolução, a pesquisa em Experiência do Usuário (UX) e a integração da Inteligência Artificial (AI).</p><p>Esta abordagem começa destacando a importância histórica da pesquisa UX no design de produtos digitais, enfatizando a compreensão das necessidades, comportamentos e motivações humanas para o desenvolvimento de soluções eficazes.</p></dd>
+      </dl>
+      <a class="cta up d4" href="https://clubedeautores.com.br/livro/ai-e-ux" target="_blank" rel="noopener noreferrer"><span class="ul">VER NO CLUBE DE AUTORES</span> <span class="arr ne" aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 06 ABOUT -->
+<section class="sec" id="about" aria-labelledby="about-title">
+  <div class="g shead rv" ref="{{rv}}">
+    <p class="eyebrow up"><b>06</b>About</p>
+    <h2 class="h-sec" id="about-title"><span class="ln"><span class="li d1">Design é uma forma de</span></span><span class="ln"><span class="li d2">investigar o mundo.</span></span></h2>
+  </div>
+  <div class="g about rv" ref="{{rv}}">
+    <figure class="portrait wipe">
+      <img class="portrait-img" src="./assets/82ada2bbeadb5f3f7406ad8c7720863e.webp" alt="Retrato de Alex Cerqueira em preto e branco, sorrindo, de braços cruzados" loading="lazy">
+    </figure>
+    <div class="about-t">
+      <p class="first up d1">Sou Alex Cerqueira, profissional de Service Design e UX Research. Meu trabalho parte da curiosidade em compreender como pessoas se relacionam com produtos, serviços e sistemas.</p>
+      <p class="up d2">Acredito que boas experiências começam antes da interface: na compreensão dos comportamentos, na identificação de necessidades e na conexão entre evidências e decisões.</p>
+      <p class="up d3">Exploro a interseção entre pesquisa, estratégia, tecnologia e inteligência artificial para transformar complexidade em oportunidades de evolução.</p>
+      <dl class="kv up d4">
+        <dt>Foco</dt><dd>Service Design · UX Research</dd>
+        <dt>Interseções</dt><dd>Pesquisa · Estratégia · Tecnologia · IA</dd>
+        <dt>Base</dt><dd>São Paulo, Brazil</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- 07 CONTACT -->
+<section class="sec contact" id="contact" ref="{{refContact}}" aria-labelledby="contact-title">
+  <div class="g c-top rv" ref="{{rv}}">
+    <p class="eyebrow up"><b>07</b>Contact</p>
+    <h2 class="h-xl" id="contact-title"><span class="ln"><span class="li d1">Let's make sense</span></span><span class="ln"><span class="li d2">of complexity.</span></span></h2>
+    <ul class="c-links up d3">
+      <li><a href="https://br.linkedin.com/in/alexcerqueirabr" target="_blank" rel="noopener noreferrer"><span class="mono mute">LinkedIn</span><span class="big"><span class="ul">in/alexcerqueirabr</span></span><span class="arr ne" aria-hidden="true">↗</span></a></li>
+      <li><a href="https://medium.com/@alexcerqueirabr" target="_blank" rel="noopener noreferrer"><span class="mono mute">Medium</span><span class="big"><span class="ul">@alexcerqueirabr</span></span><span class="arr ne" aria-hidden="true">↗</span></a></li>
+      <li><div class="row"><span class="mono mute">Email</span><span class="big mute">[inserir e-mail]</span><span class="ph">reservado</span></div></li>
+    </ul>
+  </div>
+  <div class="c-space" aria-hidden="true"></div>
+  <div class="g c-bot rv" ref="{{rv}}">
+    <p class="lead up d2">Vamos conversar sobre pesquisa, serviços, experiências e novas possibilidades.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="g ftr layer">
+  <p class="mono f1">Alex Cerqueira</p>
+  <p class="mono f2 mute">Service Design · Research · Strategy</p>
+  <p class="mono f3 mute">© 2026</p>
+  <p class="mono f4 mute">São Paulo · Brazil</p>
+  <a class="mono f5" href="#top"><span class="ul">Back to top</span> <span class="arr n" aria-hidden="true">↑</span></a>
+</footer>
+
+<button class="fab" type="button" onClick="{{toggleTheme}}" aria-pressed="{{darkOn}}" aria-label="{{themeLabel}}" title="{{themeLabel}}">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><g class="rays"><path d="M12 1.5v1.6M4.6 4.6l1.1 1.1M19.4 4.6l-1.1 1.1M1.8 11h1.6M20.6 11h1.6"></path></g><path class="bulb" d="M8.6 15.2c0-1.4-.5-2.2-1.3-3.1A5.4 5.4 0 0 1 12 3.8a5.4 5.4 0 0 1 4.7 8.3c-.8.9-1.3 1.7-1.3 3.1z"></path><path d="M9.2 18h5.6M9.8 20.6h4.4"></path></svg>
+</button>
+<div class="cursor" ref="{{refCursor}}" aria-hidden="true"><span>VIEW CASE</span></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":11000}}'>
+/* The Research Network — one set of evidence points that changes shape with the content:
+   F1 network (hero) → F2 timeline (work) → F3 service blueprint (approach) → F4 lenses (expertise)
+   → F5 resting seed (writing, books, about) → F6 organized system (contact). */
+var EV = [
+  { k: 'BEHAVIOR', x: .20, y: .22 }, { k: 'NEEDS', x: .56, y: .08 }, { k: 'CONTEXT', x: .88, y: .26 },
+  { k: 'BUSINESS', x: .22, y: .62 }, { k: 'TECHNOLOGY', x: .84, y: .68 }, { k: 'FRICTION', x: .50, y: .92 },
+  { k: 'OPPORTUNITY', x: .54, y: .48 }
+];
+var HUBE = [[0,1],[1,2],[0,3],[2,4],[3,5],[4,5],[0,6],[2,6],[3,6],[4,6],[5,6,1],[1,6,1]];
+var LANES = ['PEOPLE', 'BUSINESS', 'TECHNOLOGY', 'SYSTEMS'];
+var STAGES = ['Understand', 'Explore', 'Connect', 'Design', 'Validate'];
+var LENSES = ['SERVICE DESIGN', 'UX RESEARCH', 'STRATEGY & DISCOVERY', 'AI & EMERGING'];
+var COLS = [[0,1],[0,2,3],[0,1,2,3],[0,1,2],[0,1,3]];
+var BP = [ // [col, lane, col, lane, accent]
+  [0,0,1,0,1],[1,0,2,0,1],[2,0,3,0,1],[3,0,4,0,1],
+  [0,1,2,1],[2,1,3,1],[3,1,4,1],[1,2,2,2],[2,2,3,2],[1,3,2,3],[2,3,4,3],
+  [0,0,1,2],[0,1,1,3],[1,2,2,1],[1,3,2,2],[2,0,2,3],[2,3,3,1],[2,2,3,0],[3,2,4,3],[3,1,4,0]
+];
+var HI = { people: [0, 1], systems: [2, 4], exp: [5, 6] };
+var MONO = '"IBM Plex Mono", ui-monospace, Menlo, monospace';
+var TH = { ink: '23,23,23', mute: '102,102,102', acc: '49,85,231', bg: '#F8F8F6' };
+var THEMES = { light: { ink: '23,23,23', mute: '102,102,102', acc: '49,85,231', bg: '#F8F8F6' }, dark: { ink: '237,237,234', mute: '163,163,158', acc: '125,149,255', bg: '#121212' } };
+var ARTICLES = [["P", "O poder transformador do Design Thinking e da pesquisa em UX", "https://medium.com/@alexcerqueirabr/o-poder-transformador-do-design-thinking-e-da-pesquisa-em-ux-c11e17abab1d"], ["P", "Gestão de projetos em pesquisa para design", "https://medium.com/@alexcerqueirabr/gest%C3%A3o-de-projetos-em-pesquisa-para-design-e00fcda34ae5"], ["P", "Transformando ideias em produtos de sucesso", "https://medium.com/@alexcerqueirabr/transformando-ideias-em-produtos-de-sucesso-de2fd8a6234e"], ["P", "Árvores de KPI, usuário e métricas de produto", "https://medium.com/@alexcerqueirabr/arvores-de-kpi-usu%C3%A1rio-e-m%C3%A9tricas-de-produto-cdc273211b19"], ["P", "Importância da Consistência de um Design System como parte de valor da Marca", "https://medium.com/@alexcerqueirabr/import%C3%A2ncia-da-consist%C3%AAncia-de-um-design-system-como-parte-de-valor-da-marca-7be713252cee"], ["P", "Planejamento ágil para Design System", "https://medium.com/@alexcerqueirabr/planejamento-da-evolu%C3%A7%C3%A3o-de-um-design-system-abf761b1ece3"], ["P", "Organize seu projeto de tecnologia no Confluence", "https://medium.com/@alexcerqueirabr/organize-seu-projeto-de-tecnologia-no-confluence-debfa36386da"], ["P", "Aplicando Behavioral Design para melhorar a experiência do usuário", "https://medium.com/@alexcerqueirabr/aplicando-behavioral-design-para-melhorar-a-experi%C3%AAncia-do-usu%C3%A1rio-b1b93e40f92d"], ["P", "Product Discovery: a importância estratégica da pesquisa", "https://medium.com/@alexcerqueirabr/product-discovery-e6d34a2acb3f"], ["P", "Design tokens e a escalabilidade do Design System", "https://medium.com/@alexcerqueirabr/design-tokens-e-a-escalabilidade-do-design-system-eac138eb2f2e"], ["P", "Features de produto: Matriz Kano e Value Matriz", "https://medium.com/@alexcerqueirabr/features-de-produto-matriz-kano-e-value-matriz-ou-matriz-de-valor-ce468d6d95ed"], ["P", "Network Theory and Predictive Analysis: The Case of Conclave", "https://medium.com/@alexcerqueirabr/network-theory-and-predictive-analysis-the-case-of-conclave-f16bb18b703b"], ["E", "UX e Product-Led Growth — PLG", "https://medium.com/editoraux/ux-e-product-led-growth-plg-1b2017096381"], ["E", "Writing e SEO na era da AI", "https://medium.com/editoraux/writing-e-seo-na-era-da-ai-d9c5c344e870"], ["E", "Teoria de Redes e Análise Preditiva: O Caso do Conclave", "https://medium.com/editoraux/teoria-de-redes-e-an%C3%A1lise-preditiva-o-caso-do-conclave-4c4f75be4c73"], ["E", "Lean UX", "https://medium.com/editoraux/lean-ux-cab9a3b20d01"], ["E", "ROI em UX", "https://medium.com/editoraux/roi-em-ux-eeb8d04d44ff"], ["E", "Dados de Negócio, Inteligência de Mercado e Processos", "https://medium.com/editoraux/dados-pesquisa-de-mercado-e-processos-a04a8d4923ff"], ["E", "Métricas de Produto", "https://medium.com/editoraux/m%C3%A9tricas-de-produto-25f8e8dc75e7"], ["E", "Business Quantum", "https://medium.com/editoraux/business-quantum-928738040740"], ["E", "O Processo de Governança de Sistemas de Design", "https://medium.com/editoraux/o-processo-de-governan%C3%A7a-de-sistemas-de-design-982d51a72bc9"], ["E", "Systems Thinking", "https://medium.com/editoraux/systems-thinking-4d8b2df78b4e"], ["E", "Método de Pesquisa UX", "https://medium.com/editoraux/m%C3%A9todo-de-pesquisa-ux-76dd18c24919"], ["E", "Qualidade em Usabilidade — ISO 9126", "https://medium.com/editoraux/qualidade-em-usabilidade-48006cbb3a33"], ["E", "UX Métrica", "https://medium.com/editoraux/ux-m%C3%A9trica-fundamental-teorico-5742cfbea7e"], ["E", "Research e Growth", "https://medium.com/editoraux/uxr-e-growth-5c796dfd7a26"], ["B", "User-Centered Innovation", "https://medium.com/design-bootcamp/user-centered-innovation-08a518a450d4"], ["B", "Early Adopters in the Success of Innovation", "https://medium.com/design-bootcamp/early-adopters-in-the-success-of-innovation-b2809a53e2ee"], ["B", "The Transformative Power of Design Thinking and UX Research", "https://medium.com/design-bootcamp/the-transformative-power-of-design-thinking-and-ux-research-d9e1f3da74db"], ["B", "Systemic Thinking and Design Thinking", "https://medium.com/design-bootcamp/systemic-thinking-and-design-thinking-c361e5c14859"], ["B", "Persona Research and Usability Testing", "https://medium.com/design-bootcamp/persona-research-and-usability-testing-309c2aa54a26"], ["B", "Persona Research and Usability Testing — Exploring an Integrated Approach", "https://medium.com/design-bootcamp/persona-research-and-usability-testing-376d9240c937"], ["B", "Strategy Research on Digital Products and New Interface Usability", "https://medium.com/design-bootcamp/strategy-research-on-digital-products-and-new-interface-usability-22fa81a3d5e7"], ["B", "UX Research Strategy for Digital Products", "https://medium.com/design-bootcamp/ux-research-strategy-for-digital-products-01f81e2d91ed"], ["B", "I, Robot and AI Technologies", "https://medium.com/design-bootcamp/i-robot-and-ai-technologies-fd853d29945a"], ["B", "Operant Conditioning and Behavioral Design", "https://medium.com/design-bootcamp/operant-conditioning-and-behavioral-design-63ff08a326d7"], ["B", "Innovation for Products, Services, and Processes", "https://medium.com/design-bootcamp/innovation-for-products-services-and-processes-f91848c500d8"], ["B", "Double Diamond Reverse", "https://medium.com/design-bootcamp/double-diamond-reverse-f51d5a1dc03d"], ["B", "Generic Strategies of Michael Porter x Strategic Typology of Miles & Snow", "https://medium.com/design-bootcamp/generic-strategies-of-michael-porter-x-strategic-typology-of-miles-snow-b932ad4546c5"], ["B", "Network Theory and Predictive Analysis: The Case of Conclave — versão em inglês", "https://medium.com/design-bootcamp/network-theory-and-predictive-analysis-the-case-of-conclave-f16bb18b703b"], ["U", "Generative AI and Its Approach to Design", "https://uxplanet.org/generative-ai-and-its-approach-to-design-a2e3d905e8af"], ["U", "UX 3.0", "https://uxplanet.org/ux-3-0-4ca8fcd9106e"], ["U", "The End of the User Interface?", "https://uxplanet.org/the-end-of-the-user-interface-31a787c3ae94"], ["U", "Turning Insights into Growth and Revenue", "https://uxplanet.org/turning-insights-into-growth-and-revenue-b17f6a71fd69"], ["C", "Padrões de leitura na web: A experiência de escanear informação", "https://brasil.uxdesign.cc/padroes-de-leitura-na-web-a-experiencia-de-escanear-informacao-76d0a846c35a"], ["C", "Harness Engineering: a arquitetura invisível que torna a IA confiável", "https://brasil.uxdesign.cc/harness-engineering-a-arquitetura-invisivel-que-torna-a-ia-confiavel-812502d7c921"], ["C", "O que o Nobel de Economia tem a ver com designers?", "https://brasil.uxdesign.cc/o-que-o-nobel-de-economia-tem-a-ver-com-designers-7ae3c5aa13ec"], ["C", "A teia de Luhmann", "https://brasil.uxdesign.cc/a-teia-de-luhmann-66bfe9fa0c32"], ["C", "Design Systems e IA na prática", "https://brasil.uxdesign.cc/design-systems-e-ia-na-pratica-c34783d60e9e"], ["A", "The Invisible Architecture That Makes AI Trustworthy — versão em inglês", "https://medium.com/agileinsider/harness-engineering-the-invisible-architecture-that-makes-ai-trustworthy-b50191bf564c"], ["D", "Measuring the Value of a Design System with AI", "https://www.designsystemscollective.com/measuring-the-value-of-a-design-system-with-ai-19709f750a10"]];
+var PUBS = { P: 'Medium · Perfil pessoal', E: 'Editora UX', B: 'Bootcamp', U: 'UX Planet', C: 'UX Collective Brasil', A: 'Agile Insider', D: 'Design Systems Collective' };
+var FILTERS = [['all', 'Todos'], ['P', 'Perfil pessoal'], ['E', 'Editora UX'], ['B', 'Bootcamp'], ['U', 'UX Planet'], ['O', 'UX Collective & outras']];
+var PREVIEW = 8;
+
+function rng(s) { return function () { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }; }
+function c01(t) { return t < 0 ? 0 : t > 1 ? 1 : t; }
+function ease(t) { t = c01(t); return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+function eo(t) { t = c01(t); return 1 - Math.pow(1 - t, 3); }
+/* rotate the cube (yaw, pitch), project it with perspective, and give nearer parts more weight */
+function projectCube(Fx, ya, pa) {
+  var C = Fx.cube, cyw = Math.cos(ya), syw = Math.sin(ya), cpt = Math.cos(pa), spt = Math.sin(pa);
+  C.corners.forEach(function (c) {
+    var x = c.x * cyw + c.z * syw, z = -c.x * syw + c.z * cyw, y = c.y;
+    var y2 = y * cpt - z * spt, z2 = y * spt + z * cpt;
+    var f = C.D / (C.D - z2), px = C.cx + x * f * C.sc, py = C.cy + y2 * f * C.sc;
+    var depth = .28 + .72 * c01((z2 + 1.8) / 3.6), r = C.rS * f;
+    Fx.x[c.p] = px; Fx.y[c.p] = py; Fx.s[c.p] = 4.5 * Math.pow(f, .8); Fx.a[c.p] = depth; Fx.dz[c.p] = depth;
+    c.sats.forEach(function (sid, j) {
+      var an = -Math.PI / 2 + j / c.sats.length * 6.283;
+      Fx.x[sid] = px + Math.cos(an) * r; Fx.y[sid] = py + Math.sin(an) * r;
+      Fx.s[sid] = 1.8 * Math.pow(f, .6); Fx.a[sid] = .8 * depth; Fx.dz[sid] = depth;
+    });
+    if (c.lab) {
+      var dx = px - C.cx, dy = py - C.cy, d = Math.sqrt(dx * dx + dy * dy);
+      if (d < C.sc * .5) { c.lab.ux = 1; c.lab.uy = 0; } else { c.lab.ux = dx / d; c.lab.uy = dy / d; }
+      c.lab.off = r + 14;
+    }
+  });
+}
+
+function build(W, H, m, S, K, R) {
+  var N = 7 + 7 * S + K, F = [], f, i, h, j, k;
+  for (f = 0; f < 7; f++) F.push({ x: new Float32Array(N), y: new Float32Array(N), a: new Float32Array(N), s: new Float32Array(N), g: new Uint8Array(N), c: new Uint8Array(N), col: new Int8Array(N).fill(-1), ring: new Int8Array(N).fill(-1), e: [], l: [] });
+  function sat(h, j) { return 7 + h * S + j; }
+  function str(k) { return 7 + 7 * S + k; }
+  function box(b) { return { x0: b[0] * W, y0: b[1] * H, w: (b[2] - b[0]) * W, h: (b[3] - b[1]) * H }; }
+  function set(F, i, x, y, a, s, g) { F.x[i] = x; F.y[i] = y; F.a[i] = a; F.s[i] = s; F.g[i] = g; }
+
+  /* F0 — scattered evidence */
+  for (i = 0; i < N; i++) set(F[0], i, R[0][i] * W, R[1][i] * H, i < 7 ? 1 : i < 7 + 7 * S ? .75 : .3, i < 7 ? 4.5 : i < 7 + 7 * S ? 1.8 : 1.2, i < 7 ? 1 : 0);
+
+  /* F1 — hero: a cube in perspective. OPPORTUNITY is the nearest corner; every corner carries the same hexagon */
+  var b1 = box(m ? [.06, .1, .94, .46] : [.52, .14, .95, .86]);
+  var RH = Math.min(b1.w, b1.h) * (m ? .33 : .34), R3 = Math.sqrt(3), RR = Math.sqrt(8 / 3), ZF = 1 / R3;
+  var v8 = str(0), corners = [];
+  function corner(pid, angDeg, rr, z, sats) {
+    var a = angDeg * Math.PI / 180;
+    var c = { p: pid, x: Math.cos(a) * rr, y: Math.sin(a) * rr, z: z, sats: sats, lab: null };
+    if (pid < 7) { c.lab = { i: pid, t: EV[pid].k, hub: 1, ux: 1, uy: 0, off: 20 }; F[1].l.push(c.lab); }
+    corners.push(c);
+  }
+  function hubSats(h) { var r = []; for (var q = 0; q < S; q++) r.push(sat(h, q)); return r; }
+  var backSats = []; for (j = 0; j < S; j++) backSats.push(str(1 + j));
+  corner(6, 0, 0, R3, hubSats(6));
+  corner(v8, 0, 0, -R3, backSats);
+  [[0, 210], [2, -30], [5, 90]].forEach(function (c) { corner(c[0], c[1], RR, ZF, hubSats(c[0])); });
+  [[1, -90], [4, 30], [3, 150]].forEach(function (c) { corner(c[0], c[1], RR, -ZF, hubSats(c[0])); });
+  for (k = 0; k < K; k++) { i = str(k); set(F[1], i, R[0][i] * W, R[1][i] * H, 0, 1, 0); }
+  corners.forEach(function (c, ci) {
+    set(F[1], c.p, 0, 0, 1, 4.5, 1); F[1].c[c.p] = c.p === 6 ? 1 : 0;
+    c.sats.forEach(function (sid, q) {
+      set(F[1], sid, 0, 0, .8, 1.8, 0);
+      F[1].e.push({ a: c.p, b: sid, w: .14, d: q / S * .6 + ci * .08 });
+      F[1].e.push({ a: sid, b: c.sats[(q + 1) % S], w: .2, d: .6 + q / S * .5 + ci * .08 });
+    });
+  });
+  [[6, 0, 1], [6, 2], [6, 5, 1], [v8, 1], [v8, 4], [v8, 3], [1, 2], [2, 4], [4, 5], [5, 3], [3, 0], [0, 1]].forEach(function (q, n) {
+    F[1].e.push({ a: q[0], b: q[1], w: .38, acc: q[2], d: 1.2 + n * .09, hub: 1 });
+  });
+  F[1].dz = new Float32Array(N).fill(1);
+  F[1].cube = { cx: b1.x0 + b1.w / 2, cy: b1.y0 + b1.h / 2, sc: RH / RR, rS: RH * .19, D: 5.5, corners: corners };
+  projectCube(F[1], -.32, .16);
+
+  /* F2 — a timeline: evidence filed along the right margin while projects are read */
+  var spX = W - (m ? 12 : Math.max(22, W * .022)), order = [], o;
+  for (h = 0; h < 7; h++) { order.push(h); for (j = 0; j < S; j++) order.push(sat(h, j)); }
+  for (o = 0; o < order.length; o++) {
+    i = order[o];
+    var hubb = i < 7;
+    set(F[2], i, spX, H * (.24 + .52 * o / (order.length - 1)), hubb ? .55 : .2, hubb ? 2 : 1, 0);
+  }
+  F[2].e.push({ a: order[0], b: order[order.length - 1], w: .14 });
+  for (k = 0; k < K; k++) { i = str(k); set(F[2], i, spX, R[1][i] * H, 0, 1, 0); }
+
+  /* F3 — service blueprint: 5 stages × 4 layers, drawn by the same points */
+  var b3 = box(m ? [.06, .11, .95, .50] : [.44, .2, .96, .82]);
+  var cS = b3.x0 + b3.w * (m ? .2 : .16), cE = b3.x0 + b3.w * .97;
+  var colX = [0, 1, 2, 3, 4].map(function (c) { return cS + c * (cE - cS) / 4; });
+  var laneY = [0, 1, 2, 3].map(function (l) { return b3.y0 + b3.h * (.2 + l * .25); });
+  var slot = {}, sl = 0;
+  COLS.forEach(function (lanes, c) { lanes.forEach(function (l) { slot[c * 4 + l] = sl; i = sl; set(F[3], i, colX[c], laneY[l], 1, 4.5, 1); F[3].col[i] = c; sl++; }); });
+  var rest = [];
+  for (i = sl; i < 7 + 7 * S; i++) rest.push(i);
+  var perLane = Math.ceil(rest.length / 4);
+  rest.forEach(function (i, q) { var l = Math.floor(q / perLane), n = q % perLane; set(F[3], i, colX[0] + (colX[4] - colX[0]) * (n + .5) / perLane, laneY[Math.min(3, l)], .32, 1.1, 0); });
+  for (k = 0; k < K; k++) { i = str(k); var cc = k % 5, nn = Math.floor(k / 5), per = Math.ceil(K / 5); set(F[3], i, colX[cc], b3.y0 + b3.h * (.1 + .85 * (nn + .5) / per), .22, 1, 0); }
+  BP.forEach(function (e) { F[3].e.push({ a: slot[e[0] * 4 + e[1]], b: slot[e[2] * 4 + e[3]], w: e[4] ? .95 : .34, acc: e[4], curve: e[1] !== e[3] && e[0] !== e[2], st: Math.max(e[0], e[2]) }); });
+  F[3].e.push({ a: slot[4 * 4 + 3], b: slot[1], w: .2, loop: 1, st: 5, by: b3.y0 + b3.h * 1.02 });
+  LANES.forEach(function (n, l) { F[3].l.push({ x: b3.x0, y: laneY[l] + 3.5, t: n, kind: 'lane' }); });
+  STAGES.forEach(function (n, c) { F[3].l.push({ x: colX[c], y: b3.y0, t: '0' + (c + 1) + (m ? '' : '  ' + n.toUpperCase()), kind: 'col', c: c, align: 'center' }); });
+
+  /* F4 — four lenses overlapping on one opportunity */
+  var b4 = box(m ? [.08, .1, .92, .44] : [.56, .16, .95, .84]);
+  var cx = b4.x0 + b4.w / 2, cy = b4.y0 + b4.h / 2, R4 = Math.min(b4.w, b4.h) * .27, off = R4 * .56;
+  var SG = [[-1, -1], [1, -1], [-1, 1], [1, 1]];
+  F[4].rings = SG.map(function (s) { return { x: cx + s[0] * off, y: cy + s[1] * off, r: R4 }; });
+  set(F[4], 6, cx, cy, 1, 5, 1); F[4].c[6] = 1;
+  for (h = 0; h < 6; h++) { var ah = h / 6 * 6.283 + .5; set(F[4], h, cx + Math.cos(ah) * R4 * .9, cy + Math.sin(ah) * R4 * .9, .9, 3.5, 1); }
+  var sats = [];
+  for (i = 7; i < 7 + 7 * S; i++) sats.push(i);
+  var perR = Math.ceil(sats.length / 4);
+  sats.forEach(function (i, q) { var rg = q % 4, n = Math.floor(q / 4), ri = F[4].rings[rg], an = n / perR * 6.283 + rg; set(F[4], i, ri.x + Math.cos(an) * ri.r, ri.y + Math.sin(an) * ri.r, .7, 1.7, 0); F[4].ring[i] = rg; });
+  for (k = 0; k < K; k++) { i = str(k); set(F[4], i, cx + (R[0][i] - .5) * R4 * 1.2, cy + (R[1][i] - .5) * R4 * 1.2, .14, 1, 0); }
+  for (h = 0; h < 6; h++) F[4].e.push({ a: h, b: 6, w: .26 });
+  SG.forEach(function (s, q) { var ri = F[4].rings[q]; F[4].l.push({ x: ri.x + s[0] * ri.r * .8, y: ri.y + s[1] * (ri.r * .8 + 16), t: LENSES[q], kind: 'ring', k: q, align: s[0] < 0 ? 'right' : 'left' }); });
+
+  /* F5 — the network rests as a seed while you read, gaining links */
+  var sr = m ? 26 : 50, sx = W - (m ? 104 : 200), sy = H - (m ? 56 : 112);
+  set(F[5], 6, sx, sy, 1, 3.2, 1); F[5].c[6] = 1;
+  for (h = 0; h < 6; h++) { var a5 = h / 6 * 6.283 - 1.57; set(F[5], h, sx + Math.cos(a5) * sr, sy + Math.sin(a5) * sr, 1, 2.8, 1); }
+  for (h = 0; h < 7; h++) for (j = 0; j < S; j++) { i = sat(h, j); var a6 = R[2][i] * 6.283, d6 = sr * .28 * R[3][i]; set(F[5], i, F[5].x[h] + Math.cos(a6) * d6, F[5].y[h] + Math.sin(a6) * d6, .5, 1, 0); }
+  for (k = 0; k < K; k++) { i = str(k); set(F[5], i, sx, sy, 0, 1, 0); }
+  HUBE.forEach(function (p, q) { F[5].e.push({ a: p[0], b: p[1], w: .5, acc: p[2], prog: q }); });
+  if (!m) F[5].l.push({ x: sx, y: sy + sr + 26, t: 'THE RESEARCH NETWORK', kind: 'cap', align: 'center' });
+
+  /* F6 — contact: the network dissolves where it rests, leaving the section clean */
+  var F6 = F[6];
+  for (i = 0; i < N; i++) { F6.x[i] = F[5].x[i]; F6.y[i] = F[5].y[i]; F6.s[i] = F[5].s[i]; F6.g[i] = F[5].g[i]; F6.c[i] = F[5].c[i]; F6.a[i] = 0; }
+  F6.e = []; F6.l = [];
+  /* F5 — the corner seed ("The Research Network") is removed: nothing is drawn while reading */
+  for (i = 0; i < N; i++) F[5].a[i] = 0;
+  F[5].e = []; F[5].l = [];
+
+  return F;
+}
+
+class Component extends DCLogic {
+  state = { stage: 1, menu: false, pub: 'all', all: false, theme: (function () { try { return localStorage.getItem('ac-theme') === 'dark' ? 'dark' : 'light'; } catch (e) { return 'light'; } })() };
+  rvEls = []; lensEls = []; parEls = []; panEls = []; mouse = { on: false, x: -999, y: -999 };
+  seg = { f0: 1, f1: 1, t: 1 }; ap = 0; gp5 = 0; hi = null; lensHover = -1; lensScroll = -1;
+
+  refRoot = (el) => { this.root = el; };
+  refCv = (el) => { this.cv = el; };
+  refHeader = (el) => { this.header = el; };
+  refHero = (el) => { this.hero = el; };
+  refWork = (el) => { this.work = el; };
+  refAppr = (el) => { this.appr = el; };
+  refExp = (el) => { this.exp = el; };
+  refWriting = (el) => { this.writing = el; };
+  refContact = (el) => { this.contact = el; };
+  refBar = (el) => { this.bar = el; };
+  refHs = (el) => { this.hs = el; };
+  refTrack = (el) => { this.track = el; };
+  refHsCount = (el) => { this.hsCount = el; };
+  refHsBar = (el) => { this.hsBar = el; };
+  pan = (el) => { if (el && this.panEls.indexOf(el) < 0) { this.panEls.push(el); this.rv(el); } };
+  focusPan = [0, 1, 2].map((i) => () => {
+    if (!this.hs || !this.hsDist) return;
+    var top = this.hs.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: top + this.hsDist * i / 2, behavior: 'auto' });
+  });
+  refCursor = (el) => { this.cursor = el; };
+  rv = (el) => { if (el && this.rvEls.indexOf(el) < 0) { this.rvEls.push(el); if (this.io) this.io.observe(el); } };
+  lens = (el) => { if (el && this.lensEls.indexOf(el) < 0) { this.lensEls.push(el); this.rv(el); } };
+  par = (el) => { if (el && this.parEls.indexOf(el) < 0) this.parEls.push(el); };
+
+  goStage = [0, 1, 2, 3, 4].map((s) => () => {
+    if (!this.appr) return;
+    var top = this.appr.getBoundingClientRect().top + window.scrollY;
+    var span = this.appr.offsetHeight - window.innerHeight;
+    window.scrollTo({ top: top + span * (s + .5) / 5, behavior: this.reduce ? 'auto' : 'smooth' });
+  });
+  pickPub = FILTERS.map((f) => () => { this.setState({ pub: f[0], all: false }); });
+  toggleTheme = () => { var t = this.state.theme === 'dark' ? 'light' : 'dark'; try { localStorage.setItem('ac-theme', t); } catch (e) {} this.setState({ theme: t }); };
+  toggleAll = () => { this.setState({ all: !this.state.all }); };
+  toggleMenu = () => { this.setState({ menu: !this.state.menu }); };
+  closeMenu = () => { this.setState({ menu: false }); };
+  cursorOn = () => { if (this.cursor) this.cursor.classList.add('on'); };
+  cursorOff = () => { if (this.cursor) this.cursor.classList.remove('on'); };
+  hiPeople = () => { this.hi = HI.people; };
+  hiSystems = () => { this.hi = HI.systems; };
+  hiExp = () => { this.hi = HI.exp; };
+  hiOff = () => { this.hi = null; };
+  lensOn0 = () => { this.lensHover = 0; };
+  lensOn1 = () => { this.lensHover = 1; };
+  lensOn2 = () => { this.lensHover = 2; };
+  lensOn3 = () => { this.lensHover = 3; };
+  lensOff = () => { this.lensHover = -1; };
+
+  componentDidMount() {
+    var w = window;
+    this.reduce = !!(w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    if (!this.reduce && this.root) this.root.classList.add('js');
+    if ('IntersectionObserver' in w) {
+      this.io = new IntersectionObserver((es) => {
+        es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); this.io.unobserve(e.target); } });
+      }, { threshold: .1, rootMargin: '0px 0px -6% 0px' });
+      this.rvEls.forEach((el) => this.io.observe(el));
+    } else this.rvEls.forEach((el) => el.classList.add('is-in'));
+    this.onScroll = () => { if (!this.sq) { this.sq = true; requestAnimationFrame(() => { this.sq = false; this.measure(); }); } };
+    this.onMove = (e) => {
+      this.mouse.on = true; this.mouse.x = e.clientX; this.mouse.y = e.clientY;
+      if (this.cursor) this.cursor.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+    };
+    this.onLeave = () => { this.mouse.on = false; };
+    w.addEventListener('scroll', this.onScroll, { passive: true });
+    w.addEventListener('resize', this.onScroll);
+    w.addEventListener('pointermove', this.onMove, { passive: true });
+    document.addEventListener('pointerleave', this.onLeave);
+    this.t0 = performance.now();
+    this.measure();
+    setTimeout(this.onScroll, 400);
+    this.loop = (now) => { this.raf = requestAnimationFrame(this.loop); this.frame(now); };
+    this.raf = requestAnimationFrame(this.loop);
+  }
+
+  componentWillUnmount() {
+    var w = window;
+    cancelAnimationFrame(this.raf);
+    w.removeEventListener('scroll', this.onScroll);
+    w.removeEventListener('resize', this.onScroll);
+    w.removeEventListener('pointermove', this.onMove);
+    document.removeEventListener('pointerleave', this.onLeave);
+    if (this.io) this.io.disconnect();
+  }
+
+  measure() {
+    var w = window, y = w.scrollY || document.documentElement.scrollTop || 0, vh = w.innerHeight;
+    if (this.header) this.header.classList.toggle('is-scrolled', y > 24);
+    if (!this.hero || !this.work || !this.appr || !this.exp || !this.writing || !this.contact) return;
+    function top(el) { return el.getBoundingClientRect().top + y; }
+    if (this.hs && this.track && !this.reduce) {
+      var dist = Math.max(0, this.track.scrollWidth - w.innerWidth);
+      var want = Math.round(dist + vh);
+      if (this.hsH !== want) { this.hs.style.height = want + 'px'; this.hsH = want; }
+      this.hsDist = dist;
+      var hp = c01((y - top(this.hs)) / Math.max(1, dist));
+      this.track.style.transform = 'translate3d(' + (-hp * dist).toFixed(1) + 'px,0,0)';
+      if (this.hsBar) this.hsBar.style.transform = 'scaleX(' + hp.toFixed(3) + ')';
+      var cx0 = w.innerWidth / 2, on = 0, bd0 = 1e9;
+      this.panEls.forEach((el, q) => { var r = el.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - cx0); if (d < bd0) { bd0 = d; on = q; } });
+      this.panEls.forEach((el, q) => el.classList.toggle('is-on', q === on));
+      if (this.hsCount && this.hsOn !== on) { this.hsCount.textContent = '0' + (on + 1) + ' / 0' + this.panEls.length; this.hsOn = on; }
+    }
+    var heroH = this.hero.offsetHeight, wT = top(this.work), aT = top(this.appr), aH = this.appr.offsetHeight;
+    var eT = top(this.exp), eB = eT + this.exp.offsetHeight, wrT = top(this.writing), cT = top(this.contact);
+    var A = [[0, 1], [heroH * .25, 1], [wT, 2], [aT - vh * 1.1, 2], [aT, 3], [aT + aH - vh, 3], [eT + vh * .25, 4], [eB - vh, 4], [wrT, 5], [cT - vh * .6, 5], [cT - vh * .05, 6]];
+    for (var i = 1; i < A.length; i++) if (A[i][0] <= A[i - 1][0]) A[i][0] = A[i - 1][0] + 1;
+    var f0 = 6, f1 = 6, t = 1;
+    if (y <= A[0][0]) { f0 = f1 = 1; }
+    else for (i = 0; i < A.length - 1; i++) {
+      if (y >= A[i][0] && y < A[i + 1][0]) { f0 = A[i][1]; f1 = A[i + 1][1]; t = (y - A[i][0]) / (A[i + 1][0] - A[i][0]); break; }
+    }
+    if (f0 === f1) t = 1;
+    this.seg = { f0: f0, f1: f1, t: t };
+    this.ap = c01((y - aT) / Math.max(1, aH - vh));
+    this.gp5 = c01((y - wrT) / Math.max(1, cT - vh * .6 - wrT));
+    if (this.bar) this.bar.style.transform = 'scaleX(' + this.ap.toFixed(3) + ')';
+    var st = Math.min(5, Math.floor(this.ap * 5) + 1);
+    if (st !== this.state.stage) this.setState({ stage: st });
+    var best = -1, bd = 1e9;
+    this.lensEls.forEach((el) => { var r = el.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - vh * .5); if (d < bd && r.bottom > 0 && r.top < vh) { bd = d; best = +el.getAttribute('data-k'); } });
+    this.lensScroll = best;
+    if (!this.reduce) this.parEls.forEach((el) => {
+      var r = el.parentNode.getBoundingClientRect();
+      el.style.translate = (((r.left + r.width / 2) - w.innerWidth / 2) * -.06).toFixed(1) + 'px 0';
+    });
+  }
+
+  ensure(W, H) {
+    var m = W < 680, S = 6, K = m ? 14 : 34;
+    if (this.F && this.W === W && this.H === H) return;
+    var N = 7 + 7 * S + K;
+    if (!this.R || this.R[0].length !== N) {
+      var r = rng(9), R = [];
+      for (var q = 0; q < 6; q++) { R.push(new Float32Array(N)); for (var i = 0; i < N; i++) R[q][i] = r(); }
+      this.R = R;
+      this.cx = new Float32Array(N); this.cy = new Float32Array(N); this.ox = new Float32Array(N); this.oy = new Float32Array(N);
+      this.started = false;
+    }
+    this.F = build(W, H, m, S, K, this.R); this.W = W; this.H = H; this.N = N; this.m = m;
+    if (!this.started) { for (var j = 0; j < N; j++) { this.cx[j] = this.F[0].x[j]; this.cy[j] = this.F[0].y[j]; } this.started = true; }
+  }
+
+  frame(now) {
+    var cv = this.cv; if (!cv) return;
+    var w = cv.clientWidth, h = cv.clientHeight; if (!w || !h) return;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2), BW = Math.round(w * dpr), BH = Math.round(h * dpr);
+    if (cv.width !== BW || cv.height !== BH) { cv.width = BW; cv.height = BH; }
+    this.ensure(w, h);
+    var ctx = cv.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    try { ctx.letterSpacing = '0.06em'; } catch (e) {}
+    TH = THEMES[this.state.theme === 'dark' ? 'dark' : 'light'];
+    var red = this.reduce, time = red ? 99 : (now - this.t0) / 1000, F = this.F, N = this.N, R = this.R;
+    var sg = this.seg, f0 = sg.f0, f1 = sg.f1, t = sg.t, A = F[f0], B = F[f1];
+    var intro = time < 6;
+    var w0 = f0 === f1 ? 0 : 1 - t, w1 = f0 === f1 ? 1 : t;
+    function wf(k) { return (f0 === k ? w0 : 0) + (f1 === k ? w1 : 0); }
+    var W2 = wf(2), W3 = wf(3), W4 = wf(4), W1 = wf(1), W6 = wf(6);
+    var active = Math.min(4, Math.floor(this.ap * 5)), lensA = this.lensHover > -1 ? this.lensHover : this.lensScroll;
+    var hiSet = this.hi, mo = this.mouse, i;
+    if (F[1].cube && (W1 > 0 || intro)) {
+      var tya = -.32, tpa = .16;
+      if (!red) {
+        tya += Math.sin(time * .21) * .16; tpa += Math.sin(time * .16) * .07;
+        if (mo.on) { tya += (mo.x / w - .5) * .5; tpa -= (mo.y / h - .5) * .3; }
+      }
+      this.ya = this.ya === undefined || red ? tya : this.ya + (tya - this.ya) * .05;
+      this.pa = this.pa === undefined || red ? tpa : this.pa + (tpa - this.pa) * .05;
+      projectCube(F[1], this.ya, this.pa);
+    }
+
+    /* positions: staggered flight between formations, softened by a spring */
+    for (i = 0; i < N; i++) {
+      var ti = f0 === f1 ? 1 : ease((t - R[4][i] * .32) / .68);
+      var ax = A.x[i], ay = A.y[i], bx = B.x[i], by = B.y[i];
+      if (intro) {
+        var k1 = eo((time - .2 - R[5][i] * 1.4) / 2.4);
+        if (f0 === 1) { ax = F[0].x[i] + (ax - F[0].x[i]) * k1; ay = F[0].y[i] + (ay - F[0].y[i]) * k1; }
+        if (f1 === 1) { bx = F[0].x[i] + (bx - F[0].x[i]) * k1; by = F[0].y[i] + (by - F[0].y[i]) * k1; }
+      }
+      var tx = ax + (bx - ax) * ti, ty = ay + (by - ay) * ti;
+      var kk = red ? 1 : .14;
+      this.cx[i] += (tx - this.cx[i]) * kk; this.cy[i] += (ty - this.cy[i]) * kk;
+      var mx = 0, my = 0;
+      if (mo.on && !red && W2 < .5 && W1 < .5) { var dx = this.cx[i] - mo.x, dy = this.cy[i] - mo.y, d = Math.sqrt(dx * dx + dy * dy) || 1; if (d < 130) { var ff = 1 - d / 130; ff = ff * ff * 16; mx = dx / d * ff; my = dy / d * ff; } }
+      this.ox[i] += (mx - this.ox[i]) * .1; this.oy[i] += (my - this.oy[i]) * .1;
+    }
+    var px = new Float32Array(N), py = new Float32Array(N), al = new Float32Array(N);
+    for (i = 0; i < N; i++) {
+      var dr = red ? 0 : (i < 7 ? 1.2 : 2.6) * (1 - W2) * (1 - W1);
+      px[i] = this.cx[i] + this.ox[i] + Math.sin(time * (.3 + R[2][i] * .5) + R[3][i] * 6.28) * dr;
+      py[i] = this.cy[i] + this.oy[i] + Math.cos(time * (.25 + R[3][i] * .5) + R[2][i] * 6.28) * dr;
+      var tj = f0 === f1 ? 1 : ease((t - R[4][i] * .32) / .68);
+      al[i] = (A.a[i] + (B.a[i] - A.a[i]) * tj) * (red ? 1 : c01((time - R[5][i] * .9) / .6));
+    }
+    var ap5 = this.ap, gp5 = this.gp5;
+
+    /* overlays: lens circles, blueprint loop */
+    if (W4 > .01) {
+      F[4].rings.forEach(function (rg, q) {
+        var on = q === lensA;
+        ctx.strokeStyle = 'rgba(' + TH.ink + ',' + ((on ? .55 : .14) * W4) + ')'; ctx.lineWidth = on ? 1.2 : 1;
+        ctx.beginPath(); ctx.arc(rg.x, rg.y, rg.r * (.6 + .4 * eo(W4)), 0, 6.283); ctx.stroke();
+      });
+    }
+
+    /* edges */
+    function drawSet(Fs, wgt, incoming) {
+      if (wgt <= .01) return;
+      var es = Fs.e;
+      for (var q = 0; q < es.length; q++) {
+        var e = es[q], pr = incoming ? eo(wgt) : 1, a = e.w * wgt;
+        if (Fs === F[1] || Fs === F[6]) { if (intro) pr *= eo((time - 1.6 - e.d) / 1.1); }
+        if (Fs === F[3]) pr *= c01((ap5 * 5 - e.st + .9) / .8);
+        if (Fs === F[5]) { if (e.prog !== undefined) pr *= c01(gp5 * 13 - e.prog); }
+        if (pr <= 0) continue;
+        var A1 = e.a, B1 = e.b, aa = a * c01(Math.min(al[A1], al[B1]) * 1.6), dep = Fs.dz ? (Fs.dz[A1] + Fs.dz[B1]) / 2 : 1;
+        aa *= .3 + .7 * dep;
+        if (hiSet && (Fs === F[1] || Fs === F[6]) && (hiSet.indexOf(A1) > -1 || hiSet.indexOf(B1) > -1)) aa = Math.min(1, aa * 2.4);
+        ctx.strokeStyle = e.acc ? 'rgba(' + TH.acc + ',' + Math.min(1, aa) + ')' : 'rgba(' + TH.ink + ',' + Math.min(1, aa) + ')';
+        ctx.lineWidth = (e.acc ? 1.4 : 1) * (.7 + .45 * dep);
+        ctx.beginPath();
+        var x1 = px[A1], y1 = py[A1], x2 = px[B1], y2 = py[B1];
+        if (e.loop) {
+          var yb = e.by, steps = 40;
+          ctx.moveTo(x1, y1);
+          for (var s = 1; s <= steps * pr; s++) { var u = s / steps, v = 1 - u; ctx.lineTo(v * v * v * x1 + 3 * v * v * u * x1 + 3 * v * u * u * x2 + u * u * u * x2, v * v * v * y1 + 3 * v * v * u * yb + 3 * v * u * u * yb + u * u * u * y2); }
+        } else if (e.curve && W3 > .5) {
+          var mxp = (x1 + x2) / 2, n = 24;
+          ctx.moveTo(x1, y1);
+          for (var s2 = 1; s2 <= n * pr; s2++) { var u2 = s2 / n, v2 = 1 - u2; ctx.lineTo(v2 * v2 * v2 * x1 + 3 * v2 * v2 * u2 * mxp + 3 * v2 * u2 * u2 * mxp + u2 * u2 * u2 * x2, v2 * v2 * v2 * y1 + 3 * v2 * v2 * u2 * y1 + 3 * v2 * u2 * u2 * y2 + u2 * u2 * u2 * y2); }
+        } else { ctx.moveTo(x1, y1); ctx.lineTo(x1 + (x2 - x1) * pr, y1 + (y2 - y1) * pr); }
+        ctx.stroke();
+      }
+    }
+    if (f0 !== f1) drawSet(A, w0, false);
+    drawSet(B, w1, f0 !== f1);
+
+    /* points */
+    for (i = 0; i < N; i++) {
+      var a2 = al[i]; if (a2 <= .01) continue;
+      var tk = f0 === f1 ? 1 : ease((t - R[4][i] * .32) / .68);
+      var sz = A.s[i] + (B.s[i] - A.s[i]) * tk, ringP = (tk < .5 ? A.g[i] : B.g[i]), acc = (tk < .5 ? A.c[i] : B.c[i]);
+      var ink = 23, aa2 = a2;
+      if (W3 > .5 && F[3].col[i] > -1) {
+        var cI = F[3].col[i];
+        if (cI > active) aa2 *= .35;
+        if (cI === active) { sz += 1.5; acc = 1; }
+      }
+      if (W4 > .5 && F[4].ring[i] > -1 && lensA > -1) aa2 *= F[4].ring[i] === lensA ? 1.25 : .45;
+      var hot = hiSet && i < 7 && hiSet.indexOf(i) > -1 && (W1 > .5 || W6 > .5);
+      if (hot) { sz += 2; acc = 1; }
+      ctx.beginPath(); ctx.arc(px[i], py[i], sz, 0, 6.283);
+      if (ringP && !acc) {
+        ctx.fillStyle = TH.bg; ctx.fill();
+        ctx.strokeStyle = 'rgba(' + TH.ink + ',' + Math.min(1, aa2) + ')'; ctx.lineWidth = 1; ctx.stroke();
+        ctx.beginPath(); ctx.arc(px[i], py[i], Math.max(1, sz * .36), 0, 6.283); ctx.fillStyle = 'rgba(' + TH.ink + ',' + Math.min(1, aa2) + ')'; ctx.fill();
+      } else {
+        ctx.fillStyle = acc ? 'rgba(' + TH.acc + ',' + Math.min(1, aa2) + ')' : 'rgba(' + TH.ink + ',' + Math.min(1, aa2) + ')';
+        ctx.fill();
+      }
+    }
+
+    /* labels */
+    var m = this.m;
+    function drawLabels(Fs, wgt) {
+      if (wgt <= .02) return;
+      Fs.l.forEach(function (L) {
+        var a = wgt * wgt;
+        if (L.hub) {
+          if (intro) a *= c01((time - 2.4) / 1);
+          a *= al[L.i];
+          var hot = hiSet && hiSet.indexOf(L.i) > -1, dim = hiSet && !hot;
+          ctx.font = '400 ' + (m ? 9 : 10) + 'px ' + MONO;
+          ctx.fillStyle = hot ? 'rgba(' + TH.acc + ',' + a + ')' : 'rgba(' + TH.ink + ',' + (a * (dim ? .3 : .75)) + ')';
+          if (L.off) { ctx.textAlign = L.ux > .3 ? 'left' : L.ux < -.3 ? 'right' : 'center'; ctx.fillText(L.t, px[L.i] + L.ux * L.off, py[L.i] + L.uy * L.off + (L.uy > .3 ? 9 : L.uy < -.3 ? -1 : 3.5)); }
+          else { var rt = px[L.i] < (m ? .62 : .82) * w; ctx.textAlign = rt ? 'left' : 'right'; ctx.fillText(L.t, px[L.i] + (rt ? 12 : -12), py[L.i] + 3.5); }
+        } else {
+          ctx.font = '400 ' + (m ? 8.5 : 10) + 'px ' + MONO;
+          ctx.textAlign = L.align || 'left';
+          var col = 'rgba(' + TH.mute + ',' + a + ')';
+          if (L.kind === 'col' && L.c === active) col = 'rgba(' + TH.ink + ',' + a + ')';
+          if (L.kind === 'col' && L.c > active) col = 'rgba(' + TH.mute + ',' + (a * .5) + ')';
+          if (L.kind === 'ring' && L.k === lensA) col = 'rgba(' + TH.ink + ',' + a + ')';
+          ctx.fillStyle = col;
+          ctx.fillText(L.t, L.x, L.y);
+        }
+      });
+      ctx.textAlign = 'left';
+    }
+    if (f0 !== f1) drawLabels(A, w0);
+    drawLabels(B, w1);
+  }
+
+  renderVals() {
+    var st = this.state.stage || 1, menu = !!this.state.menu, pub = this.state.pub || 'all', all = !!this.state.all;
+    function inPub(a, k) { return k === 'all' || a[0] === k || (k === 'O' && 'CAD'.indexOf(a[0]) > -1); }
+    var list = ARTICLES.map((a, i) => ({ k: a[0], n: (i < 9 ? '0' : '') + (i + 1), t: a[1], u: a[2], p: PUBS[a[0]] })).filter((a) => inPub([a.k], pub));
+    var shown = all ? list : list.slice(0, PREVIEW);
+    return {
+      theme: this.state.theme === 'dark' ? 'dark' : 'light', darkOn: this.state.theme === 'dark' ? 'true' : 'false', toggleTheme: this.toggleTheme,
+      themeLabel: this.state.theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro',
+      filters: FILTERS.map((f, i) => ({ label: f[1], count: String(ARTICLES.filter((a) => inPub(a, f[0])).length), on: f[0] === pub ? 'true' : 'false', pick: this.pickPub[i] })),
+      articles: shown, artShown: String(shown.length), artTotal: String(list.length),
+      hasMore: list.length > PREVIEW, allOpen: all ? 'true' : 'false', toggleAll: this.toggleAll,
+      moreLabel: all ? 'MOSTRAR MENOS' : 'MOSTRAR TODOS (' + list.length + ')', moreSign: all ? '−' : '+',
+      refRoot: this.refRoot, refCv: this.refCv, refHeader: this.refHeader, refHero: this.refHero, refWork: this.refWork,
+      refAppr: this.refAppr, refExp: this.refExp, refWriting: this.refWriting, refContact: this.refContact,
+      refBar: this.refBar, refCursor: this.refCursor, refHs: this.refHs, refTrack: this.refTrack, refHsCount: this.refHsCount, refHsBar: this.refHsBar, pan: this.pan, focus0: this.focusPan[0], focus1: this.focusPan[1], focus2: this.focusPan[2], rv: this.rv, lens: this.lens, par: this.par,
+      cursorOn: this.cursorOn, cursorOff: this.cursorOff,
+      hiPeople: this.hiPeople, hiSystems: this.hiSystems, hiExp: this.hiExp, hiOff: this.hiOff,
+      lensOn0: this.lensOn0, lensOn1: this.lensOn1, lensOn2: this.lensOn2, lensOn3: this.lensOn3, lensOff: this.lensOff,
+      menuOpen: menu ? 'true' : 'false', menuLabel: menu ? 'FECHAR' : 'MENU', toggleMenu: this.toggleMenu, closeMenu: this.closeMenu,
+      stage: String(st),
+      stages: STAGES.map((n, i) => ({ n: '0' + (i + 1), name: n, cur: i + 1 === st ? 'step' : 'false', aria: 'Etapa 0' + (i + 1) + ': ' + n, go: this.goStage[i] }))
+    };
+  }
+}
+</script>
+</body>
+</html>
