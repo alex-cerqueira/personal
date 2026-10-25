@@ -98,7 +98,7 @@
       <div class="ch-h up"><span class="mono n">03</span><h2 id="h03">Research Question</h2></div>
       <div class="ch-c">
         <p class="mono mute w6 up d1">Questão central</p>
-        <p class="rq wf up d2">Como podemos <em>[ação]</em> para <em>[pessoas]</em> em <em>[contexto]</em>?</p>
+        <p class="state w6 up d2">Como podemos [ação] para [pessoas] em [contexto]?</p>
         <ol class="subq w6 up d3">
           <li><span class="mono mute">Q.01</span><span>[Pergunta secundária]</span></li>
           <li><span class="mono mute">Q.02</span><span>[Pergunta secundária]</span></li>
@@ -110,26 +110,33 @@
     <section class="ch rv" id="c04" data-ref="ch" data-i="4" aria-labelledby="h04">
       <div class="ch-h up"><span class="mono n">04</span><h2 id="h04">Stakeholders</h2></div>
       <div class="ch-c">
-        <figure class="smap wf mask">
-          <svg viewBox="0 0 960 520" role="img" aria-label="Mapa de stakeholders em três anéis — núcleo, diretos e indiretos — com espaços reservados para cada stakeholder.">
-            <circle class="r" cx="480" cy="260" r="240"></circle>
-            <circle class="r" cx="480" cy="260" r="160"></circle>
-            <circle class="r0" cx="480" cy="260" r="80"></circle>
-            <text x="480" y="256" text-anchor="middle" class="tk">[PESSOA NO</text>
-            <text x="480" y="272" text-anchor="middle" class="tk">CENTRO]</text>
-            <text x="480" y="112" text-anchor="middle">DIRETOS</text>
-            <text x="480" y="36" text-anchor="middle">INDIRETOS</text>
-            <line class="l" x1="537" y1="203" x2="600" y2="140"></line>
-            <line class="l" x1="400" y1="260" x2="330" y2="260"></line>
-            <line class="l" x1="520" y1="330" x2="560" y2="400"></line>
-            <line class="l" x1="600" y1="140" x2="700" y2="70"></line>
-            <line class="l" x1="330" y1="260" x2="250" y2="380"></line>
-            <circle class="nd" cx="600" cy="140" r="6"></circle><text x="614" y="144">[STAKEHOLDER]</text>
-            <circle class="nd" cx="330" cy="260" r="6"></circle><text x="316" y="250" text-anchor="end">[STAKEHOLDER]</text>
-            <circle class="acc" cx="560" cy="400" r="6"></circle><text x="574" y="404">[STAKEHOLDER-CHAVE]</text>
-            <circle class="nd" cx="700" cy="70" r="5"></circle><text x="712" y="74">[INDIRETO]</text>
-            <circle class="nd" cx="250" cy="380" r="5"></circle><text x="236" y="384" text-anchor="end">[INDIRETO]</text>
-            <circle class="nd" cx="760" cy="330" r="5"></circle><text x="772" y="334">[INDIRETO]</text>
+        <figure class="smap wf rv anim" data-ref="rv">
+          <svg viewBox="0 0 960 520" role="img" aria-label="Mapa de stakeholders em três anéis — núcleo, diretos e indiretos — com a pessoa (ícone) no centro, espaços reservados para cada stakeholder e um sinal que percorre as relações a partir dela.">
+            <circle class="r0 dr k0" pathLength="1" cx="480" cy="260" r="80"></circle>
+            <circle class="r dr k1" pathLength="1" cx="480" cy="260" r="160"></circle>
+            <circle class="r dr k2" pathLength="1" cx="480" cy="260" r="240"></circle>
+            <g class="person lb k1" transform="translate(480 260) scale(.8) translate(-480 -260)"><circle cx="480" cy="244" r="11"></circle><path d="M456 288c0-17 10-26 24-26s24 9 24 26"></path></g>
+            <text class="lb k2" x="480" y="112" text-anchor="middle">DIRETOS</text>
+            <text class="lb k3" x="480" y="36" text-anchor="middle">INDIRETOS</text>
+            <line class="l dr k4" pathLength="1" x1="537" y1="203" x2="600" y2="140"></line>
+            <line class="l dr k5" pathLength="1" x1="400" y1="260" x2="330" y2="260"></line>
+            <line class="l dr k6" pathLength="1" x1="520" y1="330" x2="560" y2="400"></line>
+            <line class="l dr k7" pathLength="1" x1="600" y1="140" x2="700" y2="70"></line>
+            <line class="l dr k8" pathLength="1" x1="330" y1="260" x2="250" y2="380"></line>
+            <line class="l dr k9" pathLength="1" x1="558" y1="279" x2="760" y2="330"></line>
+            <line class="flow k4" pathLength="1" x1="537" y1="203" x2="600" y2="140"></line>
+            <line class="flow k5" pathLength="1" x1="400" y1="260" x2="330" y2="260"></line>
+            <line class="flow k6" pathLength="1" x1="520" y1="330" x2="560" y2="400"></line>
+            <line class="flow k7" pathLength="1" x1="600" y1="140" x2="700" y2="70"></line>
+            <line class="flow k8" pathLength="1" x1="330" y1="260" x2="250" y2="380"></line>
+            <line class="flow k9" pathLength="1" x1="558" y1="279" x2="760" y2="330"></line>
+            <circle class="nd pop k4" cx="600" cy="140" r="6"></circle><text class="lb k4" x="614" y="144">[STAKEHOLDER]</text>
+            <circle class="nd pop k5" cx="330" cy="260" r="6"></circle><text class="lb k5" x="316" y="250" text-anchor="end">[STAKEHOLDER]</text>
+            <circle class="halo" cx="560" cy="400" r="6"></circle>
+            <circle class="acc pop k6" cx="560" cy="400" r="6"></circle><text class="lb k6" x="574" y="404">[STAKEHOLDER-CHAVE]</text>
+            <circle class="nd pop k7" cx="700" cy="70" r="5"></circle><text class="lb k7" x="712" y="74">[INDIRETO]</text>
+            <circle class="nd pop k8" cx="250" cy="380" r="5"></circle><text class="lb k8" x="236" y="384" text-anchor="end">[INDIRETO]</text>
+            <circle class="nd pop k9" cx="760" cy="330" r="5"></circle><text class="lb k9" x="772" y="334">[INDIRETO]</text>
           </svg>
         </figure>
         <p class="body w5 up d2">[Quem influencia e quem é afetado pelo serviço; tensões e interesses entre eles.]</p>
@@ -201,18 +208,18 @@
     <section class="ch rv" id="c09" data-ref="ch" data-i="9" aria-labelledby="h09">
       <div class="ch-h up"><span class="mono n">09</span><h2 id="h09">Journey / Ecosystem</h2></div>
       <div class="ch-c">
-        <div class="wf scroll up d1" role="region" aria-label="Mapa de jornada (role horizontalmente)" tabindex="0">
+        <div class="wf scroll rv anim" data-ref="rv" role="region" aria-label="Mapa de jornada (role horizontalmente)" tabindex="0">
           <div class="jm">
-            <div class="rh">Etapa</div><div class="hd">[Etapa 1]</div><div class="hd">[Etapa 2]</div><div class="hd">[Etapa 3]</div><div class="hd">[Etapa 4]</div><div class="hd">[Etapa 5]</div>
-            <div class="rh">Ações</div><div>[—]</div><div>[—]</div><div>[—]</div><div>[—]</div><div>[—]</div>
-            <div class="rh">Pensamentos</div><div>[—]</div><div>[—]</div><div>[—]</div><div>[—]</div><div>[—]</div>
-            <div class="rh">Experiência</div>
-            <div class="curve"><svg viewBox="0 0 1000 110" preserveAspectRatio="none" aria-hidden="true"><line class="base" x1="0" y1="55" x2="1000" y2="55"></line><path d="M100 40 C200 30 230 50 300 70 S460 100 500 92 S640 40 700 38 S860 20 900 24"></path></svg></div>
-            <div class="rh">Pontos de dor</div><div>[—]</div><div>[—]</div><div>[—]</div><div>[—]</div><div>[—]</div>
-            <div class="rh">Oportunidades</div><div>[—]</div><div>[—]</div><div>[—]</div><div>[—]</div><div>[—]</div>
+            <div class="rh k0">Etapa</div><div class="hd k1">[Etapa 1]</div><div class="hd k2">[Etapa 2]</div><div class="hd k3">[Etapa 3]</div><div class="hd k4">[Etapa 4]</div><div class="hd k5">[Etapa 5]</div>
+            <div class="rh k0">Ações</div><div class="k1">[—]</div><div class="k2">[—]</div><div class="k3">[—]</div><div class="k4">[—]</div><div class="k5">[—]</div>
+            <div class="rh k0">Pensamentos</div><div class="k1">[—]</div><div class="k2">[—]</div><div class="k3">[—]</div><div class="k4">[—]</div><div class="k5">[—]</div>
+            <div class="rh k0">Experiência</div>
+            <div class="curve k1"><svg viewBox="0 0 1000 110" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><line class="base lb k1" x1="0" y1="55" x2="1000" y2="55"></line><path class="line dr k2" pathLength="1" d="M100 40 C200 30 230 50 300 70 S460 100 500 92 S640 40 700 38 S860 20 900 24"></path><path class="flow fl-c k10" pathLength="1" d="M100 40 C200 30 230 50 300 70 S460 100 500 92 S640 40 700 38 S860 20 900 24"></path><circle class="pt pop k2" cx="100" cy="40" r="5"></circle><circle class="pt pop k4" cx="300" cy="70" r="5"></circle><circle class="halo" cx="500" cy="92" r="5"></circle><circle class="pt pop k6 acc" cx="500" cy="92" r="5"></circle><circle class="pt pop k8" cx="700" cy="38" r="5"></circle><circle class="pt pop k10" cx="900" cy="24" r="5"></circle></svg></div>
+            <div class="rh k0">Pontos de dor</div><div class="k1">[—]</div><div class="k2">[—]</div><div class="k3">[—]</div><div class="k4">[—]</div><div class="k5">[—]</div>
+            <div class="rh k0">Oportunidades</div><div class="k1">[—]</div><div class="k2">[—]</div><div class="k3">[—]</div><div class="k4">[—]</div><div class="k5">[—]</div>
           </div>
         </div>
-        <p class="note w5 up d2">Curva ilustrativa — substituir pela jornada ou pelo mapa de ecossistema real.</p>
+        <p class="note w5 up d2">Curva ilustrativa — substituir pela jornada ou pelo mapa de ecossistema real. A animação acompanha os dados: troque os pontos da curva e as etapas.</p>
       </div>
     </section>
 
@@ -280,7 +287,9 @@
   <p class="mono f4 mute">São Paulo · Brazil</p>
   <a class="mono f5" href="#main"><span class="ul">Back to top</span> <span class="arr n" aria-hidden="true">↑</span></a>
 </footer>
-<button class="fab" type="button" data-click="toggleTheme" aria-pressed="true" aria-label="Ativar tema claro" title="Ativar tema claro"><svg viewBox="0 0 24 24" aria-hidden="true"><g class="rays"><path d="M12 2.6V.6M7.33 4.53L5.92 3.12M16.67 4.53l1.41-1.41M5.4 9.2H3.4M18.6 9.2h2"></path></g><path class="bulb" d="M8.6 15.2c0-1.4-.5-2.2-1.3-3.1A5.4 5.4 0 0 1 12 3.8a5.4 5.4 0 0 1 4.7 8.3c-.8.9-1.3 1.7-1.3 3.1z"></path><path d="M9.2 18h5.6M9.8 20.6h4.4"></path></svg></button>
+<button class="fab" type="button" data-click="toggleTheme" aria-pressed="true" aria-label="Ativar tema claro" title="Ativar tema claro">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><g class="rays"><path d="M12 2.6V.6M7.33 4.53L5.92 3.12M16.67 4.53l1.41-1.41M5.4 9.2H3.4M18.6 9.2h2"></path></g><path class="bulb" d="M8.6 15.2c0-1.4-.5-2.2-1.3-3.1A5.4 5.4 0 0 1 12 3.8a5.4 5.4 0 0 1 4.7 8.3c-.8.9-1.3 1.7-1.3 3.1z"></path><path d="M9.2 18h5.6M9.8 20.6h4.4"></path></svg>
+</button>
 </div>
 </body>
 </html>

@@ -36,6 +36,13 @@ Qualquer hospedagem estática serve — publique a pasta `site/`:
 Netlify, Vercel ou Cloudflare Pages (diretório de publicação: `site`, sem comando de build),
 ou GitHub Pages (via Actions).
 
+## Hostinger (hospedagem compartilhada)
+
+1. No hPanel, abra **Arquivos → Gerenciador de Arquivos** e entre em `public_html`.
+2. Envie o conteúdo do pacote (o `.zip` do site) e use **Extrair** ali mesmo. `index.html` e o `.htaccess` precisam ficar **direto** em `public_html`, não dentro de uma subpasta.
+3. Se o domínio ainda não tem SSL, ative o certificado gratuito em **Segurança → SSL** e depois descomente as linhas de redirecionamento https no `.htaccess`.
+4. Se for colocar o site numa subpasta (ex.: `seudominio.com/portfolio`), a página 404 e os caminhos que começam com `/` precisam ser ajustados.
+
 ## Observações
 
 - Tema escuro é o padrão; a escolha do visitante fica salva no navegador (`localStorage`).

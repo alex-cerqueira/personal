@@ -1,4 +1,7 @@
-:root{--bg:#F8F8F6;--ink:#171717;--mute:#666666;--line:#DADAD6;--bg2:#EFEFEB;--accent:#3155E7;--ink2:#3A3A38;--faint:#8A8A85;--hdr:rgba(248,248,246,.95);--logo:#4A4A48;--fab:#E6E6E2;--sans:'Geist','Helvetica Neue',Helvetica,Arial,sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;--ease:cubic-bezier(.2,.7,.1,1);--ease2:cubic-bezier(.65,0,.35,1);--gx:clamp(20px,4.4vw,72px);--gut:24px}
+:root{--bg:#F8F8F6;--ink:#171717;--mute:#666666;--line:#DADAD6;--bg2:#EFEFEB;--accent:#3155E7;--ink2:#3A3A38;--faint:#8A8A85;--hdr:rgba(248,248,246,.95);--fab:#E6E6E2;--logo:#4A4A48;--sans:'Geist','Helvetica Neue',Helvetica,Arial,sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;--ease:cubic-bezier(.2,.7,.1,1);--ease2:cubic-bezier(.65,0,.35,1);--gx:clamp(20px,4.4vw,72px);--gut:24px}
+[hidden]{display:none !important}
+html{color-scheme:light}
+html[data-theme="dark"]{color-scheme:dark}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:var(--ink);text-decoration:none}a:hover{color:var(--ink)}
@@ -6,18 +9,16 @@ a{color:var(--ink);text-decoration:none}a:hover{color:var(--ink)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 h1,h2,h3,p,ul,ol,figure,blockquote{margin:0}
 ul,ol{padding:0;list-style:none}
-.site{position:relative;overflow-x:clip;background:var(--bg);color:var(--ink);min-height:100vh}
-.fab{position:fixed;right:24px;bottom:24px;z-index:70;width:52px;height:70px;border-radius:26px;background:var(--fab);color:var(--ink);display:flex;align-items:center;justify-content:center;transition:background-color 500ms var(--ease),color 500ms var(--ease),transform 500ms var(--ease);cursor:pointer;border:0;padding:0}
+.site{position:relative;overflow-x:clip;background:var(--bg);color:var(--ink);min-height:100vh;transition:background-color 500ms var(--ease),color 500ms var(--ease)}
+html[data-theme="dark"]{--bg:#121212;--ink:#EDEDEA;--mute:#A3A39E;--line:#2E2E2C;--bg2:#1D1D1C;--accent:#7D95FF;--ink2:#CFCFCB;--faint:#85857F;--hdr:rgba(18,18,18,.86);--fab:#262624;--logo:#2B2B29}
+html[data-theme="dark"] ::selection{background:var(--ink);color:var(--bg)}
+.fab{position:fixed;right:24px;bottom:24px;z-index:70;width:52px;height:70px;border-radius:26px;border:0;padding:0;cursor:pointer;background:var(--fab);color:var(--ink);display:flex;align-items:center;justify-content:center;transition:background-color 500ms var(--ease),color 500ms var(--ease),transform 500ms var(--ease)}
 .fab:hover{transform:translateY(-3px)}
 .fab svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .fab .bulb{transition:fill 400ms}
 html[data-theme="dark"] .fab .bulb{fill:currentColor}
 .fab .rays{transition:opacity 400ms,transform 500ms var(--ease);transform-box:view-box;transform-origin:12px 9.2px}
 html[data-theme="dark"] .fab .rays{transform:scale(1.08)}
-[hidden]{display:none !important}
-html{color-scheme:light}
-html[data-theme="dark"]{color-scheme:dark}
-html[data-theme="dark"]{--bg:#121212;--ink:#EDEDEA;--mute:#A3A39E;--line:#2E2E2C;--bg2:#1D1D1C;--accent:#7D95FF;--ink2:#CFCFCB;--faint:#85857F;--hdr:rgba(18,18,18,.86);--logo:#2B2B29;--fab:#262624}
 .g{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);padding-inline:var(--gx)}
 .mono{font-family:var(--mono);font-size:11.5px;line-height:1.5;letter-spacing:.08em;text-transform:uppercase}
 .mute{color:var(--mute)}
@@ -99,6 +100,7 @@ a:hover .arr.w{transform:translateX(-6px)}a:hover .arr.e{transform:translateX(6p
 .smap .acc{fill:var(--accent)}
 .smap text{font-family:var(--mono);font-size:11px;letter-spacing:.08em;fill:var(--mute)}
 .smap .tk{fill:var(--ink)}
+.smap .person{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .table{width:100%;border-collapse:collapse;font-size:15px}
 .table th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:400;text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--ink)}
 .table td{padding:14px 12px 14px 0;border-bottom:1px solid var(--line);vertical-align:top}
@@ -122,12 +124,30 @@ a:hover .arr.w{transform:translateX(-6px)}a:hover .arr.e{transform:translateX(6p
 .jm>div{padding:12px 10px 12px 0;border-bottom:1px solid var(--line);font-size:14px}
 .jm .hd{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
 .jm .rh{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
-.jm .curve{grid-column:2/7;padding:0;height:110px}
-.jm .curve svg{display:block;width:100%;height:100%}
-.jm .curve path{fill:none;stroke:var(--ink);stroke-width:1.2}
+.jm .curve{grid-column:2/7;padding:14px 0;height:auto}
+.jm .curve svg{display:block;width:100%;height:auto;overflow:visible}
+.jm .curve .line{fill:none;stroke:var(--ink);stroke-width:1.2}
 .jm .curve .base{stroke:var(--line);stroke-dasharray:3 5;stroke-width:1}
-.jm .curve circle{fill:var(--bg);stroke:var(--ink)}
-.jm .curve .acc{fill:var(--accent);stroke:none}
+.jm .curve .pt{fill:var(--bg);stroke:var(--ink);stroke-width:1.2}
+.jm .curve .pt.acc{fill:var(--accent);stroke:none}
+/* animated diagrams: drawn when they enter the viewport, then a quiet signal loops along the relations */
+.k0{--dl:0s}.k1{--dl:.15s}.k2{--dl:.3s}.k3{--dl:.45s}.k4{--dl:.6s}.k5{--dl:.75s}.k6{--dl:.9s}.k7{--dl:1.05s}.k8{--dl:1.2s}.k9{--dl:1.35s}.k10{--dl:1.6s}
+.anim .dr{stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1400ms var(--ease2) var(--dl,0s)}
+.anim .pop{transform-box:fill-box;transform-origin:center;transition:opacity 500ms var(--ease) var(--dl,0s),transform 700ms var(--ease) var(--dl,0s)}
+.anim .lb{transition:opacity 700ms var(--ease) var(--dl,0s)}
+.jm>div{transition:opacity 700ms var(--ease) var(--dl,0s),transform 700ms var(--ease) var(--dl,0s)}
+.js .anim:not(.is-in) .dr{stroke-dashoffset:1}
+.js .anim:not(.is-in) .pop{opacity:0;transform:scale(.3)}
+.js .anim:not(.is-in) .lb{opacity:0}
+.js .anim:not(.is-in) .jm>div{opacity:0;transform:translateY(10px)}
+.anim .flow{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-dasharray:.12 .88;stroke-dashoffset:1;opacity:0}
+.anim .flow.fl-c{stroke-dasharray:.05 .95}
+.anim.is-in .flow{animation:acflow 3.4s linear infinite;animation-delay:calc(var(--dl,0s) + 1.8s)}
+.anim.is-in .flow.fl-c{animation-duration:5s}
+@keyframes acflow{0%{stroke-dashoffset:1;opacity:0}10%{opacity:1}85%{opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+.anim .halo{fill:none;stroke:var(--accent);stroke-width:1;opacity:0;transform-box:fill-box;transform-origin:center}
+.anim.is-in .halo{animation:achalo 2.6s var(--ease) infinite;animation-delay:2.2s}
+@keyframes achalo{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(3.2)}}
 .opp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--gut);border-top:1px solid var(--line)}
 .opp li{padding:22px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
 .opp p{font-size:clamp(19px,1.6vw,24px);line-height:1.3;letter-spacing:-.02em}
