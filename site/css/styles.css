@@ -112,6 +112,7 @@ a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
 .hs-hint{margin-left:auto}
 .project:hover .p-in,.project:focus-visible .p-in{transform:scale(1.02)}
 .p-in svg{display:block;width:100%;height:100%}
+.p-in .p-img{display:block;width:100%;height:100%;object-fit:cover}
 .p-fig .ph{position:absolute;left:18px;bottom:16px}
 .p-dot{position:absolute;right:18px;top:18px;width:8px;height:8px;border-radius:50%;background:var(--accent);transform:scale(0);transition:transform 500ms var(--ease)}
 .project:hover .p-dot,.project:focus-visible .p-dot{transform:scale(1)}
