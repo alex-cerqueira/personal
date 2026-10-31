@@ -199,7 +199,7 @@ a:hover .arr.w{transform:translateX(-6px)}a:hover .arr.e{transform:translateX(6p
 .opp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--gut);border-top:1px solid var(--line)}
 .opp li{padding:22px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
 .opp p{font-size:clamp(19px,1.6vw,24px);line-height:1.3;letter-spacing:-.02em}
-.impact{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.impact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
 .impact div{padding:22px 16px 22px 0}
 .impact .v{font-size:clamp(40px,4.4vw,72px);letter-spacing:-.05em;line-height:1;font-weight:330;margin-bottom:10px}
 .note{border-left:2px solid var(--line);padding:4px 0 4px 16px;color:var(--mute);font-size:15px;max-width:40em}
