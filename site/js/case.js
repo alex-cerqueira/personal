@@ -15,6 +15,119 @@ class Component extends DCLogic {
   refProg = (el) => { this.prog = el; };
   refRun = (el) => { this.run = el; };
   refTrack = (el) => { this.track = el; };
+  refCar = (el) => { if (el) this.car = el; };
+  refCap = (el) => { if (el) this.cap = el; };
+
+  /* Project carousel: the next image grows out of a honeycomb that sweeps in the direction of travel. */
+  initCar() {
+    var f = this.car;
+    if (!f || f.getAttribute('data-car')) return;
+    var imgs = [].slice.call(f.querySelectorAll('.cimg')), n = imgs.length;
+    if (n < 2) return;
+    f.setAttribute('data-car', '1');
+    var cv = f.querySelector('.car-cv'), ctx = cv && cv.getContext ? cv.getContext('2d') : null;
+    var num = f.querySelector('.car-n b'), bar = f.querySelector('.car-bar i');
+    var reduce = this.reduce, DUR = 5600, TR = 1250;
+    var S = this.carS = { i: 0, busy: false, el: 0, vis: false, paused: false, last: 0, raf: 0 };
+    var pad = (k) => (k < 9 ? '0' : '') + (k + 1);
+    var ready = (im) => im.complete && im.naturalWidth > 0;
+    var paint = (im, W, H) => {
+      var iw = im.naturalWidth, ih = im.naturalHeight, cover = im.getAttribute('data-fit') !== 'contain';
+      var pos = (im.getAttribute('data-pos') || '50% 50%').split(' ').map(parseFloat);
+      var s = cover ? Math.max(W / iw, H / ih) : Math.min(W / iw, H / ih), dw = iw * s, dh = ih * s;
+      if (!cover) { ctx.fillStyle = getComputedStyle(f).backgroundColor; ctx.fillRect(0, 0, W, H); }
+      ctx.drawImage(im, (W - dw) * pos[0] / 100, (H - dh) * pos[1] / 100, dw, dh);
+    };
+    var hex = (x, y, r) => {
+      ctx.moveTo(x + r, y);
+      for (var a = 1; a < 6; a++) ctx.lineTo(x + r * Math.cos(a * Math.PI / 3), y + r * Math.sin(a * Math.PI / 3));
+      ctx.closePath();
+    };
+    var settle = (j, manual) => {
+      imgs[S.i].classList.remove('on'); imgs[S.i].setAttribute('aria-hidden', 'true');
+      imgs[j].classList.add('on'); imgs[j].removeAttribute('aria-hidden');
+      S.i = j;
+      if (num) num.textContent = pad(j);
+      if (this.cap) { this.cap.setAttribute('aria-live', manual ? 'polite' : 'off'); this.cap.textContent = imgs[j].getAttribute('data-cap') || ''; }
+    };
+    var go = (d, manual) => {
+      if (S.busy) return;
+      var j = (S.i + d + n) % n, A = imgs[S.i], B = imgs[j];
+      S.el = 0;
+      if (reduce || !ctx || !ready(A) || !ready(B)) { settle(j, manual); return; }
+      S.busy = true;
+      var W = f.clientWidth, H = f.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var R = Math.max(24, Math.min(76, W / 16)), h3 = Math.sqrt(3) * R, cells = [];
+      for (var c = -1; c * 1.5 * R < W + R; c++) {
+        for (var r = -1; r * h3 < H + h3; r++) {
+          var x = c * 1.5 * R, y = r * h3 + (c & 1 ? h3 / 2 : 0);
+          var u = (d > 0 ? x / W : 1 - x / W) * .8 + (y / H) * .12 + Math.random() * .08;
+          cells.push(x, y, Math.max(0, Math.min(1, u)));
+        }
+      }
+      var t0 = 0;
+      var frame = (now) => {
+        if (!t0) t0 = now;
+        var t = Math.min(1, (now - t0) / TR), ring = [];
+        ctx.clearRect(0, 0, W, H);
+        paint(A, W, H);
+        ctx.save(); ctx.beginPath();
+        for (var k = 0; k < cells.length; k += 3) {
+          var p = Math.min(1, Math.max(0, (t - cells[k + 2] * .55) / .45));
+          if (p <= 0) continue;
+          var e = 1 - Math.pow(1 - p, 3);
+          hex(cells[k], cells[k + 1], R * 1.03 * e);
+          if (p < 1) ring.push(cells[k], cells[k + 1], R * e, p);
+        }
+        ctx.clip(); paint(B, W, H); ctx.restore();
+        ctx.lineWidth = 1;
+        for (var q = 0; q < ring.length; q += 4) {
+          ctx.strokeStyle = 'rgba(255,255,255,' + (Math.sin(Math.PI * ring[q + 3]) * .75).toFixed(3) + ')';
+          ctx.beginPath(); hex(ring[q], ring[q + 1], ring[q + 2]); ctx.stroke();
+        }
+        if (t < 1) { S.tr = requestAnimationFrame(frame); return; }
+        settle(j, manual);
+        S.tr = requestAnimationFrame(() => { cv.classList.remove('on'); S.busy = false; });
+      };
+      cv.classList.add('on');
+      S.tr = requestAnimationFrame(frame);
+    };
+    var tick = (now) => {
+      var dt = S.last ? Math.min(100, now - S.last) : 0; S.last = now;
+      if (!S.paused && !S.busy && !document.hidden) { S.el += dt; if (S.el >= DUR) go(1, false); }
+      if (bar) bar.style.transform = 'scaleX(' + Math.min(1, S.el / DUR).toFixed(4) + ')';
+      S.raf = S.vis ? requestAnimationFrame(tick) : 0;
+    };
+    f.addEventListener('click', (e) => {
+      var b = e.target.closest ? e.target.closest('.car-b') : null;
+      if (b) go(b.classList.contains('car-prev') ? -1 : 1, true);
+    });
+    f.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(1, true); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1, true); }
+    });
+    f.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') S.paused = true; });
+    f.addEventListener('pointerleave', () => { S.paused = f.contains(document.activeElement); });
+    f.addEventListener('focusin', () => { S.paused = true; });
+    f.addEventListener('focusout', () => { S.paused = false; });
+    var px = null;
+    f.addEventListener('pointerdown', (e) => { px = e.target.closest && e.target.closest('.car-b') ? null : e.clientX; });
+    f.addEventListener('pointerup', (e) => {
+      if (px === null) return;
+      var dx = e.clientX - px; px = null;
+      if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1, true);
+    });
+    if (reduce) return;
+    if ('IntersectionObserver' in window) {
+      this.carIO = new IntersectionObserver((es) => {
+        S.vis = es[0].isIntersecting;
+        if (S.vis && !S.raf) { S.last = 0; S.raf = requestAnimationFrame(tick); }
+      }, { threshold: .35 });
+      this.carIO.observe(f);
+    } else { S.vis = true; S.raf = requestAnimationFrame(tick); }
+  }
   fit() {
     this.chEls.forEach((c) => {
       var cc = c.querySelector('.ch-c'); if (!cc) return;
@@ -58,6 +171,7 @@ class Component extends DCLogic {
     };
     document.addEventListener('click', this.onToc);
     this.measure();
+    this.initCar();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.fit());
     setTimeout(() => this.fit(), 600);
   }
@@ -67,6 +181,8 @@ class Component extends DCLogic {
     window.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onScroll);
     if (this.io) this.io.disconnect();
+    if (this.carIO) this.carIO.disconnect();
+    if (this.carS) { cancelAnimationFrame(this.carS.raf); cancelAnimationFrame(this.carS.tr); this.carS.vis = false; }
   }
 
   measure() {
