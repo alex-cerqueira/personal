@@ -23,7 +23,11 @@ var BP = [ // [col, lane, col, lane, accent]
   [0,1,2,1],[2,1,3,1],[3,1,4,1],[1,2,2,2],[2,2,3,2],[1,3,2,3],[2,3,4,3],
   [0,0,1,2],[0,1,1,3],[1,2,2,1],[1,3,2,2],[2,0,2,3],[2,3,3,1],[2,2,3,0],[3,2,4,3],[3,1,4,0]
 ];
-var HI = { people: [0, 1], systems: [2, 4], exp: [5, 6] };
+/* headline word -> cube corners: pessoas (comportamento, necessidades), produto (contexto, tecnologia, fricção), negócios (negócio, oportunidade) */
+var HERO_GROUPS = [[0, 1], [2, 4, 5], [3, 6]];
+/* yaw that turns each group to face the viewer (from the corner geometry built in F1) */
+var HERO_YAW = [1.5708, -1.3694, 0.8861];
+var HERO_STEP = 2400;
 var MONO = '"IBM Plex Mono", ui-monospace, Menlo, monospace';
 var TH = { ink: '23,23,23', mute: '102,102,102', acc: '49,85,231', bg: '#F8F8F6' };
 var THEMES = { light: { ink: '23,23,23', mute: '102,102,102', acc: '49,85,231', bg: '#F8F8F6' }, dark: { ink: '237,237,234', mute: '163,163,158', acc: '125,149,255', bg: '#121212' } };
@@ -204,6 +208,7 @@ function drawStill(ctx, Fx, k, w, h, o) {
     var sz = Fx.s[i], acc = Fx.c[i], ring = Fx.g[i];
     if (k === 3 && Fx.col[i] > -1) { if (Fx.col[i] > act) a *= .35; if (Fx.col[i] === act) { sz += 1.5; acc = 1; } }
     if (k === 4 && Fx.ring[i] > -1 && lensA > -1) a *= Fx.ring[i] === lensA ? 1.25 : .45;
+    if (o.hi && i < 7 && o.hi.indexOf(i) > -1) { sz += 1.5; acc = 1; }
     a = Math.min(1, a);
     ctx.beginPath(); ctx.arc(X[i], Y[i], sz, 0, 6.283);
     if (ring && !acc) {
@@ -217,7 +222,8 @@ function drawStill(ctx, Fx, k, w, h, o) {
     if (L.hub) {
       if (k === 1 && !o.red) a *= c01((o.time - 1.2) / .8);
       a *= Fx.a[L.i];
-      ctx.fillStyle = 'rgba(' + TH.ink + ',' + (a * .75) + ')';
+      var hotL = o.hi && o.hi.indexOf(L.i) > -1;
+      ctx.fillStyle = hotL ? 'rgba(' + TH.acc + ',' + Math.min(1, a * 1.25) + ')' : 'rgba(' + TH.ink + ',' + (a * (o.hi ? .5 : .75)) + ')';
       ctx.textAlign = L.ux > .3 ? 'left' : L.ux < -.3 ? 'right' : 'center';
       ctx.fillText(L.t, X[L.i] + L.ux * L.off, Y[L.i] + L.uy * L.off + (L.uy > .3 ? 9 : L.uy < -.3 ? -1 : 3.5));
     } else {
@@ -284,10 +290,35 @@ class Component extends DCLogic {
   closeMenu = () => { this.setState({ menu: false }); };
   cursorOn = () => { if (this.cursor) this.cursor.classList.add('on'); };
   cursorOff = () => { if (this.cursor) this.cursor.classList.remove('on'); };
-  hiPeople = () => { this.hi = HI.people; };
-  hiSystems = () => { this.hi = HI.systems; };
-  hiExp = () => { this.hi = HI.exp; };
-  hiOff = () => { this.hi = null; };
+  kwEls = [];
+  kw = (el) => { if (el && this.kwEls.indexOf(el) < 0) this.kwEls.push(el); };
+  /* the headline cycles pessoas -> produto -> negócios; the cube turns the matching corners to the front */
+  setHeroStep(k) {
+    this.heroStep = k;
+    this.kwEls.forEach((el) => el.classList.toggle('on', +el.getAttribute('data-k') === k));
+    this.hi = HERO_GROUPS[k];
+    var d = HERO_YAW[k];
+    if (this.yawT === undefined) this.yawT = d;
+    else this.yawT += ((d - this.yawT) % 6.2832 + 6.2832) % 6.2832;
+  }
+  heroTick = () => { if (this.heroHold < 0 && !document.hidden) this.setHeroStep((this.heroStep + 1) % 3); };
+  heroRestart() { clearInterval(this.heroTimer); if (!this.reduce) this.heroTimer = setInterval(this.heroTick, HERO_STEP); }
+  heroHold = -1;
+  hiWord(k) { this.heroHold = k; if (k !== this.heroStep) this.setHeroStep(k); }
+  hiPeople = () => { this.hiWord(0); };
+  hiProduct = () => { this.hiWord(1); };
+  hiBiz = () => { this.hiWord(2); };
+  hiOff = () => { this.heroHold = -1; this.heroRestart(); };
+  /* eased yaw/pitch shared by the fixed canvas and the inline mobile canvas */
+  cubeAngles(time, red) {
+    var ty = this.yawT === undefined ? -.32 : this.yawT, tp = .16, mo = this.mouse;
+    if (!red) {
+      ty += Math.sin(time * .21) * .08; tp += Math.sin(time * .16) * .06;
+      if (mo.on && !this.mob) { ty += (mo.x / window.innerWidth - .5) * .3; tp -= (mo.y / window.innerHeight - .5) * .2; }
+    }
+    this.ya = this.ya === undefined || red ? ty : this.ya + (ty - this.ya) * .045;
+    this.pa = this.pa === undefined || red ? tp : this.pa + (tp - this.pa) * .05;
+  }
   lensOn0 = () => { this.lensHover = 0; };
   lensOn1 = () => { this.lensHover = 1; };
   lensOn2 = () => { this.lensHover = 2; };
@@ -323,13 +354,15 @@ class Component extends DCLogic {
       this.mio = new IntersectionObserver((es) => { es.forEach((e) => { this.mVis[e.target.getAttribute('data-m')] = e.isIntersecting; }); }, { threshold: 0 });
       Object.keys(this.mCv).forEach((k) => this.mio.observe(this.mCv[k]));
     } else { this.mVis = { hero: true, appr: true, exp: true }; }
-    this.loop = (now) => { this.raf = requestAnimationFrame(this.loop); this.frame(now); this.frameM(now); };
+    this.setHeroStep(0); this.heroRestart();
+    this.loop = (now) => { this.raf = requestAnimationFrame(this.loop); this.cubeAngles((now - this.t0) / 1000, this.reduce); this.frame(now); this.frameM(now); };
     this.raf = requestAnimationFrame(this.loop);
   }
 
   componentWillUnmount() {
     var w = window;
     cancelAnimationFrame(this.raf);
+    clearInterval(this.heroTimer);
     w.removeEventListener('scroll', this.onScroll);
     w.removeEventListener('resize', this.onScroll);
     w.removeEventListener('pointermove', this.onMove);
@@ -418,16 +451,7 @@ class Component extends DCLogic {
     var W2 = wf(2), W3 = wf(3), W4 = wf(4), W1 = wf(1), W6 = wf(6);
     var active = Math.min(4, Math.floor(this.ap * 5)), lensA = this.lensHover > -1 ? this.lensHover : this.lensScroll;
     var hiSet = this.hi, mo = this.mouse, i;
-    if (F[1].cube && (W1 > 0 || intro)) {
-      var tya = -.32, tpa = .16;
-      if (!red) {
-        tya += Math.sin(time * .21) * .16; tpa += Math.sin(time * .16) * .07;
-        if (mo.on) { tya += (mo.x / w - .5) * .5; tpa -= (mo.y / h - .5) * .3; }
-      }
-      this.ya = this.ya === undefined || red ? tya : this.ya + (tya - this.ya) * .05;
-      this.pa = this.pa === undefined || red ? tpa : this.pa + (tpa - this.pa) * .05;
-      projectCube(F[1], this.ya, this.pa);
-    }
+    if (F[1].cube && (W1 > 0 || intro)) projectCube(F[1], this.ya, this.pa);
 
     /* positions: staggered flight between formations, softened by a spring */
     for (i = 0; i < N; i++) {
@@ -536,8 +560,8 @@ class Component extends DCLogic {
           if (intro) a *= c01((time - 2.4) / 1);
           a *= al[L.i];
           var hot = hiSet && hiSet.indexOf(L.i) > -1, dim = hiSet && !hot;
-          ctx.font = '400 ' + (m ? 9 : 10) + 'px ' + MONO;
-          ctx.fillStyle = hot ? 'rgba(' + TH.acc + ',' + a + ')' : 'rgba(' + TH.ink + ',' + (a * (dim ? .3 : .75)) + ')';
+          ctx.font = (hot ? '500 ' : '400 ') + (m ? 9 : hot ? 11 : 10) + 'px ' + MONO;
+          ctx.fillStyle = hot ? 'rgba(' + TH.acc + ',' + Math.min(1, a * 1.25) + ')' : 'rgba(' + TH.ink + ',' + (a * (dim ? .5 : .75)) + ')';
           if (L.off) { ctx.textAlign = L.ux > .3 ? 'left' : L.ux < -.3 ? 'right' : 'center'; ctx.fillText(L.t, px[L.i] + L.ux * L.off, py[L.i] + L.uy * L.off + (L.uy > .3 ? 9 : L.uy < -.3 ? -1 : 3.5)); }
           else { var rt = px[L.i] < (m ? .62 : .82) * w; ctx.textAlign = rt ? 'left' : 'right'; ctx.fillText(L.t, px[L.i] + (rt ? 12 : -12), py[L.i] + 3.5); }
         } else {
@@ -581,11 +605,11 @@ class Component extends DCLogic {
       if (!st.F || st.w !== w || st.h !== h) { st.F = build(w, h, true, 6, 14, this.Rm, true)[k]; st.w = w; st.h = h; }
       if (st.t0 === undefined) st.t0 = t;
       var lt = red ? 99 : t - st.t0;
-      if (k === 1) projectCube(st.F, -.32 + (red ? 0 : Math.sin(lt * .25) * .22), .16 + (red ? 0 : Math.sin(lt * .19) * .08));
+      if (k === 1) projectCube(st.F, this.ya === undefined ? -.32 : this.ya, this.pa === undefined ? .16 : this.pa);
       var ctx = cv.getContext('2d');
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       try { ctx.letterSpacing = '0.06em'; } catch (e) {}
-      drawStill(ctx, st.F, k, w, h, { time: lt, ap: ap, active: act, lensA: lensA, red: red });
+      drawStill(ctx, st.F, k, w, h, { time: lt, ap: ap, active: act, lensA: lensA, red: red, hi: k === 1 ? this.hi : null });
     });
   }
 

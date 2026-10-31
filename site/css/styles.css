@@ -75,8 +75,8 @@ a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
 .hero-g{row-gap:0}
 .hero .eyebrow{grid-column:1/7;margin-bottom:clamp(28px,5vh,56px)}
 .h-hero{grid-column:1/9;font-size:clamp(46px,5vw,104px);line-height:.96;letter-spacing:-.055em;font-weight:300}
-.kw{background-image:linear-gradient(currentColor,currentColor);background-size:0% 1px;background-repeat:no-repeat;background-position:0 92%;transition:background-size 600ms var(--ease);cursor:default}
-.kw:hover{background-size:100% 1px}
+.kw{background-image:linear-gradient(currentColor,currentColor);background-size:0% .06em;background-repeat:no-repeat;background-position:0 94%;transition:color 700ms var(--ease),background-size 700ms var(--ease);cursor:default}
+.kw.on{color:var(--accent);background-size:100% .06em}
 .hero-sub{grid-column:1/6;padding-top:clamp(28px,4.5vh,48px)}
 .lead{font-size:clamp(18px,1.35vw,20px);line-height:1.5;letter-spacing:-.01em;color:var(--ink2);max-width:31em}
 .ctas{display:flex;flex-wrap:wrap;gap:12px 36px;margin-top:36px}
