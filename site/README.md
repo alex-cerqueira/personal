@@ -7,6 +7,7 @@ Esta pasta é tudo o que precisa ser publicado.
 index.html        home (hero, work, approach, expertise, writing, books, about, contact)
 case.html         estudo de caso 01 — Reciclar (14 capítulos, carrossel de imagens)
 caldohs.html      estudo de caso 02 — Caldohs (14 capítulos, carrossel de imagens)
+wft.html          estudo de caso 03 — World Footvolley Tournament (14 capítulos; imagens a enviar)
 404.html          página de erro
 css/ js/          estilos e comportamento (a "Research Network" é um canvas 2D, sem libs)
 assets/           imagens dos cases, capa do livro, retrato e imagem de compartilhamento (og-image.jpg)
@@ -23,7 +24,7 @@ cd site && python3 -m http.server 8000   # abra http://localhost:8000
 ## Antes de publicar
 
 1. **Preencher os placeholders** (aparecem entre colchetes):
-   - projetos 03 a 05 na home (nome, ano, contexto, papel, descrição e imagem) — 01 Reciclar e 02 Caldohs já estão prontos;
+   - projetos 04 e 05 na home e as imagens do 03 (World Footvolley Tournament) — 01 Reciclar e 02 Caldohs já estão prontos;
    - e-mail na seção Contact (`[inserir e-mail]`, em `index.html`).
    Para listar o que falta: `grep -n "\[" index.html | grep -v data-`
 2. **Definir o domínio**: `python3 set-domain.py https://seudominio.com`
