@@ -9,13 +9,13 @@ class DCLogic {
    F1 network (hero) → F2 timeline (work) → F3 service blueprint (approach) → F4 lenses (expertise)
    → F5 resting seed (writing, books, about) → F6 organized system (contact). */
 var EV = [
-  { k: 'BEHAVIOR', x: .20, y: .22 }, { k: 'NEEDS', x: .56, y: .08 }, { k: 'CONTEXT', x: .88, y: .26 },
-  { k: 'BUSINESS', x: .22, y: .62 }, { k: 'TECHNOLOGY', x: .84, y: .68 }, { k: 'FRICTION', x: .50, y: .92 },
-  { k: 'OPPORTUNITY', x: .54, y: .48 }
+  { k: 'COMPORTAMENTO', x: .20, y: .22 }, { k: 'NECESSIDADES', x: .56, y: .08 }, { k: 'CONTEXTO', x: .88, y: .26 },
+  { k: 'NEGÓCIO', x: .22, y: .62 }, { k: 'TECNOLOGIA', x: .84, y: .68 }, { k: 'FRICÇÃO', x: .50, y: .92 },
+  { k: 'OPORTUNIDADE', x: .54, y: .48 }
 ];
 var HUBE = [[0,1],[1,2],[0,3],[2,4],[3,5],[4,5],[0,6],[2,6],[3,6],[4,6],[5,6,1],[1,6,1]];
-var LANES = ['PEOPLE', 'BUSINESS', 'TECHNOLOGY', 'SYSTEMS'];
-var STAGES = ['Understand', 'Explore', 'Connect', 'Design', 'Validate'];
+var LANES = ['PESSOAS', 'NEGÓCIO', 'TECNOLOGIA', 'SISTEMAS'];
+var STAGES = ['Entender', 'Explorar', 'Conectar', 'Projetar', 'Validar'];
 var LENSES = ['SERVICE DESIGN', 'UX RESEARCH', 'STRATEGY & DISCOVERY', 'AI & EMERGING'];
 var COLS = [[0,1],[0,2,3],[0,1,2,3],[0,1,2],[0,1,3]];
 var BP = [ // [col, lane, col, lane, accent]
@@ -154,7 +154,7 @@ function build(W, H, m, S, K, R, inl) {
   for (h = 0; h < 7; h++) for (j = 0; j < S; j++) { i = sat(h, j); var a6 = R[2][i] * 6.283, d6 = sr * .28 * R[3][i]; set(F[5], i, F[5].x[h] + Math.cos(a6) * d6, F[5].y[h] + Math.sin(a6) * d6, .5, 1, 0); }
   for (k = 0; k < K; k++) { i = str(k); set(F[5], i, sx, sy, 0, 1, 0); }
   HUBE.forEach(function (p, q) { F[5].e.push({ a: p[0], b: p[1], w: .5, acc: p[2], prog: q }); });
-  if (!m) F[5].l.push({ x: sx, y: sy + sr + 26, t: 'THE RESEARCH NETWORK', kind: 'cap', align: 'center' });
+  if (!m) F[5].l.push({ x: sx, y: sy + sr + 26, t: 'A REDE DE PESQUISA', kind: 'cap', align: 'center' });
 
   /* F6 — contact: the network dissolves where it rests, leaving the section clean */
   var F6 = F[6];
@@ -258,10 +258,12 @@ class Component extends DCLogic {
   refHsCount = (el) => { this.hsCount = el; };
   refHsBar = (el) => { this.hsBar = el; };
   pan = (el) => { if (el && this.panEls.indexOf(el) < 0) { this.panEls.push(el); this.rv(el); } };
-  focusPan = [0, 1, 2].map((i) => () => {
+  focusPan = [0, 1, 2, 3, 4].map((i) => () => {
     if (!this.hs || !this.hsDist) return;
+    /* the browser may scroll the clipped container to reveal the focused card: undo it, the page scroll drives the track */
+    var box = this.track && this.track.parentNode; if (box) { box.scrollLeft = 0; box.scrollTop = 0; }
     var top = this.hs.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top: top + this.hsDist * i / 2, behavior: 'auto' });
+    window.scrollTo({ top: top + this.hsDist * i / 4, behavior: 'auto' });
   });
   refCursor = (el) => { this.cursor = el; };
   rv = (el) => { if (el && this.rvEls.indexOf(el) < 0) { this.rvEls.push(el); if (this.io) this.io.observe(el); } };
