@@ -27,7 +27,7 @@ var BP = [ // [col, lane, col, lane, accent]
 var HERO_GROUPS = [[0, 1], [2, 4, 5], [3, 6]];
 /* yaw that turns each group to face the viewer (from the corner geometry built in F1) */
 var HERO_YAW = [1.5708, -1.3694, 0.8861];
-var HERO_STEP = 2400;
+var HERO_STEP = 3400;
 var MONO = '"IBM Plex Mono", ui-monospace, Menlo, monospace';
 var TH = { ink: '23,23,23', mute: '102,102,102', acc: '49,85,231', bg: '#F8F8F6' };
 var THEMES = { light: { ink: '23,23,23', mute: '102,102,102', acc: '49,85,231', bg: '#F8F8F6' }, dark: { ink: '237,237,234', mute: '163,163,158', acc: '125,149,255', bg: '#121212' } };
