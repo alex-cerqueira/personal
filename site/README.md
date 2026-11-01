@@ -5,11 +5,12 @@ Esta pasta é tudo o que precisa ser publicado.
 
 ```
 index.html        home (hero, work, approach, expertise, writing, books, about, contact)
-case.html         estudo de caso 01 — Reciclar (14 capítulos, carrossel de imagens)
-caldohs.html      estudo de caso 02 — Caldohs (14 capítulos, carrossel de imagens)
-wft.html          estudo de caso 03 — World Footvolley Tournament (14 capítulos, carrossel de imagens)
-bonomia.html      estudo de caso 04 — Bonomia (14 capítulos, carrossel de imagens)
-hostad.html       estudo de caso 05 — Hostad (14 capítulos, carrossel de imagens)
+design-system.html estudo de caso 01 — Design System com IA (14 capítulos; imagens a enviar)
+case.html         estudo de caso 02 — Reciclar (14 capítulos, carrossel de imagens)
+caldohs.html      estudo de caso 03 — Caldohs (14 capítulos, carrossel de imagens)
+wft.html          estudo de caso 04 — World Footvolley Tournament (14 capítulos, carrossel de imagens)
+bonomia.html      estudo de caso 05 — Bonomia (14 capítulos, carrossel de imagens)
+hostad.html       estudo de caso 06 — Hostad (14 capítulos, carrossel de imagens)
 404.html          página de erro
 css/ js/          estilos e comportamento (a "Research Network" é um canvas 2D, sem libs)
 assets/           imagens dos cases, capa do livro, retrato e imagem de compartilhamento (og-image.jpg)

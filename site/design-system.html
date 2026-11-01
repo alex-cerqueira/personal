@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design System com IA — Estudo de caso · Alex Cerqueira</title>
+<meta name="description" content="Design System com IA — estudo de caso de Alex Cerqueira: um design system de 40 componentes, em light e dark, construído do Figma ao código com Claude Code, MCP do Figma e GitHub via MCP.">
+<meta name="theme-color" content="#121212">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Design System com IA — Estudo de caso · Alex Cerqueira">
+<meta property="og:description" content="Design System com IA — estudo de caso de Alex Cerqueira: um design system de 40 componentes, em light e dark, construído do Figma ao código com Claude Code, MCP do Figma e GitHub via MCP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="css/design-system.css">
+<script>(function(){var d=document.documentElement;try{d.setAttribute("data-theme",localStorage.getItem("ac-theme2")==="light"?"light":"dark")}catch(e){}if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("js")})()</script>
+<script src="js/design-system.js" defer></script>
+</head>
+<body>
+<div class="site" data-ref="refRoot">
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="logo" href="index.html" aria-label="Alex Cerqueira — página inicial"><svg class="logo-mark" viewBox="0 0 64 19" role="img" aria-hidden="true" focusable="false"><path d="M8 0H48C52.418 0 55 3.082 55 7.5V19H51V7.26441C51 5.05541 49.709 4 47.5 4H8C5.791 4 4 5.791 4 8V11C4 13.209 5.791 15 8 15H41V19H8C3.582 19 0 15.418 0 11V8C0 3.582 3.582 0 8 0Z"></path><circle cx="62" cy="17" r="2"></circle></svg></a>
+    <a class="back mono" href="index.html"><span class="arr w" aria-hidden="true">←</span> <span class="ul t">Todos os projetos</span></a>
+  </div>
+  <ol class="strip" aria-label="Narrativa do caso">
+    <li data-ref="st" data-s="0">Problema<span aria-hidden="true">→</span></li>
+    <li data-ref="st" data-s="1">Pesquisa<span aria-hidden="true">→</span></li>
+    <li data-ref="st" data-s="2">Evidências<span aria-hidden="true">→</span></li>
+    <li data-ref="st" data-s="3">Raciocínio<span aria-hidden="true">→</span></li>
+    <li data-ref="st" data-s="4">Decisão<span aria-hidden="true">→</span></li>
+    <li data-ref="st" data-s="5">Impacto<span aria-hidden="true">→</span></li>
+  </ol>
+  <div class="prog" data-ref="refProg" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+<section class="g chero rv" data-ref="rv" aria-labelledby="case-title">
+  <p class="meta mono up"><span><span class="sq" aria-hidden="true"></span>Caso 01</span><span>Design Systems · IA · Estratégia de Produto</span><span class="mute">Ano não informado</span></p>
+  <h1 id="case-title"><span class="ln"><span class="li d1">Design System com IA</span></span></h1>
+  <p class="sum up d2">Do Figma ao código: um design system de 40 componentes, em light e dark, construído com Claude Code, MCP do Figma e GitHub via MCP.</p>
+  <dl class="cmeta up d3">
+    <div><dt class="mono">Papel</dt><dd>Design de sistemas · Estratégia · Design com IA</dd></div>
+    <div><dt class="mono">Duração</dt><dd>Não informada</dd></div>
+    <div><dt class="mono">Equipe</dt><dd>Eu e o Claude Code, agente de IA</dd></div>
+    <div><dt class="mono">Método</dt><dd>Tokens com modos light e dark · Figma via MCP · código dos componentes · GitHub via MCP</dd></div>
+  </dl>
+  <figure class="cfig ph-fig mask d3">
+    <svg class="ph-x" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="0" x2="1600" y2="900"></line><line x1="1600" y1="0" x2="0" y2="900"></line></svg>
+    <span class="ph-l mono">Imagem principal · visão geral do design system: os 40 componentes por família, light e dark lado a lado — aguardando arquivo</span>
+  </figure>
+  <p class="mono mute cap up d4">Design system — visão geral dos 40 componentes, em light e dark.</p>
+</section>
+
+<div class="crun" data-ref="refRun">
+<div class="g cbody">
+  <nav class="toc" aria-label="Capítulos do caso">
+    <ol>
+      <li><a href="#c01" data-ref="ix" data-i="1"><span class="tn">01</span>Contexto</a></li>
+      <li><a href="#c02" data-ref="ix" data-i="2"><span class="tn">02</span>Problema</a></li>
+      <li><a href="#c03" data-ref="ix" data-i="3"><span class="tn">03</span>Pergunta de pesquisa</a></li>
+      <li><a href="#c04" data-ref="ix" data-i="4"><span class="tn">04</span>Partes interessadas</a></li>
+      <li><a href="#c05" data-ref="ix" data-i="5"><span class="tn">05</span>Metodologia</a></li>
+      <li><a href="#c06" data-ref="ix" data-i="6"><span class="tn">06</span>Pesquisa</a></li>
+      <li><a href="#c07" data-ref="ix" data-i="7"><span class="tn">07</span>Evidências</a></li>
+      <li><a href="#c08" data-ref="ix" data-i="8"><span class="tn">08</span>Descobertas</a></li>
+      <li><a href="#c09" data-ref="ix" data-i="9"><span class="tn">09</span>Jornada / Ecossistema</a></li>
+      <li><a href="#c10" data-ref="ix" data-i="10"><span class="tn">10</span>Oportunidades</a></li>
+      <li><a href="#c11" data-ref="ix" data-i="11"><span class="tn">11</span>Impacto</a></li>
+      <li><a href="#c12" data-ref="ix" data-i="12"><span class="tn">12</span>Entregáveis</a></li>
+      <li><a href="#c13" data-ref="ix" data-i="13"><span class="tn">13</span>Recomendação</a></li>
+      <li><a href="#c14" data-ref="ix" data-i="14"><span class="tn">14</span>Aprendizados</a></li>
+    </ol>
+  </nav>
+
+  <div class="chs">
+  <div class="track" data-ref="refTrack">
+    <section class="ch rv" id="c01" data-ref="ch" data-i="1" aria-labelledby="h01">
+      <div class="ch-h up"><span class="mono n">01</span><h2 id="h01">Contexto</h2></div>
+      <div class="ch-c">
+        <div class="wl up d1">
+          <p class="body">Um design system só se prova quando alguém o usa. O cenário deste caso é o próprio portfólio: um conjunto pequeno e consistente de decisões visuais, com paleta neutra e um único azul de acento, tipografia em Geist e IBM Plex Mono, grade de 12, 8 e 4 colunas e tema escuro como padrão, que precisava virar um sistema reutilizável.</p>
+          <p class="body">Construí esse sistema com IA: o Claude Code atuou como agente de construção, conectado ao Figma e ao GitHub por MCP (Model Context Protocol). Eu defini os princípios, decidi e revisei; ele executou e iterou, do Figma ao código.</p>
+        </div>
+        <dl class="facts wr up d2">
+          <div><dt class="mono">Setor</dt><dd>Design systems · produto digital</dd></div>
+          <div><dt class="mono">Projeto</dt><dd>Autoral, com este portfólio como cenário</dd></div>
+          <div><dt class="mono">Ferramentas</dt><dd>Claude Code · Figma (MCP) · GitHub (MCP)</dd></div>
+          <div><dt class="mono">Período</dt><dd>Não informado</dd></div>
+          <div><dt class="mono">Meu papel</dt><dd>Design de sistemas · direção de design · orquestração de IA</dd></div>
+        </dl>
+      </div>
+    </section>
+    <section class="ch rv" id="c02" data-ref="ch" data-i="2" aria-labelledby="h02">
+      <div class="ch-h up"><span class="mono n">02</span><h2 id="h02">Problema</h2></div>
+      <div class="ch-c">
+        <p class="state w6 up d1">Como manter design e código coerentes em 40 componentes, em dois temas, sem perder o critério ao delegar parte do trabalho à IA?</p>
+        <p class="body w5 up d2">Um sistema grande costuma se desfazer em dois lugares: no Figma, onde variantes e estilos divergem, e no código, onde os valores são copiados em vez de referenciados. Com dois temas, o risco dobra, porque cada componente precisa funcionar em light e em dark sem exceções soltas. A IA acelera a construção, mas só ajuda se as regras estiverem explícitas; sem tokens e critérios claros, ela reproduz a inconsistência em escala.</p>
+      </div>
+    </section>
+    <section class="ch rv" id="c03" data-ref="ch" data-i="3" aria-labelledby="h03">
+      <div class="ch-h up"><span class="mono n">03</span><h2 id="h03">Pergunta de pesquisa</h2></div>
+      <div class="ch-c">
+        <p class="mono mute w6 up d1">Questão central</p>
+        <p class="state w6 up d2">Como podemos construir, com apoio de IA, um design system de 40 componentes, em light e dark, em que Figma e código nasçam das mesmas decisões e permaneçam sincronizados?</p>
+        <ol class="subq w6 up d3">
+          <li><span class="mono mute">Q.01</span><span>Como transformar a linguagem visual do portfólio em tokens que servem aos dois temas?</span></li>
+          <li><span class="mono mute">Q.02</span><span>Como usar o MCP do Figma para criar e manter componentes e variantes?</span></li>
+          <li><span class="mono mute">Q.03</span><span>Como gerar o código a partir do Figma e versioná-lo no GitHub, também por MCP?</span></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ch rv" id="c04" data-ref="ch" data-i="4" aria-labelledby="h04">
+      <div class="ch-h up"><span class="mono n">04</span><h2 id="h04">Partes interessadas</h2></div>
+      <div class="ch-c fit">
+        <div class="pl sk up d1">
+          <p class="body">Um design system serve a quatro frentes: quem projeta, que usa as bibliotecas do Figma; quem desenvolve, que usa o código; quem decide o produto, que depende da consistência; e, neste caso, o Claude Code, que lê e escreve no Figma e no GitHub por MCP.</p>
+          <p class="note">A equipe do caso é enxuta: eu, na direção de design e na decisão, e o Claude Code, na execução. Outros usuários do sistema não foram pesquisados.</p>
+        </div>
+        <figure class="persona scene ph up d2">
+          <svg class="ph-x" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="0" x2="1600" y2="900"></line><line x1="1600" y1="0" x2="0" y2="900"></line></svg>
+          <span class="ph-l mono">Imagem · diagrama do ecossistema: o design system ao centro; ao redor, designer, desenvolvedor, Claude Code, Figma e GitHub, ligados por MCP — aguardando arquivo</span>
+        </figure>
+      </div>
+    </section>
+    <section class="ch rv" id="c05" data-ref="ch" data-i="5" aria-labelledby="h05">
+      <div class="ch-h up"><span class="mono n">05</span><h2 id="h05">Metodologia</h2></div>
+      <div class="ch-c">
+        <ol class="steps wf up d1">
+          <li class="on"><span class="mono">01</span><br>Entender</li>
+          <li class="on"><span class="mono">02</span><br>Explorar</li>
+          <li class="on"><span class="mono">03</span><br>Conectar</li>
+          <li class="on"><span class="mono">04</span><br>Projetar</li>
+          <li class="on"><span class="mono">05</span><br>Validar</li>
+        </ol>
+        <div class="wf scroll up d2">
+          <table class="table">
+            <thead><tr><th scope="col">Método</th><th scope="col">Objetivo</th><th scope="col">Base de análise</th><th scope="col">Etapa</th></tr></thead>
+            <tbody>
+              <tr><td>Auditoria do portfólio</td><td>Extrair as decisões visuais que já existem</td><td>Cores, tipografia, grade, espaçamento e movimento</td><td class="mono">Entender</td></tr>
+              <tr><td>Tokens com modos</td><td>Representar light e dark com os mesmos nomes</td><td>Variáveis do Figma e variáveis CSS</td><td class="mono">Explorar</td></tr>
+              <tr><td>Orquestração por MCP</td><td>Conectar o agente às ferramentas</td><td>Claude Code, Figma (MCP) e GitHub (MCP)</td><td class="mono">Conectar</td></tr>
+              <tr><td>Componentes em Figma e em código</td><td>Construir os 40 componentes, com estados e variantes</td><td>Biblioteca no Figma e pacote de código</td><td class="mono">Projetar</td></tr>
+              <tr><td>Revisão de contraste e estados</td><td>Garantir legibilidade nos dois temas</td><td>Pares de cor, foco, hover e desabilitado</td><td class="mono">Validar</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note w5 up d3">A IA executa e propõe; a linguagem, o critério de qualidade e a aprovação final são decisões minhas.</p>
+      </div>
+    </section>
+    <section class="ch rv" id="c06" data-ref="ch" data-i="6" aria-labelledby="h06">
+      <div class="ch-h up"><span class="mono n">06</span><h2 id="h06">Pesquisa</h2></div>
+      <div class="ch-c">
+        <div class="nums wf up d1">
+          <div><p class="v">40</p><p class="mono mute">Componentes no escopo</p></div>
+          <div><p class="v">2</p><p class="mono mute">Temas: light e dark</p></div>
+          <div><p class="v">3</p><p class="mono mute">Ferramentas conectadas: Claude Code, Figma e GitHub</p></div>
+          <div><p class="v">6</p><p class="mono mute">Famílias de componentes</p></div>
+        </div>
+        <p class="body w5 up d2">A agenda é prática: quais decisões do portfólio já são tokens? Quais componentes o site já usa, mesmo sem nomeá-los? O que um sistema completo precisa acrescentar, como formulários, feedback e sobreposições? E como manter Figma e código sincronizados com a IA no meio?</p>
+        <p class="note w5 up d3">Os números descrevem o escopo definido para o sistema. Métricas de uso e de ganho de tempo não foram medidas.</p>
+      </div>
+    </section>
+    <section class="ch rv" id="c07" data-ref="ch" data-i="7" aria-labelledby="h07">
+      <div class="ch-h up"><span class="mono n">07</span><h2 id="h07">Evidências</h2></div>
+      <div class="ch-c">
+        <div class="ev wf">
+          <blockquote class="up d1"><p>Paleta neutra: fundo #F8F8F6, texto #171717 e um único azul de acento, #3155E7</p><span class="mono mute">E.01 — Portfólio · tema claro</span></blockquote>
+          <blockquote class="up d2"><p>Tema escuro como padrão: fundo #121212, texto #EDEDEA e acento #7D95FF</p><span class="mono mute">E.02 — Portfólio · tema escuro</span></blockquote>
+          <blockquote class="k up d3"><p>Geist para o texto e IBM Plex Mono para rótulos, números e metadados</p><span class="mono mute">E.03 — Portfólio · tipografia</span></blockquote>
+          <blockquote class="up d1"><p>Grade de 12, 8 e 4 colunas, do desktop ao celular</p><span class="mono mute">E.04 — Portfólio · grade</span></blockquote>
+          <blockquote class="up d2"><p>Contraste do texto sobre o fundo: 16,9:1 no claro e 16,0:1 no escuro. Do acento: 5,5:1 e 6,8:1</p><span class="mono mute">E.05 — Cálculo · WCAG</span></blockquote>
+          <blockquote class="up d3"><p>Os mesmos padrões reaparecem em todos os cases: passos, tabelas, citações, blocos de números, carrossel e alternador de tema</p><span class="mono mute">E.06 — Portfólio · padrões recorrentes</span></blockquote>
+        </div>
+        <p class="note wf up d4">As decisões existem, mas servem a um único site; falta transformá-las em tokens e em componentes documentados, reutilizáveis fora dele.</p>
+      </div>
+    </section>
+    <section class="ch rv" id="c08" data-ref="ch" data-i="8" aria-labelledby="h08">
+      <div class="ch-h up"><span class="mono n">08</span><h2 id="h08">Descobertas</h2></div>
+      <div class="ch-c">
+        <ol class="ins wf">
+          <li class="up d1"><span class="mono mute">I.01</span><div><h3>Tokens primeiro, componentes depois: sem nomes semânticos de cor, a IA copia valores; com eles, ela referencia decisões.</h3><p class="mono mute">Evidências · E.01 · E.02</p></div></li>
+          <li class="up d2"><span class="mono mute">I.02</span><div><h3>Light e dark são modos dos mesmos tokens, e não dois sistemas: cada componente é desenhado uma vez só.</h3><p class="mono mute">Evidências · E.01 · E.02 · E.05</p></div></li>
+          <li class="up d3"><span class="mono mute">I.03</span><div><h3>Com MCP, a IA passa de sugerir a executar dentro das ferramentas, e por isso o critério e a revisão humana ganham peso.</h3><p class="mono mute">Evidências · E.03 · E.06</p></div></li>
+        </ol>
+      </div>
+    </section>
+    <section class="ch rv" id="c09" data-ref="ch" data-i="9" aria-labelledby="h09">
+      <div class="ch-h up"><span class="mono n">09</span><h2 id="h09">Jornada / Ecossistema</h2></div>
+      <div class="ch-c">
+        <div class="wf scroll rv anim" data-ref="rv" role="region" aria-label="Mapa de jornada (role horizontalmente)" tabindex="0">
+          <div class="jm">
+            <div class="rh k0">Etapa</div><div class="hd k1">Auditar o portfólio</div><div class="hd k2">Definir os tokens</div><div class="hd k3">Construir no Figma</div><div class="hd k4">Gerar o código</div><div class="hd k5">Versionar e manter</div>
+            <div class="rh k0">Ações</div><div class="k1">Levanto cores, tipos, grade e padrões do site</div><div class="k2">Nomeio os tokens, com modos light e dark</div><div class="k3">O Claude Code cria componentes e variantes no Figma por MCP</div><div class="k4">O Claude Code gera o código a partir da biblioteca</div><div class="k5">Versiono no GitHub, também por MCP, e documento</div>
+            <div class="rh k0">Perguntas</div><div class="k1">O que já é decisão?</div><div class="k2">Que nomes servem aos dois temas?</div><div class="k3">O componente cobre todos os estados?</div><div class="k4">O código reflete o Figma?</div><div class="k5">Como o sistema evolui sem divergir?</div>
+            <div class="rh k0">Esforço</div>
+            <div class="curve k1"><svg viewBox="0 0 1000 110" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><line class="base lb k1" x1="0" y1="55" x2="1000" y2="55"></line><path class="line dr k2" pathLength="1" d="M100 40 C200 30 230 50 300 70 S460 100 500 92 S640 40 700 38 S860 20 900 24"></path><path class="flow fl-c k10" pathLength="1" d="M100 40 C200 30 230 50 300 70 S460 100 500 92 S640 40 700 38 S860 20 900 24"></path><circle class="pt pop k2" cx="100" cy="40" r="5"></circle><circle class="pt pop k4" cx="300" cy="70" r="5"></circle><circle class="halo" cx="500" cy="92" r="5"></circle><circle class="pt pop k6 acc" cx="500" cy="92" r="5"></circle><circle class="pt pop k8" cx="700" cy="38" r="5"></circle><circle class="pt pop k10" cx="900" cy="24" r="5"></circle></svg></div>
+            <div class="rh k0">Barreiras</div><div class="k1">Decisões implícitas</div><div class="k2">Valores repetidos entre temas</div><div class="k3">Variantes inconsistentes</div><div class="k4">Desvio entre Figma e código</div><div class="k5">Mudanças sem registro</div>
+            <div class="rh k0">Oportunidades</div><div class="k1">Inventário dos padrões</div><div class="k2">Tokens semânticos com modos</div><div class="k3">Revisão humana a cada família</div><div class="k4">Comparação entre Figma e código</div><div class="k5">Pull requests e histórico</div>
+          </div>
+        </div>
+        <p class="note w5 up d2">Curva ilustrativa do esforço de revisão ao longo do caso, sem dados medidos. A divisão entre o que a IA executa e o que eu decido está descrita em Metodologia.</p>
+      </div>
+    </section>
+    <section class="ch rv" id="c10" data-ref="ch" data-i="10" aria-labelledby="h10">
+      <div class="ch-h up"><span class="mono n">10</span><h2 id="h10">Oportunidades</h2></div>
+      <div class="ch-c">
+        <ul class="opp wf">
+          <li class="up d1"><span class="mono mute">O.01 · I.01</span><p>Como podemos fazer dos tokens a fonte única para o Figma e para o código?</p></li>
+          <li class="up d2"><span class="mono mute">O.02 · I.02</span><p>Como podemos medir a cobertura de estados e de temas em cada componente?</p></li>
+          <li class="up d1"><span class="mono mute">O.03 · I.03</span><p>Como podemos registrar cada decisão do agente em pull requests revisáveis?</p></li>
+          <li class="up d2"><span class="mono mute">O.04 · I.01</span><p>Como podemos reaproveitar o sistema em outros projetos e nos próximos cases?</p></li>
+        </ul>
+      </div>
+    </section>
+    <section class="ch rv" id="c11" data-ref="ch" data-i="11" aria-labelledby="h11">
+      <div class="ch-h up"><span class="mono n">11</span><h2 id="h11">Impacto</h2></div>
+      <div class="ch-c">
+        <div class="impact wf up d1">
+          <div><p class="v">40</p><p class="mono mute">Componentes, cada um em versão light e dark</p></div>
+          <div><p class="v">3</p><p class="mono mute">Ferramentas em um mesmo fluxo: Claude Code, Figma e GitHub</p></div>
+        </div>
+        <p class="body w5 up d2">O resultado é um design system completo, em dois temas, construído do Figma ao código por um fluxo em que a IA executa dentro das ferramentas e a pessoa decide. O ganho está em transformar o portfólio em um sistema reutilizável e em ter um método de trabalho com IA que pode ser repetido.</p>
+        <p class="note w5 up d3">Métricas de adoção, tempo de construção e economia de esforço não foram medidas e não são reivindicadas aqui.</p>
+      </div>
+    </section>
+    <section class="ch rv" id="c12" data-ref="ch" data-i="12" aria-labelledby="h12">
+      <div class="ch-h up"><span class="mono n">12</span><h2 id="h12">Entregáveis</h2></div>
+      <div class="ch-c">
+        <div class="wf scroll up d1">
+          <table class="table">
+            <thead><tr><th scope="col">Família</th><th scope="col">Componentes</th><th scope="col">Qtd.</th></tr></thead>
+            <tbody>
+              <tr><td>Ações</td><td>Botão · Botão de ícone · Link · Grupo de botões · Alternador de tema</td><td class="mono">05</td></tr>
+              <tr><td>Formulários</td><td>Campo de texto · Área de texto · Seleção · Caixa de seleção · Opção · Interruptor · Controle deslizante · Busca</td><td class="mono">08</td></tr>
+              <tr><td>Navegação</td><td>Cabeçalho · Menu · Abas · Migalhas · Paginação · Índice lateral · Barra de progresso</td><td class="mono">07</td></tr>
+              <tr><td>Conteúdo</td><td>Cartão · Tabela · Lista · Citação · Bloco de números · Tag · Avatar · Carrossel · Acordeão · Passos</td><td class="mono">10</td></tr>
+              <tr><td>Feedback</td><td>Alerta · Toast · Modal · Tooltip · Popover · Carregamento</td><td class="mono">06</td></tr>
+              <tr><td>Estrutura</td><td>Grade · Divisor · Logotipo · Rodapé</td><td class="mono">04</td></tr>
+              <tr class="tot"><td>Total</td><td>Cada componente em versão light e dark, com estados e variantes</td><td class="mono">40</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="body w5 up d2">Três entregas: a biblioteca no Figma, com variáveis em modos light e dark; o pacote de código dos 40 componentes; e a documentação do fluxo com Claude Code, Figma (MCP) e GitHub (MCP).</p>
+      </div>
+    </section>
+    <section class="ch rv" id="c13" data-ref="ch" data-i="13" aria-labelledby="h13">
+      <div class="ch-h up"><span class="mono n">13</span><h2 id="h13">Recomendação</h2></div>
+      <div class="ch-c">
+        <div class="wf scroll up d1">
+          <table class="table">
+            <thead><tr><th scope="col">Frente</th><th scope="col">Recomendação</th><th scope="col">Indicador</th><th scope="col">Base</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">F1</td><td>Manter os tokens como fonte única e gerar Figma e código a partir deles</td><td>Valores repetidos fora dos tokens</td><td class="mono mute">O.01 · I.01</td></tr>
+              <tr><td class="mono">F2</td><td>Revisar cada família em light e dark, com estados e contraste</td><td>Cobertura de estados e de temas</td><td class="mono mute">O.02 · I.02</td></tr>
+              <tr><td class="mono">F3</td><td>Registrar cada mudança feita pela IA em pull request revisável</td><td>Mudanças revisadas antes do merge</td><td class="mono mute">O.03 · O.04</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="body w5 up d2">Esses indicadores mostrariam se o sistema continua coerente conforme cresce e se a IA ganha velocidade sem perder qualidade.</p>
+      </div>
+    </section>
+    <section class="ch rv" id="c14" data-ref="ch" data-i="14" aria-labelledby="h14">
+      <div class="ch-h up"><span class="mono n">14</span><h2 id="h14">Aprendizados</h2></div>
+      <div class="ch-c">
+        <div class="wl up d1"><p class="mono mute" style="margin-bottom: 12px">O que aprendi</p><p class="body">Com IA, o gargalo deixa de ser produzir componentes e passa a ser definir bem as regras: tokens, nomes e critérios de revisão.</p></div>
+        <div class="wr up d2"><p class="mono mute" style="margin-bottom: 12px">O que levo adiante</p><p class="body">O método: decisões explícitas primeiro, execução assistida por IA via MCP depois e revisão humana em cada etapa, com o histórico no GitHub.</p></div>
+      </div>
+    </section>
+  </div>
+  </div>
+</div>
+</div>
+
+<nav class="g next rv" data-ref="rv" aria-label="Próximo caso">
+  <p class="mono mute a up">Próximo caso — 02</p>
+  <a class="up d1" href="case.html"><span class="ul">Reciclar</span><span class="arr e" aria-hidden="true">→</span></a>
+</nav>
+</main>
+
+<footer class="g ftr">
+  <p class="mono f1">Alex Cerqueira</p>
+  <p class="mono f2 mute">Design de Serviços · Pesquisa · Estratégia</p>
+  <p class="mono f3 mute">© 2026</p>
+  <p class="mono f4 mute">São Paulo · Brasil</p>
+  <a class="mono f5" href="#main"><span class="ul">Voltar ao topo</span> <span class="arr n" aria-hidden="true">↑</span></a>
+</footer>
+<button class="fab" type="button" data-click="toggleTheme" aria-pressed="true" aria-label="Ativar tema claro" title="Ativar tema claro">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><g class="rays"><path d="M12 2.6V.6M7.33 4.53L5.92 3.12M16.67 4.53l1.41-1.41M5.4 9.2H3.4M18.6 9.2h2"></path></g><path class="bulb" d="M8.6 15.2c0-1.4-.5-2.2-1.3-3.1A5.4 5.4 0 0 1 12 3.8a5.4 5.4 0 0 1 4.7 8.3c-.8.9-1.3 1.7-1.3 3.1z"></path><path d="M9.2 18h5.6M9.8 20.6h4.4"></path></svg>
+</button>
+</div>
+</body>
+</html>

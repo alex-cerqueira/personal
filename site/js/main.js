@@ -264,12 +264,12 @@ class Component extends DCLogic {
   refHsCount = (el) => { this.hsCount = el; };
   refHsBar = (el) => { this.hsBar = el; };
   pan = (el) => { if (el && this.panEls.indexOf(el) < 0) { this.panEls.push(el); this.rv(el); } };
-  focusPan = [0, 1, 2, 3, 4].map((i) => () => {
+  focusPan = [0, 1, 2, 3, 4, 5].map((i) => () => {
     if (!this.hs || !this.hsDist) return;
     /* the browser may scroll the clipped container to reveal the focused card: undo it, the page scroll drives the track */
     var box = this.track && this.track.parentNode; if (box) { box.scrollLeft = 0; box.scrollTop = 0; }
     var top = this.hs.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top: top + this.hsDist * i / 4, behavior: 'auto' });
+    window.scrollTo({ top: top + this.hsDist * i / 5, behavior: 'auto' });
   });
   refCursor = (el) => { this.cursor = el; };
   rv = (el) => { if (el && this.rvEls.indexOf(el) < 0) { this.rvEls.push(el); if (this.io) this.io.observe(el); } };
