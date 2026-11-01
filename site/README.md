@@ -5,7 +5,7 @@ Esta pasta é tudo o que precisa ser publicado.
 
 ```
 index.html        home (hero, work, approach, expertise, writing, books, about, contact)
-design-system.html estudo de caso 01 — Design System com IA (14 capítulos; imagens a enviar)
+design-system.html estudo de caso 01 — Syntra (14 capítulos; imagens a enviar)
 case.html         estudo de caso 02 — Reciclar (14 capítulos, carrossel de imagens)
 caldohs.html      estudo de caso 03 — Caldohs (14 capítulos, carrossel de imagens)
 wft.html          estudo de caso 04 — World Footvolley Tournament (14 capítulos, carrossel de imagens)
