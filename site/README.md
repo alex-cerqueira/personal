@@ -5,12 +5,13 @@ Esta pasta é tudo o que precisa ser publicado.
 
 ```
 index.html        home (hero, work, approach, expertise, writing, books, about, contact)
-design-system.html estudo de caso 01 — NodIA (14 capítulos, carrossel de imagens)
-case.html         estudo de caso 02 — Reciclar (14 capítulos, carrossel de imagens)
-caldohs.html      estudo de caso 03 — Caldohs (14 capítulos, carrossel de imagens)
-wft.html          estudo de caso 04 — World Footvolley Tournament (14 capítulos, carrossel de imagens)
-bonomia.html      estudo de caso 05 — Bonomia (14 capítulos, carrossel de imagens)
-hostad.html       estudo de caso 06 — Hostad (14 capítulos, carrossel de imagens)
+iconlib.html      estudo de caso 01 — IconLib (14 capítulos; imagens a enviar)
+design-system.html estudo de caso 02 — NodIA (14 capítulos, carrossel de imagens)
+case.html         estudo de caso 03 — Reciclar (14 capítulos, carrossel de imagens)
+caldohs.html      estudo de caso 04 — Caldohs (14 capítulos, carrossel de imagens)
+wft.html          estudo de caso 05 — World Footvolley Tournament (14 capítulos, carrossel de imagens)
+bonomia.html      estudo de caso 06 — Bonomia (14 capítulos, carrossel de imagens)
+hostad.html       estudo de caso 07 — Hostad (14 capítulos, carrossel de imagens)
 404.html          página de erro
 css/nodia.css    design system NodIA (tokens + Link), cópia fiel de github.com/alex-cerqueira/NodIA — não editar aqui
 css/ js/          estilos e comportamento (a "Research Network" é um canvas 2D, sem libs)
