@@ -37,13 +37,34 @@ a:hover .arr.w{transform:translateX(-6px)}a:hover .arr.e{transform:translateX(6p
 .js .rv:not(.is-in) .mask,.js .mask.rv:not(.is-in){clip-path:inset(0 0 100% 0)}
 
 /* header + narrative strip */
-.hdr{position:sticky;top:0;z-index:50;background:var(--hdr);border-bottom:1px solid var(--line)}
+.hdr{position:sticky;top:0;z-index:60;background:var(--hdr);border-bottom:1px solid var(--line)}
 .hdr-in{display:flex;align-items:center;justify-content:space-between;gap:var(--space-5);padding:var(--space-4) var(--gx)}
 .hdr :focus-visible{outline-offset:2px}
 .hdr-end{display:flex;align-items:center;gap:var(--space-3)}
 .logo{display:inline-flex;align-items:center;min-height:44px;color:var(--logo-ink)}
 .logo-mark{display:block;height:26px;width:auto;fill:currentColor;transition:height 500ms var(--ease)}
 .hdr-end .back{width:auto;gap:var(--space-2)}
+/* menu: hamburger (NodIA Icon Button) that turns into a close icon, and a drawer of NodIA Menu Items from the right */
+.burger .nd-icon-button__icon{position:relative;display:block;width:20px;height:14px}
+.burger .bl{position:absolute;left:0;width:20px;height:1.5px;border-radius:1px;background:currentColor;transition:transform var(--dur-2) var(--ease-2),opacity var(--dur-1) var(--ease)}
+.burger .b1{top:0}.burger .b2{top:6.25px}.burger .b3{top:12.5px}
+.burger[aria-expanded="true"] .b1{transform:translateY(6.25px) rotate(45deg)}
+.burger[aria-expanded="true"] .b2{opacity:0;transform:scaleX(.2)}
+.burger[aria-expanded="true"] .b3{transform:translateY(-6.25px) rotate(-45deg)}
+.drawer{position:fixed;inset:0;z-index:58;visibility:visible;transition:visibility 0s linear 0s}
+.drawer[data-open="false"]{visibility:hidden;transition:visibility 0s linear var(--dur-2)}
+.drawer-scrim{position:absolute;inset:0;background:rgba(0,0,0,.5);transition:opacity var(--dur-2) var(--ease)}
+.drawer[data-open="false"] .drawer-scrim{opacity:0}
+.drawer-panel{position:absolute;top:0;right:0;bottom:0;width:min(360px,88vw);display:flex;flex-direction:column;justify-content:space-between;gap:var(--space-6);padding:calc(var(--hh,92px) + var(--space-5)) var(--gx) var(--space-6) var(--space-5);overflow-y:auto;background:var(--bg);box-shadow:inset 1px 0 0 var(--line),var(--shadow-overlay);transition:transform var(--dur-2) var(--ease)}
+.drawer[data-open="false"] .drawer-panel{transform:translateX(100%)}
+.drawer .nd-menu__li{transition:opacity var(--dur-2) var(--ease),transform var(--dur-2) var(--ease)}
+.drawer[data-open="false"] .nd-menu__li{opacity:0;transform:translateX(var(--space-5))}
+.drawer[data-open="true"] .nd-menu__li:nth-child(2){transition-delay:40ms}
+.drawer[data-open="true"] .nd-menu__li:nth-child(3){transition-delay:80ms}
+.drawer[data-open="true"] .nd-menu__li:nth-child(4){transition-delay:120ms}
+.drawer[data-open="true"] .nd-menu__li:nth-child(5){transition-delay:160ms}
+.drawer .nd-menu__item--active{color:var(--accent)}
+.theme-btn{position:fixed;right:var(--space-5);bottom:var(--space-5);z-index:70;background:var(--bg)}
 .prog{position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--ink);transform-origin:left;transform:scaleX(0)}
 .strip{display:flex;gap:0;padding:0 var(--gx);border-top:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
 .strip li{flex:1 0 auto;padding:10px 16px 10px 0;color:var(--faint);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:color 400ms}
@@ -209,6 +230,9 @@ a:hover .arr.w{transform:translateX(-6px)}a:hover .arr.e{transform:translateX(6p
 .impact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
 .impact div{padding:22px 16px 22px 0}
 .impact .v{font-size:clamp(40px,4.4vw,72px);letter-spacing:-.05em;line-height:1;font-weight:330;margin-bottom:10px}
+.impact .v.tbd{display:flex;align-items:flex-end;height:1em;letter-spacing:0}
+.impact .v.tbd .tag{margin:0}
+.kick{margin-bottom:var(--space-4)}
 .note{border-left:2px solid var(--line);padding:4px 0 4px 16px;color:var(--mute);font-size:15px;max-width:40em}
 .next{border-top:1px solid var(--line);padding-block:clamp(64px,10vh,120px);row-gap:20px;align-items:end}
 .next .a{grid-column:1/4}
@@ -235,6 +259,7 @@ a:hover .arr.w{transform:translateX(-6px)}a:hover .arr.e{transform:translateX(6p
 @media (max-width:680px){
   :root{--gut:16px}
   .ch-c{margin-left:0}
+  .theme-btn{right:var(--space-4);bottom:var(--space-4)}
   body{font-size:16px}
   .g,.ch-h,.ch-c{grid-template-columns:repeat(4,minmax(0,1fr))}
   .g>*,.ch-c>*,.ch-h>*{grid-column:1/-1 !important}

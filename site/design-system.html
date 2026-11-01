@@ -26,7 +26,7 @@
     <a class="logo" href="index.html" aria-label="Alex Cerqueira — página inicial"><svg class="logo-mark" viewBox="0 0 64 19" role="img" aria-hidden="true" focusable="false"><path d="M8 0H48C52.418 0 55 3.082 55 7.5V19H51V7.26441C51 5.05541 49.709 4 47.5 4H8C5.791 4 4 5.791 4 8V11C4 13.209 5.791 15 8 15H41V19H8C3.582 19 0 15.418 0 11V8C0 3.582 3.582 0 8 0Z"></path><circle cx="62" cy="17" r="2"></circle></svg></a>
     <div class="hdr-end">
       <a class="nd-menu__item back" href="index.html" aria-label="Todos os projetos"><span class="arr w" aria-hidden="true">←</span><span class="t">Todos os projetos</span></a>
-      <button class="nd-icon-button nd-icon-button--ghost theme-btn" type="button" data-click="toggleTheme" aria-pressed="true" aria-label="Ativar tema claro" title="Ativar tema claro"><span class="nd-icon-button__icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><g class="rays"><path d="M12 2.6V.6M7.33 4.53L5.92 3.12M16.67 4.53l1.41-1.41M5.4 9.2H3.4M18.6 9.2h2"></path></g><path class="bulb" d="M8.6 15.2c0-1.4-.5-2.2-1.3-3.1A5.4 5.4 0 0 1 12 3.8a5.4 5.4 0 0 1 4.7 8.3c-.8.9-1.3 1.7-1.3 3.1z"></path><path d="M9.2 18h5.6M9.8 20.6h4.4"></path></svg></span></button>
+      <button class="nd-icon-button nd-icon-button--ghost burger menu-btn" type="button" aria-controls="mmenu" aria-expanded="false" aria-label="Abrir menu" data-click="toggleMenu"><span class="nd-icon-button__icon" aria-hidden="true"><span class="bl b1"></span><span class="bl b2"></span><span class="bl b3"></span></span></button>
     </div>
   </div>
   <ol class="strip" aria-label="Narrativa do caso">
@@ -39,6 +39,19 @@
   </ol>
   <div class="prog" data-ref="refProg" aria-hidden="true"></div>
 </header>
+<div class="drawer" id="mmenu" data-open="false">
+  <div class="drawer-scrim" aria-hidden="true" data-click="closeMenu"></div>
+  <nav class="drawer-panel" aria-label="Navegação principal">
+    <ul class="nd-menu__list">
+      <li class="nd-menu__li"><a class="nd-menu__item" href="index.html#work" data-click="closeMenu">Trabalhos</a></li>
+      <li class="nd-menu__li"><a class="nd-menu__item" href="index.html#approach" data-click="closeMenu">Abordagem</a></li>
+      <li class="nd-menu__li"><a class="nd-menu__item" href="index.html#writing" data-click="closeMenu">Artigos</a></li>
+      <li class="nd-menu__li"><a class="nd-menu__item" href="index.html#about" data-click="closeMenu">Sobre</a></li>
+      <li class="nd-menu__li"><a class="nd-menu__item" href="index.html#contact" data-click="closeMenu">Contato</a></li>
+    </ul>
+    <p class="mono mute">Design de Serviços · Pesquisa · Estratégia</p>
+  </nav>
+</div>
 
 <main id="main">
 <section class="g chero rv" data-ref="rv" aria-labelledby="case-title">
@@ -165,14 +178,14 @@
     <section class="ch rv" id="c06" data-ref="ch" data-i="6" aria-labelledby="h06">
       <div class="ch-h up"><span class="mono n">06</span><h2 id="h06">Pesquisa</h2></div>
       <div class="ch-c">
-        <div class="nums wf up d1">
+        <div class="wf up d1"><p class="kick mono mute">Números da pesquisa</p><div class="nums">
           <div><p class="v">40</p><p class="mono mute">Componentes no escopo</p></div>
           <div><p class="v">2</p><p class="mono mute">Temas: light e dark</p></div>
           <div><p class="v">3</p><p class="mono mute">Ferramentas conectadas: Claude Code, Figma e GitHub</p></div>
           <div><p class="v">6</p><p class="mono mute">Famílias de componentes</p></div>
-        </div>
+        </div></div>
         <p class="body w5 up d2">A agenda é prática: quais decisões do portfólio já são tokens? Quais componentes o site já usa, mesmo sem nomeá-los? O que um sistema completo precisa acrescentar, como formulários, feedback e sobreposições? E como manter Figma e código sincronizados com a IA no meio?</p>
-        <p class="note w5 up d3">Os números descrevem o escopo definido para o sistema. Métricas de uso e de ganho de tempo não foram medidas.</p>
+        <p class="note w5 up d3">Os números descrevem o escopo definido para o sistema. Adoção e horas poupadas são números de impacto, no capítulo 11.</p>
       </div>
     </section>
     <section class="ch rv" id="c07" data-ref="ch" data-i="7" aria-labelledby="h07">
@@ -230,12 +243,12 @@
     <section class="ch rv" id="c11" data-ref="ch" data-i="11" aria-labelledby="h11">
       <div class="ch-h up"><span class="mono n">11</span><h2 id="h11">Impacto</h2></div>
       <div class="ch-c">
-        <div class="impact wf up d1">
-          <div><p class="v">40</p><p class="mono mute">Componentes, cada um em versão light e dark</p></div>
-          <div><p class="v">3</p><p class="mono mute">Ferramentas em um mesmo fluxo: Claude Code, Figma e GitHub</p></div>
-        </div>
-        <p class="body w5 up d2">O resultado é um design system completo, em dois temas, construído do Figma ao código por um fluxo em que a IA executa dentro das ferramentas e a pessoa decide. O ganho está em transformar o portfólio em um sistema reutilizável e em ter um método de trabalho com IA que pode ser repetido.</p>
-        <p class="note w5 up d3">Métricas de adoção, tempo de construção e economia de esforço não foram medidas e não são reivindicadas aqui.</p>
+        <div class="wf up d1"><p class="kick mono mute">Números de impacto</p><div class="impact">
+          <div><p class="v tbd"><span class="tag">A medir</span></p><p class="mono mute">Acessos e clones do repositório público no GitHub · adoção</p></div>
+          <div><p class="v tbd"><span class="tag">A medir</span></p><p class="mono mute">Horas poupadas ao montar telas com os componentes prontos · economia</p></div>
+        </div></div>
+        <p class="body w5 up d2">O impacto do NodIA se mede em adoção e em economia: quantas pessoas acessam e clonam o repositório, e quantas horas de construção de interface os componentes poupam. O repositório foi aberto em 1º de novembro de 2026 e os números ainda estão em coleta. Os 40 componentes, os 2 temas e as 3 ferramentas são números da pesquisa e ficam no capítulo 06.</p>
+        <p class="note w5 up d3">Nenhum número de adoção ou de economia é reivindicado antes de ser medido.</p>
       </div>
     </section>
     <section class="ch rv" id="c12" data-ref="ch" data-i="12" aria-labelledby="h12">
@@ -299,6 +312,7 @@
   <p class="mono f4 mute">São Paulo · Brasil</p>
   <a class="mono f5" href="#main"><span class="ul">Voltar ao topo</span> <span class="arr n" aria-hidden="true">↑</span></a>
 </footer>
+<button class="nd-icon-button nd-icon-button--secondary theme-btn" type="button" data-click="toggleTheme" aria-pressed="true" aria-label="Ativar tema claro" title="Ativar tema claro"><span class="nd-icon-button__icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><g class="rays"><path d="M12 2.6V.6M7.33 4.53L5.92 3.12M16.67 4.53l1.41-1.41M5.4 9.2H3.4M18.6 9.2h2"></path></g><path class="bulb" d="M8.6 15.2c0-1.4-.5-2.2-1.3-3.1A5.4 5.4 0 0 1 12 3.8a5.4 5.4 0 0 1 4.7 8.3c-.8.9-1.3 1.7-1.3 3.1z"></path><path d="M9.2 18h5.6M9.8 20.6h4.4"></path></svg></span></button>
 </div>
 </body>
 </html>

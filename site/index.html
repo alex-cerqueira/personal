@@ -36,32 +36,23 @@
   <div class="hdr-in">
     <a class="logo" href="#top" aria-label="Alex Cerqueira — voltar ao início"><svg class="logo-mark" viewBox="0 0 64 19" role="img" aria-hidden="true" focusable="false"><path d="M8 0H48C52.418 0 55 3.082 55 7.5V19H51V7.26441C51 5.05541 49.709 4 47.5 4H8C5.791 4 4 5.791 4 8V11C4 13.209 5.791 15 8 15H41V19H8C3.582 19 0 15.418 0 11V8C0 3.582 3.582 0 8 0Z"></path><circle cx="62" cy="17" r="2"></circle></svg></a>
     <div class="hdr-end">
-      <nav aria-label="Navegação principal">
-        <ul class="nav">
-          <li><a class="nd-menu__item" href="#work">Trabalhos</a></li>
-          <li><a class="nd-menu__item" href="#approach">Abordagem</a></li>
-          <li><a class="nd-menu__item" href="#writing">Artigos</a></li>
-          <li><a class="nd-menu__item" href="#about">Sobre</a></li>
-          <li><a class="nd-menu__item" href="#contact">Contato</a></li>
-        </ul>
-      </nav>
-      <button class="menu-btn nd-menu__item" type="button" aria-controls="mmenu" aria-expanded="false" data-click="toggleMenu">Menu</button>
-      <button class="nd-icon-button nd-icon-button--ghost theme-btn" type="button" data-click="toggleTheme" aria-pressed="true" aria-label="Ativar tema claro" title="Ativar tema claro"><span class="nd-icon-button__icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><g class="rays"><path d="M12 2.6V.6M7.33 4.53L5.92 3.12M16.67 4.53l1.41-1.41M5.4 9.2H3.4M18.6 9.2h2"></path></g><path class="bulb" d="M8.6 15.2c0-1.4-.5-2.2-1.3-3.1A5.4 5.4 0 0 1 12 3.8a5.4 5.4 0 0 1 4.7 8.3c-.8.9-1.3 1.7-1.3 3.1z"></path><path d="M9.2 18h5.6M9.8 20.6h4.4"></path></svg></span></button>
+      <button class="nd-icon-button nd-icon-button--ghost burger menu-btn" type="button" aria-controls="mmenu" aria-expanded="false" aria-label="Abrir menu" data-click="toggleMenu"><span class="nd-icon-button__icon" aria-hidden="true"><span class="bl b1"></span><span class="bl b2"></span><span class="bl b3"></span></span></button>
     </div>
   </div>
 </header>
 
-<div class="mmenu" id="mmenu" data-open="false">
-  <nav aria-label="Navegação móvel">
-    <ol>
-      <li><a href="#work" data-click="closeMenu"><span class="mono mute">01</span>Trabalhos</a></li>
-      <li><a href="#approach" data-click="closeMenu"><span class="mono mute">02</span>Abordagem</a></li>
-      <li><a href="#writing" data-click="closeMenu"><span class="mono mute">04</span>Artigos</a></li>
-      <li><a href="#about" data-click="closeMenu"><span class="mono mute">06</span>Sobre</a></li>
-      <li><a href="#contact" data-click="closeMenu"><span class="mono mute">07</span>Contato</a></li>
-    </ol>
+<div class="drawer" id="mmenu" data-open="false">
+  <div class="drawer-scrim" aria-hidden="true" data-click="closeMenu"></div>
+  <nav class="drawer-panel" aria-label="Navegação principal">
+    <ul class="nd-menu__list">
+      <li class="nd-menu__li"><a class="nd-menu__item" href="#work" data-click="closeMenu">Trabalhos</a></li>
+      <li class="nd-menu__li"><a class="nd-menu__item" href="#approach" data-click="closeMenu">Abordagem</a></li>
+      <li class="nd-menu__li"><a class="nd-menu__item" href="#writing" data-click="closeMenu">Artigos</a></li>
+      <li class="nd-menu__li"><a class="nd-menu__item" href="#about" data-click="closeMenu">Sobre</a></li>
+      <li class="nd-menu__li"><a class="nd-menu__item" href="#contact" data-click="closeMenu">Contato</a></li>
+    </ul>
+    <p class="mono mute">Design de Serviços · Pesquisa · Estratégia</p>
   </nav>
-  <p class="mono mute">Design de Serviços · Pesquisa · Estratégia</p>
 </div>
 
 <main id="main" class="layer">
@@ -427,6 +418,7 @@
   <a class="mono f5" href="#top"><span class="ul">Voltar ao topo</span> <span class="arr n" aria-hidden="true">↑</span></a>
 </footer>
 
+<button class="nd-icon-button nd-icon-button--secondary theme-btn" type="button" data-click="toggleTheme" aria-pressed="true" aria-label="Ativar tema claro" title="Ativar tema claro"><span class="nd-icon-button__icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><g class="rays"><path d="M12 2.6V.6M7.33 4.53L5.92 3.12M16.67 4.53l1.41-1.41M5.4 9.2H3.4M18.6 9.2h2"></path></g><path class="bulb" d="M8.6 15.2c0-1.4-.5-2.2-1.3-3.1A5.4 5.4 0 0 1 12 3.8a5.4 5.4 0 0 1 4.7 8.3c-.8.9-1.3 1.7-1.3 3.1z"></path><path d="M9.2 18h5.6M9.8 20.6h4.4"></path></svg></span></button>
 <div class="cursor" data-ref="refCursor" aria-hidden="true"><span>VER CASO</span></div>
 </div>
 </body>

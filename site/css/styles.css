@@ -61,14 +61,27 @@ a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
 .logo-mark{display:block;height:30px;width:auto;fill:currentColor;transition:height 500ms var(--ease)}
 .hdr.is-scrolled .logo-mark{height:22px}
 .hdr-end{display:flex;align-items:center;gap:var(--space-3)}
-.nav{display:flex;gap:var(--space-1)}
-.nav .nd-menu__item--active{color:var(--accent)}
-.hdr-end .nd-menu__item{width:auto}
-.menu-btn{display:none}
-.mmenu{position:fixed;inset:0;z-index:55;background:var(--bg);padding:120px var(--gx) 40px;display:flex;flex-direction:column;justify-content:space-between;clip-path:inset(0 0 0 0);transition:clip-path 700ms var(--ease-2),visibility 0s linear 0s}
-.mmenu[data-open="false"]{clip-path:inset(0 0 100% 0);visibility:hidden;transition:clip-path 600ms var(--ease-2),visibility 0s linear 600ms}
-.mmenu ol{display:flex;flex-direction:column;gap:4px}
-.mmenu a{display:flex;align-items:baseline;gap:18px;font-size:clamp(40px,11vw,60px);letter-spacing:-.045em;font-weight:320;line-height:1.12;min-height:44px}
+/* menu: hamburger (NodIA Icon Button) that turns into a close icon, and a drawer of NodIA Menu Items from the right */
+.burger .nd-icon-button__icon{position:relative;display:block;width:20px;height:14px}
+.burger .bl{position:absolute;left:0;width:20px;height:1.5px;border-radius:1px;background:currentColor;transition:transform var(--dur-2) var(--ease-2),opacity var(--dur-1) var(--ease)}
+.burger .b1{top:0}.burger .b2{top:6.25px}.burger .b3{top:12.5px}
+.burger[aria-expanded="true"] .b1{transform:translateY(6.25px) rotate(45deg)}
+.burger[aria-expanded="true"] .b2{opacity:0;transform:scaleX(.2)}
+.burger[aria-expanded="true"] .b3{transform:translateY(-6.25px) rotate(-45deg)}
+.drawer{position:fixed;inset:0;z-index:58;visibility:visible;transition:visibility 0s linear 0s}
+.drawer[data-open="false"]{visibility:hidden;transition:visibility 0s linear var(--dur-2)}
+.drawer-scrim{position:absolute;inset:0;background:rgba(0,0,0,.5);transition:opacity var(--dur-2) var(--ease)}
+.drawer[data-open="false"] .drawer-scrim{opacity:0}
+.drawer-panel{position:absolute;top:0;right:0;bottom:0;width:min(360px,88vw);display:flex;flex-direction:column;justify-content:space-between;gap:var(--space-6);padding:calc(var(--hh,92px) + var(--space-5)) var(--gx) var(--space-6) var(--space-5);overflow-y:auto;background:var(--bg);box-shadow:inset 1px 0 0 var(--line),var(--shadow-overlay);transition:transform var(--dur-2) var(--ease)}
+.drawer[data-open="false"] .drawer-panel{transform:translateX(100%)}
+.drawer .nd-menu__li{transition:opacity var(--dur-2) var(--ease),transform var(--dur-2) var(--ease)}
+.drawer[data-open="false"] .nd-menu__li{opacity:0;transform:translateX(var(--space-5))}
+.drawer[data-open="true"] .nd-menu__li:nth-child(2){transition-delay:40ms}
+.drawer[data-open="true"] .nd-menu__li:nth-child(3){transition-delay:80ms}
+.drawer[data-open="true"] .nd-menu__li:nth-child(4){transition-delay:120ms}
+.drawer[data-open="true"] .nd-menu__li:nth-child(5){transition-delay:160ms}
+.drawer .nd-menu__item--active{color:var(--accent)}
+.theme-btn{position:fixed;right:var(--space-5);bottom:var(--space-5);z-index:70;background:var(--bg)}
 
 /* hero */
 .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:120px}
@@ -252,9 +265,6 @@ a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
   .h-xl{grid-column:1/8}.c-bot .lead{grid-column:1/9}.c-links{grid-column:1/6}
   .ftr .f1{grid-column:1/5}.ftr .f2{grid-column:5/9}.ftr .f3{grid-column:1/3}.ftr .f4{grid-column:3/6}.ftr .f5{grid-column:6/9}
 }
-@media (max-width:860px){
-  .nav{display:none}.menu-btn{display:flex}
-}
 /* mobile — 4 columns; the network sits above the text in every section */
 @media (max-width:680px){
   :root{--gut:16px}
@@ -263,6 +273,7 @@ a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
   .g>*{grid-column:1/-1 !important}
   .hdr-in{padding-block:var(--space-4)}
   .logo-mark{height:24px}
+  .theme-btn{right:var(--space-4);bottom:var(--space-4)}
   .net{display:none}
   .m-net{display:block;position:relative}
   .hero{padding-top:72px}
