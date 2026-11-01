@@ -5,7 +5,7 @@ Esta pasta é tudo o que precisa ser publicado.
 
 ```
 index.html        home (hero, work, approach, expertise, writing, books, about, contact)
-design-system.html estudo de caso 01 — Nodia (14 capítulos, carrossel de imagens)
+design-system.html estudo de caso 01 — NodIA (14 capítulos, carrossel de imagens)
 case.html         estudo de caso 02 — Reciclar (14 capítulos, carrossel de imagens)
 caldohs.html      estudo de caso 03 — Caldohs (14 capítulos, carrossel de imagens)
 wft.html          estudo de caso 04 — World Footvolley Tournament (14 capítulos, carrossel de imagens)
