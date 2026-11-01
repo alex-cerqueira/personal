@@ -12,6 +12,7 @@ wft.html          estudo de caso 04 — World Footvolley Tournament (14 capítul
 bonomia.html      estudo de caso 05 — Bonomia (14 capítulos, carrossel de imagens)
 hostad.html       estudo de caso 06 — Hostad (14 capítulos, carrossel de imagens)
 404.html          página de erro
+css/nodia.css    design system NodIA (tokens + Link), cópia fiel de github.com/alex-cerqueira/NodIA — não editar aqui
 css/ js/          estilos e comportamento (a "Research Network" é um canvas 2D, sem libs)
 assets/           imagens dos cases, capa do livro, retrato e imagem de compartilhamento (og-image.jpg)
 favicon.svg, apple-touch-icon.png, robots.txt
@@ -48,6 +49,8 @@ ou GitHub Pages (via Actions).
 4. Se for colocar o site numa subpasta (ex.: `seudominio.com/portfolio`), a página 404 e os caminhos que começam com `/` precisam ser ajustados.
 
 ## Observações
+
+- **Design system:** as cores, a tipografia e o movimento vêm dos tokens do NodIA (`css/nodia.css`, v0.1.0, commit 898da6d). Os estilos do portfólio só definem o que é próprio dele: a translucência do cabeçalho (`--hdr`), o tom do logotipo da home (`--logo`), a curva de animação da home (`--ease`) e as medidas da grade (`--gx`, `--gut`). Para atualizar o sistema, gere `nodia.css` de novo a partir do repositório.
 
 - Tema escuro é o padrão; a escolha do visitante fica salva no navegador (`localStorage`).
 - Respeita `prefers-reduced-motion` (animações viram estados estáticos).

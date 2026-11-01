@@ -1,0 +1,190 @@
+/*
+ * NodIA design system v0.1.0 — https://github.com/alex-cerqueira/NodIA (commit 898da6d, licença MIT)
+ * Cópia vendorizada, sem edições: tokens.css + base.css + o componente Link (01-actions.css).
+ * O portfólio lê as cores, a tipografia, o espaçamento e o movimento destes tokens; para atualizar,
+ * gere este arquivo de novo a partir do repositório em vez de editá-lo aqui.
+ */
+
+/* ---- tokens.css ---- */
+/*
+ * Nodia — tokens
+ * Fonte: variáveis do Figma (coleções Primitives, Color, Spacing e Radius) e estilos de texto.
+ * Tema: use data-theme="light" ou "dark" em qualquer ancestral (ex.: <html>).
+ * Sem data-theme, o padrão é escuro (case Nodia), ou claro se o sistema preferir claro.
+ */
+
+:root {
+  /* Primitives */
+  --nodia-neutral-paper: #F8F8F6;
+  --nodia-neutral-paper-2: #EFEFEB;
+  --nodia-neutral-ink: #171717;
+  --nodia-neutral-ink-2: #3A3A38;
+  --nodia-neutral-mute: #666666;
+  --nodia-neutral-faint: #8A8A85;
+  --nodia-neutral-line: #DADAD6;
+  --nodia-neutral-fab: #E6E6E2;
+  --nodia-neutral-white: #FFFFFF;
+  --nodia-neutral-logo-light: #0F1010;
+  --nodia-neutral-night: #121212;
+  --nodia-neutral-night-2: #1D1D1C;
+  --nodia-neutral-night-text: #EDEDEA;
+  --nodia-neutral-night-text-2: #CFCFCB;
+  --nodia-neutral-night-mute: #A3A39E;
+  --nodia-neutral-night-faint: #85857F;
+  --nodia-neutral-night-line: #2E2E2C;
+  --nodia-neutral-night-fab: #262624;
+  --nodia-blue-600: #3155E7;
+  --nodia-blue-300: #7D95FF;
+  --nodia-red-600: #C62828;
+  --nodia-red-300: #FF8A80;
+  --nodia-green-700: #2E7D32;
+  --nodia-green-300: #7BD88F;
+  --nodia-amber-700: #9A5B00;
+  --nodia-amber-300: #F5C46B;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Radius */
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 22px;
+  --radius-full: 999px;
+
+  /* Tipografia (estilos de texto do Figma) */
+  --font-sans: 'Geist', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --font-display-xl: 500 88px/92px var(--font-sans);
+  --font-display-lg: 500 64px/68px var(--font-sans);
+  --font-heading-h1: 500 40px/46px var(--font-sans);
+  --font-heading-h2: 500 32px/38px var(--font-sans);
+  --font-heading-h3: 500 24px/30px var(--font-sans);
+  --font-heading-h4: 600 19px/26px var(--font-sans);
+  --font-body-lg: 400 17px/26px var(--font-sans);
+  --font-body-md: 400 15px/24px var(--font-sans);
+  --font-body-sm: 400 14px/20px var(--font-sans);
+  --font-mono-md: 400 13px/20px var(--font-mono);
+  --font-label-mono: 500 11px/16px var(--font-mono);
+  --font-caption-mono: 400 10.5px/14px var(--font-mono);
+  --ls-display-xl: -0.03em;
+  --ls-display-lg: -0.025em;
+  --ls-heading-h1: -0.015em;
+  --ls-heading-h2: -0.01em;
+  --ls-heading-h3: -0.005em;
+  --ls-label-mono: 0.08em;
+  --ls-caption-mono: 0.06em;
+
+  /* Movimento (referência do portfólio; não é variável no Figma) */
+  --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
+  --ease-2: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-1: 0.15s;
+  --dur-2: 0.3s;
+
+  /* Sombra (estilo de efeito shadow/overlay) */
+  --shadow-overlay: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+/* Tema escuro: padrão */
+:root,
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: var(--nodia-neutral-night);
+  --bg-subtle: var(--nodia-neutral-night-2);
+  --bg-raised: var(--nodia-neutral-night-fab);
+  --ink: var(--nodia-neutral-night-text);
+  --ink-2: var(--nodia-neutral-night-text-2);
+  --mute: var(--nodia-neutral-night-mute);
+  --faint: var(--nodia-neutral-night-faint);
+  --line: var(--nodia-neutral-night-line);
+  --accent: var(--nodia-blue-300);
+  --accent-on: var(--nodia-neutral-night);
+  --logo-ink: var(--nodia-neutral-white);
+  --danger: var(--nodia-red-300);
+  --success: var(--nodia-green-300);
+  --warning: var(--nodia-amber-300);
+}
+
+/* Tema claro */
+[data-theme='light'] {
+  color-scheme: light;
+  --bg: var(--nodia-neutral-paper);
+  --bg-subtle: var(--nodia-neutral-paper-2);
+  --bg-raised: var(--nodia-neutral-fab);
+  --ink: var(--nodia-neutral-ink);
+  --ink-2: var(--nodia-neutral-ink-2);
+  --mute: var(--nodia-neutral-mute);
+  --faint: var(--nodia-neutral-faint);
+  --line: var(--nodia-neutral-line);
+  --accent: var(--nodia-blue-600);
+  --accent-on: var(--nodia-neutral-white);
+  --logo-ink: var(--nodia-neutral-logo-light);
+  --danger: var(--nodia-red-600);
+  --success: var(--nodia-green-700);
+  --warning: var(--nodia-amber-700);
+}
+
+/* Sem data-theme: segue o sistema quando ele preferir claro */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+    --bg: var(--nodia-neutral-paper);
+    --bg-subtle: var(--nodia-neutral-paper-2);
+    --bg-raised: var(--nodia-neutral-fab);
+    --ink: var(--nodia-neutral-ink);
+    --ink-2: var(--nodia-neutral-ink-2);
+    --mute: var(--nodia-neutral-mute);
+    --faint: var(--nodia-neutral-faint);
+    --line: var(--nodia-neutral-line);
+    --accent: var(--nodia-blue-600);
+    --accent-on: var(--nodia-neutral-white);
+    --logo-ink: var(--nodia-neutral-logo-light);
+    --danger: var(--nodia-red-600);
+    --success: var(--nodia-green-700);
+    --warning: var(--nodia-amber-700);
+  }
+}
+
+/* ---- base.css ---- */
+/* Nodia — base: reset mínimo e utilitários compartilhados pelos componentes. */
+.nd-root, .nd-root *, [class^='nd-'], [class*=' nd-'] { box-sizing: border-box; }
+
+.nd-root {
+  background: var(--bg);
+  color: var(--ink);
+  font: var(--font-body-md);
+}
+
+/* Foco visível padrão (WCAG 2.4.7). O Figma ainda não define estado de foco para todos os componentes. */
+.nd-focusable:focus-visible,
+:where([class^='nd-'], [class*=' nd-']):focus-visible,
+:where([class^='nd-'], [class*=' nd-']) :focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.nd-visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [class^='nd-'], [class*=' nd-'] { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}
+
+/* ---- components: Link ---- */
+/* Link */
+.nd-link {
+  font: var(--font-body-md); color: var(--ink);
+  text-decoration: underline; text-underline-offset: 3px;
+  transition: color var(--dur-1) var(--ease);
+}
+.nd-link:hover { color: var(--accent); }
+.nd-link--disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
