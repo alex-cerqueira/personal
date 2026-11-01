@@ -59,6 +59,7 @@ class Component extends DCLogic {
       var W = f.clientWidth, H = f.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
       var R = Math.max(24, Math.min(76, W / 16)), h3 = Math.sqrt(3) * R, cells = [];
       for (var c = -1; c * 1.5 * R < W + R; c++) {
         for (var r = -1; r * h3 < H + h3; r++) {
