@@ -115,10 +115,10 @@ a:hover .arr.w{transform:translateX(-6px)}a:hover .arr.e{transform:translateX(6p
 .pl{grid-column:1/6}
 .pl .note{margin-top:28px}
 .pl.sk{grid-column:1/5}
-.smap.side{grid-column:5/13;margin:0;display:flex;align-items:center;justify-content:center}
-.smap.side svg{width:100%;height:auto}
-.smap.side text{font-size:15px}
-@media (max-width:720px){.smap.side text{font-size:19px}}
+.persona.scene{grid-column:5/13;aspect-ratio:16/9;height:auto;min-height:0;align-self:start}
+.persona.scene img{object-position:50% 50%}
+.persona.scene .chip.c1{top:24px;bottom:auto}
+.persona.scene .chip.c2{top:52px;bottom:auto}
 .ph-fig .ph-l{position:absolute;left:18px;bottom:16px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
 .persona{grid-column:6/10;margin:0;position:relative;overflow:hidden;background:#1d1d1c;min-height:380px}
 .persona img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 22%;position:absolute;inset:0}
@@ -140,8 +140,7 @@ a:hover .arr.w{transform:translateX(-6px)}a:hover .arr.e{transform:translateX(6p
   .js .ch-c.fit{grid-template-rows:minmax(0,1fr);align-content:stretch;align-items:center}
   .js .ch-c.fit .persona{height:100%;min-height:0}
   .js .ch-c.fit .pl{align-self:start}
-  .js .ch-c.fit .smap.side{height:100%;min-height:0}
-  .js .ch-c.fit .smap.side svg{height:100%;max-height:100%}
+  .js .ch-c.fit .persona.scene{height:auto;max-height:100%}
   .js .ev blockquote{min-height:150px}
 }
 @media (min-width:1081px) and (max-height:600px){
@@ -226,7 +225,7 @@ a:hover .arr.w{transform:translateX(-6px)}a:hover .arr.e{transform:translateX(6p
   .ch-h,.ch-c{grid-template-columns:repeat(8,minmax(0,1fr))}
   .ch-h .n{grid-column:1/3}.ch-h h2{grid-column:3/9}
   .w6,.w5{grid-column:1/8}.wl{grid-column:1/5}.wr{grid-column:5/9}.wf{grid-column:1/9}
-  .pl,.persona,.pl.sk,.smap.side{grid-column:1/9}.persona{height:440px}
+  .pl,.persona,.pl.sk{grid-column:1/9}.persona{height:440px}
   .next .a{grid-column:1/9}.next a{grid-column:1/9}
   .ftr .f1{grid-column:1/5}.ftr .f2{grid-column:5/9}.ftr .f3{grid-column:1/3}.ftr .f4{grid-column:3/6}.ftr .f5{grid-column:6/9}
 }
