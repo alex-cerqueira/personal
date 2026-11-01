@@ -15,7 +15,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .site{position:relative;overflow-x:clip;background:var(--bg);color:var(--ink);min-height:100vh;transition:background-color 500ms var(--ease),color 500ms var(--ease)}
 html[data-theme="dark"]{--hdr:rgba(18,18,18,.86);--logo:#2B2B29}
 html[data-theme="dark"] ::selection{background:var(--ink);color:var(--bg)}
-.theme-btn svg{display:block;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.theme-btn svg{display:block;width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .theme-btn .bulb{transition:fill 400ms var(--ease)}
 html[data-theme="dark"] .theme-btn .bulb{fill:currentColor}
 .theme-btn .rays{transition:opacity 400ms var(--ease),transform 500ms var(--ease);transform-box:view-box;transform-origin:12px 9.2px}
@@ -81,7 +81,7 @@ a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
 .drawer[data-open="true"] .nd-menu__li:nth-child(4){transition-delay:120ms}
 .drawer[data-open="true"] .nd-menu__li:nth-child(5){transition-delay:160ms}
 .drawer .nd-menu__item--active{color:var(--accent)}
-.theme-btn{position:fixed;right:var(--space-5);bottom:var(--space-5);z-index:70;background:var(--bg)}
+.theme-btn{position:fixed;right:var(--space-5);bottom:var(--space-5);z-index:70;width:var(--space-7);height:var(--space-7);background:var(--bg)}
 
 /* hero */
 .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:120px}
