@@ -226,7 +226,7 @@ class Component extends DCLogic {
   sync() {
     var dark = this.state.theme !== 'light', d = document;
     d.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-    var fab = d.querySelector('.fab'), lb = dark ? 'Ativar tema claro' : 'Ativar tema escuro';
+    var fab = d.querySelector('.theme-btn'), lb = dark ? 'Ativar tema claro' : 'Ativar tema escuro';
     if (fab) { fab.setAttribute('aria-pressed', dark ? 'true' : 'false'); fab.setAttribute('aria-label', lb); fab.setAttribute('title', lb); }
     var tc = d.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', dark ? '#121212' : '#F8F8F6');
   }

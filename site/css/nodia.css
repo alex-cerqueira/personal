@@ -1,6 +1,6 @@
 /*
  * NodIA design system v0.1.0 — https://github.com/alex-cerqueira/NodIA (commit 898da6d, licença MIT)
- * Cópia vendorizada, sem edições: tokens.css + base.css + o componente Link (01-actions.css).
+ * Cópia vendorizada, sem edições: tokens.css + base.css + os componentes Link e Icon Button (01-actions.css) e Menu / Menu Item (03-navigation.css).
  * O portfólio lê as cores, a tipografia, o espaçamento e o movimento destes tokens; para atualizar,
  * gere este arquivo de novo a partir do repositório em vez de editá-lo aqui.
  */
@@ -179,6 +179,23 @@
   [class^='nd-'], [class*=' nd-'] { transition-duration: 1ms !important; animation-duration: 1ms !important; }
 }
 
+/* ---- components: Icon Button ---- */
+/* Icon Button */
+.nd-icon-button {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; padding: 0; border: 0; cursor: pointer;
+  border-radius: var(--radius-sm); color: var(--ink); background: transparent;
+  font: var(--font-heading-h4);
+  transition: opacity var(--dur-1) var(--ease), background-color var(--dur-1) var(--ease);
+}
+.nd-icon-button--primary { background: var(--accent); color: var(--accent-on); }
+.nd-icon-button--primary:hover:not(:disabled) { opacity: 0.88; }
+.nd-icon-button--secondary { box-shadow: inset 0 0 0 1px var(--line); }
+.nd-icon-button--secondary:hover:not(:disabled),
+.nd-icon-button--ghost:hover:not(:disabled) { background: var(--bg-subtle); }
+.nd-icon-button:disabled { opacity: 0.4; cursor: not-allowed; }
+.nd-icon-button__icon { display: inline-flex; line-height: 1; }
+
 /* ---- components: Link ---- */
 /* Link */
 .nd-link {
@@ -188,3 +205,16 @@
 }
 .nd-link:hover { color: var(--accent); }
 .nd-link--disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+/* ---- components: Menu / Menu Item ---- */
+/* Menu */
+.nd-menu { width: 220px; max-width: 100%; padding: var(--space-2); background: var(--bg); border-radius: var(--radius-md); box-shadow: inset 0 0 0 1px var(--line); }
+.nd-menu__list { display: flex; flex-direction: column; gap: var(--space-1); list-style: none; margin: 0; padding: 0; }
+.nd-menu__item {
+  display: flex; width: 100%; align-items: center; text-align: left; border: 0; cursor: pointer; text-decoration: none;
+  padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); background: transparent; color: var(--ink); font: var(--font-body-md);
+  transition: background-color var(--dur-1) var(--ease);
+}
+.nd-menu__item:hover:not(:disabled) { background: var(--bg-subtle); }
+.nd-menu__item--active { background: var(--bg-subtle); color: var(--accent); }
+.nd-menu__item:disabled { opacity: 0.4; cursor: not-allowed; }

@@ -373,6 +373,12 @@ class Component extends DCLogic {
   measure() {
     var w = window, y = w.scrollY || document.documentElement.scrollTop || 0, vh = w.innerHeight;
     if (this.header) this.header.classList.toggle('is-scrolled', y > 24);
+    if (!this.navLinks) { this.navLinks = [].slice.call(document.querySelectorAll('.hdr .nav a')); this.navSecs = this.navLinks.map(function (a) { return document.querySelector(a.getAttribute('href')); }); }
+    var curN = -1; for (var ni = 0; ni < this.navSecs.length; ni++) { if (this.navSecs[ni] && this.navSecs[ni].getBoundingClientRect().top <= vh * .4) curN = ni; }
+    for (var nj = 0; nj < this.navLinks.length; nj++) {
+      var onN = nj === curN, aN = this.navLinks[nj];
+      if (aN.classList.contains('nd-menu__item--active') !== onN) { aN.classList.toggle('nd-menu__item--active', onN); if (onN) aN.setAttribute('aria-current', 'location'); else aN.removeAttribute('aria-current'); }
+    }
     if (!this.hero || !this.work || !this.appr || !this.exp || !this.writing || !this.contact) return;
     function top(el) { return el.getBoundingClientRect().top + y; }
     if (this.hs && this.track && !this.reduce) {
@@ -617,10 +623,10 @@ class Component extends DCLogic {
     var s = this.state, d = document, dark = s.theme === 'dark';
     d.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
     var tc = d.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', dark ? '#121212' : '#F8F8F6');
-    var fab = d.querySelector('.fab');
+    var fab = d.querySelector('.theme-btn');
     if (fab) { var lb = dark ? 'Ativar tema claro' : 'Ativar tema escuro'; fab.setAttribute('aria-pressed', dark ? 'true' : 'false'); fab.setAttribute('aria-label', lb); fab.setAttribute('title', lb); }
     var menu = !!s.menu, mb = d.querySelector('.menu-btn'), mm = d.getElementById('mmenu');
-    if (mb) { mb.setAttribute('aria-expanded', menu ? 'true' : 'false'); mb.textContent = menu ? 'FECHAR' : 'MENU'; }
+    if (mb) { mb.setAttribute('aria-expanded', menu ? 'true' : 'false'); mb.textContent = menu ? 'Fechar' : 'Menu'; }
     if (mm) mm.setAttribute('data-open', menu ? 'true' : 'false');
     d.body.style.overflow = menu ? 'hidden' : '';
     var st = s.stage || 1, sp = d.querySelector('.sp');

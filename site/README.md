@@ -6,16 +6,16 @@ Esta pasta é tudo o que precisa ser publicado.
 ```
 index.html        home (hero, work, approach, expertise, writing, books, about, contact)
 iconlib.html      estudo de caso 01 — IconLib (14 capítulos; imagens a enviar)
-design-system.html estudo de caso 02 — NodIA (14 capítulos, carrossel de imagens)
+design-system.html estudo de caso 02 — NodIA (14 capítulos, carrossel com a capa e três páginas de documentação em SVG)
 case.html         estudo de caso 03 — Reciclar (14 capítulos, carrossel de imagens)
 caldohs.html      estudo de caso 04 — Caldohs (14 capítulos, carrossel de imagens)
 wft.html          estudo de caso 05 — World Footvolley Tournament (14 capítulos, carrossel de imagens)
 bonomia.html      estudo de caso 06 — Bonomia (14 capítulos, carrossel de imagens)
 hostad.html       estudo de caso 07 — Hostad (14 capítulos, carrossel de imagens)
 404.html          página de erro
-css/nodia.css    design system NodIA (tokens + Link), cópia fiel de github.com/alex-cerqueira/NodIA — não editar aqui
+css/nodia.css    design system NodIA (tokens + Link, Icon Button e Menu Item), cópia fiel de github.com/alex-cerqueira/NodIA — não editar aqui
 css/ js/          estilos e comportamento (a "Research Network" é um canvas 2D, sem libs)
-assets/           imagens dos cases, capa do livro, retrato e imagem de compartilhamento (og-image.jpg)
+assets/           imagens dos cases (as páginas do NodIA são SVG de 1,5–1,8 MB, carregadas só quando o carrossel as pede), capa do livro, retrato e imagem de compartilhamento (og-image.jpg)
 favicon.svg, apple-touch-icon.png, robots.txt
 set-domain.py     define o domínio final (canonical, og:url, og:image, sitemap)
 ```
@@ -51,7 +51,7 @@ ou GitHub Pages (via Actions).
 
 ## Observações
 
-- **Design system:** as cores, a tipografia e o movimento vêm dos tokens do NodIA (`css/nodia.css`, v0.1.0, commit 898da6d). Os estilos do portfólio só definem o que é próprio dele: a translucência do cabeçalho (`--hdr`), o tom do logotipo da home (`--logo`), a curva de animação da home (`--ease`) e as medidas da grade (`--gx`, `--gut`). Para atualizar o sistema, gere `nodia.css` de novo a partir do repositório.
+- **Design system:** as cores, a tipografia e o movimento vêm dos tokens do NodIA (`css/nodia.css`, v0.1.0, commit 898da6d). O botão de tema é o Icon Button (variante ghost) e os links do cabeçalho são o Menu Item do sistema. Os estilos do portfólio só definem o que é próprio dele: a translucência do cabeçalho (`--hdr`), o tom do logotipo da home (`--logo`), a curva de animação da home (`--ease`) e as medidas da grade (`--gx`, `--gut`). Para atualizar o sistema, gere `nodia.css` de novo a partir do repositório.
 
 - Tema escuro é o padrão; a escolha do visitante fica salva no navegador (`localStorage`).
 - Respeita `prefers-reduced-motion` (animações viram estados estáticos).
