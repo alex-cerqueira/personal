@@ -61,13 +61,14 @@ a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
 .logo-mark{display:block;height:30px;width:auto;fill:currentColor;transition:height 500ms var(--ease)}
 .hdr.is-scrolled .logo-mark{height:22px}
 .hdr-end{display:flex;align-items:center;gap:var(--space-3)}
-/* menu: hamburger (NodIA Icon Button) that turns into a close icon, and a drawer of NodIA Menu Items from the right */
-.burger .nd-icon-button__icon{position:relative;display:block;width:20px;height:14px}
+/* menu: "menu" + hamburger glyph in one NodIA Menu Item; the glyph turns into a close icon; drawer of Menu Items from the right */
+.menu-tg{width:auto;gap:var(--space-2)}
+.burger{position:relative;display:block;flex:none;width:20px;height:14px}
 .burger .bl{position:absolute;left:0;width:20px;height:1.5px;border-radius:1px;background:currentColor;transition:transform var(--dur-2) var(--ease-2),opacity var(--dur-1) var(--ease)}
 .burger .b1{top:0}.burger .b2{top:6.25px}.burger .b3{top:12.5px}
-.burger[aria-expanded="true"] .b1{transform:translateY(6.25px) rotate(45deg)}
-.burger[aria-expanded="true"] .b2{opacity:0;transform:scaleX(.2)}
-.burger[aria-expanded="true"] .b3{transform:translateY(-6.25px) rotate(-45deg)}
+.menu-tg[aria-expanded="true"] .b1{transform:translateY(6.25px) rotate(45deg)}
+.menu-tg[aria-expanded="true"] .b2{opacity:0;transform:scaleX(.2)}
+.menu-tg[aria-expanded="true"] .b3{transform:translateY(-6.25px) rotate(-45deg)}
 .drawer{position:fixed;inset:0;z-index:58;visibility:visible;transition:visibility 0s linear 0s}
 .drawer[data-open="false"]{visibility:hidden;transition:visibility 0s linear var(--dur-2)}
 .drawer-scrim{position:absolute;inset:0;background:rgba(0,0,0,.5);transition:opacity var(--dur-2) var(--ease)}
@@ -81,7 +82,8 @@ a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
 .drawer[data-open="true"] .nd-menu__li:nth-child(4){transition-delay:120ms}
 .drawer[data-open="true"] .nd-menu__li:nth-child(5){transition-delay:160ms}
 .drawer .nd-menu__item--active{color:var(--accent)}
-.theme-btn{position:fixed;right:var(--gx);bottom:var(--space-5);z-index:70;width:var(--space-7);height:var(--space-7);background:var(--bg)}
+.drawer-foot{display:flex;justify-content:flex-end}
+.theme-btn{width:var(--space-7);height:var(--space-7)}
 
 /* hero */
 .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:120px}
@@ -273,7 +275,6 @@ a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
   .g>*{grid-column:1/-1 !important}
   .hdr-in{padding-block:var(--space-4)}
   .logo-mark{height:24px}
-  .theme-btn{bottom:var(--space-4)}
   .net{display:none}
   .m-net{display:block;position:relative}
   .hero{padding-top:72px}

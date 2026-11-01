@@ -28,10 +28,11 @@ class Component extends DCLogic {
     var d = document, dr = d.getElementById('mmenu'), btn = d.querySelector('.menu-btn');
     if (e.key === 'Escape') { e.preventDefault(); this.setMenu(false); if (btn) btn.focus({ preventScroll: true }); return; }
     if (e.key !== 'Tab' || !dr || !btn) return;
-    var items = [].slice.call(dr.querySelectorAll('.nd-menu__item')), a = d.activeElement;
+    var items = [].slice.call(dr.querySelectorAll('.nd-menu__item, .theme-btn')), a = d.activeElement;
     if (!items.length) return;
     if (!e.shiftKey && a === items[items.length - 1]) { e.preventDefault(); btn.focus(); }
     else if (e.shiftKey && a === btn) { e.preventDefault(); items[items.length - 1].focus(); }
+    else if (!e.shiftKey && a === btn) { e.preventDefault(); items[0].focus(); }
     else if (a !== btn && !dr.contains(a)) { e.preventDefault(); items[0].focus(); }
   };
   toggleTheme = () => { var t = this.state.theme === 'dark' ? 'light' : 'dark'; try { localStorage.setItem('ac-theme2', t); } catch (e) {} this.setState({ theme: t }); };

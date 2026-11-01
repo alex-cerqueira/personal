@@ -51,7 +51,7 @@ ou GitHub Pages (via Actions).
 
 ## Observações
 
-- **Design system:** as cores, a tipografia e o movimento vêm dos tokens do NodIA (`css/nodia.css`, v0.1.0, commit 898da6d). O cabeçalho tem um menu hambúrguer (Icon Button, variante ghost) que vira um X e abre, da direita para a esquerda, uma gaveta com os Menu Items do sistema; o botão de tema é um Icon Button flutuante (variante secondary) no canto inferior direito. Os estilos do portfólio só definem o que é próprio dele: a translucência do cabeçalho (`--hdr`), o tom do logotipo da home (`--logo`), a curva de animação da home (`--ease`) e as medidas da grade (`--gx`, `--gut`). Para atualizar o sistema, gere `nodia.css` de novo a partir do repositório.
+- **Design system:** as cores, a tipografia e o movimento vêm dos tokens do NodIA (`css/nodia.css`, v0.1.0, commit 898da6d). O cabeçalho tem o botão "menu" (um Menu Item do sistema, com a palavra e o ícone de hambúrguer, que vira um X) e abre, da direita para a esquerda, uma gaveta com os Menu Items; o botão de tema (Icon Button, variante secondary) fica dentro da gaveta, no canto inferior direito. Os estilos do portfólio só definem o que é próprio dele: a translucência do cabeçalho (`--hdr`), o tom do logotipo da home (`--logo`), a curva de animação da home (`--ease`) e as medidas da grade (`--gx`, `--gut`). Para atualizar o sistema, gere `nodia.css` de novo a partir do repositório.
 
 - Tema escuro é o padrão; a escolha do visitante fica salva no navegador (`localStorage`).
 - Respeita `prefers-reduced-motion` (animações viram estados estáticos).
