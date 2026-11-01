@@ -8,33 +8,8 @@ class DCLogic {
 var STEP_OF = [0, 0, 0, 0, 1, 1, 1, 2, 3, 3, 4, 5, 5, 5, 5];
 
 class Component extends DCLogic {
-  state = { menu: false, theme: (function () { try { return localStorage.getItem('ac-theme2') === 'light' ? 'light' : 'dark'; } catch (e) { return 'dark'; } })() };
+  state = { theme: (function () { try { return localStorage.getItem('ac-theme2') === 'light' ? 'light' : 'dark'; } catch (e) { return 'dark'; } })() };
   rvEls = []; ixEls = []; chEls = []; stEls = [];
-  toggleMenu = () => { this.setMenu(!this.state.menu); };
-  closeMenu = () => { if (this.state.menu) this.setMenu(false); };
-  /* open/close the drawer: it starts below the header, focus goes to the first item and comes back to the hamburger */
-  setMenu(open) {
-    var d = document, hdr = d.querySelector('.hdr'), dr = d.getElementById('mmenu'), btn = d.querySelector('.menu-btn');
-    if (open && hdr && dr) dr.style.setProperty('--hh', Math.round(hdr.getBoundingClientRect().bottom) + 'px');
-    this.setState({ menu: open });
-    clearTimeout(this.menuT);
-    this.menuT = setTimeout(() => {
-      if (open) { var first = dr && dr.querySelector('.nd-menu__item'); if (first) first.focus({ preventScroll: true }); }
-      else if (btn && dr && dr.contains(d.activeElement)) btn.focus({ preventScroll: true });
-    }, open ? 60 : 0);
-  }
-  onMenuKey = (e) => {
-    if (!this.state.menu) return;
-    var d = document, dr = d.getElementById('mmenu'), btn = d.querySelector('.menu-btn');
-    if (e.key === 'Escape') { e.preventDefault(); this.setMenu(false); if (btn) btn.focus({ preventScroll: true }); return; }
-    if (e.key !== 'Tab' || !dr || !btn) return;
-    var items = [].slice.call(dr.querySelectorAll('.nd-menu__item, .theme-btn')), a = d.activeElement;
-    if (!items.length) return;
-    if (!e.shiftKey && a === items[items.length - 1]) { e.preventDefault(); btn.focus(); }
-    else if (e.shiftKey && a === btn) { e.preventDefault(); items[items.length - 1].focus(); }
-    else if (!e.shiftKey && a === btn) { e.preventDefault(); items[0].focus(); }
-    else if (a !== btn && !dr.contains(a)) { e.preventDefault(); items[0].focus(); }
-  };
   toggleTheme = () => { var t = this.state.theme === 'dark' ? 'light' : 'dark'; try { localStorage.setItem('ac-theme2', t); } catch (e) {} this.setState({ theme: t }); };
   refRoot = (el) => { this.root = el; };
   refProg = (el) => { this.prog = el; };
@@ -237,7 +212,6 @@ class Component extends DCLogic {
 
   componentDidMount() {
     var w = window;
-    document.addEventListener('keydown', this.onMenuKey);
     var reduce = !!(w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches);
     this.reduce = reduce;
     if (!reduce && this.root) this.root.classList.add('js');
@@ -266,7 +240,6 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.onMenuKey);
     document.removeEventListener('click', this.onToc);
     window.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onScroll);
@@ -319,10 +292,6 @@ class Component extends DCLogic {
     var fab = d.querySelector('.theme-btn'), lb = dark ? 'Ativar tema claro' : 'Ativar tema escuro';
     if (fab) { fab.setAttribute('aria-pressed', dark ? 'true' : 'false'); fab.setAttribute('aria-label', lb); fab.setAttribute('title', lb); }
     var tc = d.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', dark ? '#121212' : '#F8F8F6');
-    var menu = !!this.state.menu, mb = d.querySelector('.menu-btn'), mm = d.getElementById('mmenu');
-    if (mb) { mb.setAttribute('aria-expanded', menu ? 'true' : 'false'); mb.setAttribute('aria-label', menu ? 'Fechar menu' : 'Abrir menu'); }
-    if (mm) mm.setAttribute('data-open', menu ? 'true' : 'false');
-    d.body.style.overflow = menu ? 'hidden' : '';
   }
 }
 
