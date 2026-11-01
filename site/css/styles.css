@@ -62,7 +62,7 @@ a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
 .hdr.is-scrolled .logo-mark{height:22px}
 .hdr-end{display:flex;align-items:center;gap:var(--space-3)}
 /* menu: "menu" + hamburger glyph in one NodIA Menu Item; the glyph turns into a close icon; drawer of Menu Items from the right */
-.menu-tg{width:auto;gap:var(--space-2)}
+.menu-tg{width:auto;gap:var(--space-3)}
 .burger{position:relative;display:block;flex:none;width:20px;height:14px}
 .burger .bl{position:absolute;left:0;width:20px;height:1.5px;border-radius:1px;background:currentColor;transition:transform var(--dur-2) var(--ease-2),opacity var(--dur-1) var(--ease)}
 .burger .b1{top:0}.burger .b2{top:6.25px}.burger .b3{top:12.5px}
@@ -99,10 +99,6 @@ a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
 .cta.pri{color:var(--accent)}.cta.pri:hover{color:var(--accent)}
 .hero-foot{padding-block:clamp(40px,7vh,72px) 28px;align-items:end}
 .hero-foot .f1{grid-column:1/6}
-.hero-foot .f2{grid-column:7/13;justify-self:end;display:flex;gap:12px;align-items:center}
-.cue{display:block;width:1px;height:28px;background:var(--line);position:relative;overflow:hidden}
-.cue::after{content:"";position:absolute;left:0;top:0;width:1px;height:10px;background:var(--ink);animation:cue 2.2s var(--ease-2) infinite}
-@keyframes cue{0%{transform:translateY(-10px)}100%{transform:translateY(28px)}}
 
 /* sections */
 .sec{position:relative;scroll-margin-top:40px}
@@ -254,7 +250,7 @@ a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
   :root{--gut:20px}
   .g,.w-row{grid-template-columns:repeat(8,minmax(0,1fr))}
   .hero .eyebrow{grid-column:1/9}.h-hero{grid-column:1/9}.hero-sub{grid-column:1/6}
-  .hero-foot .f1{grid-column:1/5}.hero-foot .f2{grid-column:5/9}
+  .hero-foot .f1{grid-column:1/5}
   .h-sec{grid-column:1/9}.s-sup{grid-column:1/7}
   .project{width:72vw}
   .appr-l{grid-column:1/4}
@@ -280,7 +276,6 @@ a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
   .hero{padding-top:72px}
   .m-hero{height:44svh;min-height:260px;margin:0 var(--gx) auto}
   .h-hero{font-size:clamp(40px,11.5vw,56px)}
-  .hero-foot .f2{justify-self:start !important}
   .shead{padding-top:120px;padding-bottom:48px}
   .project{width:82vw}
   .js .hs-stick{height:auto;justify-content:flex-start;padding-block:72px 32px}

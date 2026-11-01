@@ -45,7 +45,7 @@ a:hover .arr.w{transform:translateX(-6px)}a:hover .arr.e{transform:translateX(6p
 .logo-mark{display:block;height:26px;width:auto;fill:currentColor;transition:height 500ms var(--ease)}
 .hdr-end .back{width:auto;gap:var(--space-2)}
 /* menu: "menu" + hamburger glyph in one NodIA Menu Item; the glyph turns into a close icon; drawer of Menu Items from the right */
-.menu-tg{width:auto;gap:var(--space-2)}
+.menu-tg{width:auto;gap:var(--space-3)}
 .burger{position:relative;display:block;flex:none;width:20px;height:14px}
 .burger .bl{position:absolute;left:0;width:20px;height:1.5px;border-radius:1px;background:currentColor;transition:transform var(--dur-2) var(--ease-2),opacity var(--dur-1) var(--ease)}
 .burger .b1{top:0}.burger .b2{top:6.25px}.burger .b3{top:12.5px}
