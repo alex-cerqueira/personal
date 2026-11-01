@@ -28,7 +28,7 @@ html = html.replace(marker, '<link rel="canonical" href="%s/">\n<meta property="
 page.write_text(html)
 
 # estudos de caso: canonical e og:url em cada página que existir
-CASES = ['case.html', 'caldohs.html', 'wft.html']
+CASES = ['case.html', 'caldohs.html', 'wft.html', 'bonomia.html']
 for name in CASES:
     f = root / name
     if not f.exists():

@@ -8,6 +8,7 @@ index.html        home (hero, work, approach, expertise, writing, books, about, 
 case.html         estudo de caso 01 — Reciclar (14 capítulos, carrossel de imagens)
 caldohs.html      estudo de caso 02 — Caldohs (14 capítulos, carrossel de imagens)
 wft.html          estudo de caso 03 — World Footvolley Tournament (14 capítulos, carrossel de imagens)
+bonomia.html      estudo de caso 04 — Bonomia (14 capítulos, carrossel de imagens)
 404.html          página de erro
 css/ js/          estilos e comportamento (a "Research Network" é um canvas 2D, sem libs)
 assets/           imagens dos cases, capa do livro, retrato e imagem de compartilhamento (og-image.jpg)
@@ -24,7 +25,7 @@ cd site && python3 -m http.server 8000   # abra http://localhost:8000
 ## Antes de publicar
 
 1. **Preencher os placeholders** (aparecem entre colchetes):
-   - projetos 04 e 05 na home — 01 Reciclar, 02 Caldohs e 03 World Footvolley Tournament já estão prontos;
+   - projeto 05 na home — 01 Reciclar, 02 Caldohs, 03 World Footvolley Tournament e 04 Bonomia já estão prontos;
    - e-mail na seção Contact (`[inserir e-mail]`, em `index.html`).
    Para listar o que falta: `grep -n "\[" index.html | grep -v data-`
 2. **Definir o domínio**: `python3 set-domain.py https://seudominio.com`
