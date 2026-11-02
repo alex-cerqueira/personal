@@ -30,11 +30,11 @@ cd site && python3 -m http.server 8000   # abra http://localhost:8000
 
 1. **Preencher os placeholders** (aparecem entre colchetes):
    - os cinco projetos da home e seus cases já estão prontos;
-   - e-mail na seção Contact (`[inserir e-mail]`, em `index.html`).
+   - e-mail na seção Contato: alex@alexcerqueira.eu (já preenchido).
    Para listar o que falta: `grep -n "\[" index.html | grep -v data-`
 2. **Definir o domínio**: `python3 set-domain.py https://seudominio.com`
    (gera `<link rel="canonical">` e `og:url` na home e nos cases, `og:image` absoluto, `sitemap.xml` e a linha `Sitemap:` do `robots.txt`).
-3. Opcional: um e-mail/URL de contato real em `schema.org` (bloco `application/ld+json` do `index.html`).
+3. O bloco `schema.org` (`application/ld+json` do `index.html`) já traz o e-mail e os perfis do LinkedIn, Medium e GitHub.
 
 ## Publicar
 
