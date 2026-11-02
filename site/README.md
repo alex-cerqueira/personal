@@ -5,13 +5,14 @@ Esta pasta é tudo o que precisa ser publicado.
 
 ```
 index.html        home (hero, work, approach, expertise, writing, books, about, contact)
-iconlib.html      estudo de caso 01 — IconLib (14 capítulos; imagens a enviar)
-design-system.html estudo de caso 02 — NodIA (14 capítulos, carrossel com a capa e três páginas de documentação em SVG)
-case.html         estudo de caso 03 — Reciclar (14 capítulos, carrossel de imagens)
-caldohs.html      estudo de caso 04 — Caldohs (14 capítulos, carrossel de imagens)
-wft.html          estudo de caso 05 — World Footvolley Tournament (14 capítulos, carrossel de imagens)
-bonomia.html      estudo de caso 06 — Bonomia (14 capítulos, carrossel de imagens)
-hostad.html       estudo de caso 07 — Hostad (14 capítulos, carrossel de imagens)
+acervo.html       estudo de caso 01 — Acervo (14 capítulos, carrossel com a marca, a tela de acesso e a visão geral)
+iconlib.html      estudo de caso 02 — IconLib (14 capítulos; imagens a enviar)
+design-system.html estudo de caso 03 — NodIA (14 capítulos, carrossel com a capa e três páginas de documentação em SVG)
+case.html         estudo de caso 04 — Reciclar (14 capítulos, carrossel de imagens)
+caldohs.html      estudo de caso 05 — Caldohs (14 capítulos, carrossel de imagens)
+wft.html          estudo de caso 06 — World Footvolley Tournament (14 capítulos, carrossel de imagens)
+bonomia.html      estudo de caso 07 — Bonomia (14 capítulos, carrossel de imagens)
+hostad.html       estudo de caso 08 — Hostad (14 capítulos, carrossel de imagens)
 404.html          página de erro
 css/nodia.<código>.css  design system NodIA (tokens + Link, Icon Button e Menu Item), cópia fiel de github.com/alex-cerqueira/NodIA — não editar aqui
 css/ js/          estilos e comportamento (a "Research Network" é um canvas 2D, sem libs)
@@ -29,7 +30,7 @@ cd site && python3 -m http.server 8000   # abra http://localhost:8000
 ## Antes de publicar
 
 1. **Preencher os placeholders** (aparecem entre colchetes):
-   - os cinco projetos da home e seus cases já estão prontos;
+   - os oito projetos da home e seus cases já estão prontos;
    - e-mail na seção Contato: alex@alexcerqueira.eu (já preenchido).
    Para listar o que falta: `grep -n "\[" index.html | grep -v data-`
 2. **Definir o domínio**: `python3 set-domain.py https://seudominio.com`
