@@ -274,6 +274,7 @@ a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
   .net{display:none}
   .m-net{display:block;position:relative}
   .hero{padding-top:72px}
+  .hero .ctas,.hero-foot{display:none}
   .m-hero{height:44svh;min-height:260px;margin:0 var(--gx) auto}
   .h-hero{font-size:clamp(40px,11.5vw,56px)}
   .shead{padding-top:120px;padding-bottom:48px}
