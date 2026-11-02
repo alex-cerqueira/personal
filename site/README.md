@@ -16,7 +16,7 @@ hostad.html       estudo de caso 07 — Hostad (14 capítulos, carrossel de imag
 css/nodia.css    design system NodIA (tokens + Link, Icon Button e Menu Item), cópia fiel de github.com/alex-cerqueira/NodIA — não editar aqui
 css/ js/          estilos e comportamento (a "Research Network" é um canvas 2D, sem libs)
 assets/           imagens dos cases (as páginas do NodIA são SVG de 1,5–1,8 MB, carregadas só quando o carrossel as pede), capa do livro, retrato e imagem de compartilhamento (og-image.jpg)
-favicon.svg, apple-touch-icon.png, robots.txt
+favicon.ico (logo preto, 16 a 256 px), apple-touch-icon.png, robots.txt
 set-domain.py     define o domínio final (canonical, og:url, og:image, sitemap)
 ```
 
@@ -54,6 +54,7 @@ ou GitHub Pages (via Actions).
 - **Design system:** as cores, a tipografia e o movimento vêm dos tokens do NodIA (`css/nodia.css`, v0.1.0, commit 898da6d). O cabeçalho tem o botão "menu" (um Menu Item do sistema, com a palavra e o ícone de hambúrguer, que vira um X) e abre, da direita para a esquerda, uma gaveta com os Menu Items; o botão de tema (Icon Button, variante secondary) fica dentro da gaveta, no canto inferior direito. Os cases têm o mesmo menu, com "Home" como primeiro item. Os estilos do portfólio só definem o que é próprio dele: a translucência do cabeçalho (`--hdr`), o tom do logotipo da home (`--logo`), a curva de animação da home (`--ease`) e as medidas da grade (`--gx`, `--gut`). Para atualizar o sistema, gere `nodia.css` de novo a partir do repositório.
 
 - Tema escuro é o padrão; a escolha do visitante fica salva no navegador (`localStorage`).
+- CSS e JS são chamados com `?v=` + um código do conteúdo: a cada nova versão o endereço muda, então nem o navegador nem o cache da hospedagem mostram arquivos antigos.
 - Respeita `prefers-reduced-motion` (animações viram estados estáticos).
 - Fontes (Geist e IBM Plex Mono) vêm do Google Fonts; para hospedar localmente, baixe-as e troque o `<link>` por `@font-face`.
 - A pasta foi gerada a partir do protótipo no editor de design; daqui em diante, edite estes arquivos diretamente.

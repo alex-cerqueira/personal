@@ -312,6 +312,10 @@ a:hover .arr.n,a:focus-visible .arr.n{transform:translateY(-6px)}
   .contact{padding-top:120px}
   .ftr .f5{justify-self:start !important}
 }
+/* phones held sideways count as mobile too */
+@media (pointer:coarse) and (max-height:520px){
+  .hero .ctas,.hero-foot{display:none}
+}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{transition-duration:1ms !important;transition-delay:0ms !important;animation:none !important}
