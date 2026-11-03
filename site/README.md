@@ -18,7 +18,7 @@ css/nodia.<código>.css  design system NodIA (tokens + Link, Icon Button e Menu 
 css/ js/          estilos e comportamento (a "Research Network" é um canvas 2D, sem libs)
 assets/           imagens dos cases (as páginas do NodIA são SVG de 1,5–1,8 MB, carregadas só quando o carrossel as pede), capa do livro, retrato e imagem de compartilhamento (og-image.jpg)
 favicon.ico (logo preto, 16 a 256 px), apple-touch-icon.png, robots.txt
-assets/intro-dados-16x9.mp4/.webm e intro-dados-9x16.mp4/.webm  abertura da home (15 dados caindo, 3,4 s; tela deitada e em pé)
+assets/intro-dados.mp4 e intro-dados.webm  abertura da home (dados caindo, juntando-se em um só e virando o cubo; 11 s)
 set-domain.py     define o domínio final (canonical, og:url, og:image, sitemap)
 ```
 
@@ -56,7 +56,7 @@ ou GitHub Pages (via Actions).
 
 - **Design system:** as cores, a tipografia e o movimento vêm dos tokens do NodIA (`css/nodia.<código>.css`, v0.1.0, commit 898da6d). O cabeçalho tem o botão "menu" (um Menu Item do sistema, com a palavra e o ícone de hambúrguer, que vira um X) e abre, da direita para a esquerda, uma gaveta com os Menu Items; o botão de tema (Icon Button, variante secondary) fica dentro da gaveta, no canto inferior direito. Os cases têm o mesmo menu, com "Home" como primeiro item. Os estilos do portfólio só definem o que é próprio dele: a translucência do cabeçalho (`--hdr`), o tom do logotipo da home (`--logo`), a curva de animação da home (`--ease`) e as medidas da grade (`--gx`, `--gut`). Para atualizar o sistema, gere `nodia.css` de novo a partir do repositório.
 
-- **Abertura (home):** na primeira visita de cada aba, 15 dados 3D caem e rolam (vídeo pré-renderizado, ~0,5–0,75 MB; MP4 H.264 e WebM VP9, o navegador escolhe; versão 16:9 ou 9:16 conforme a tela). Depois a frase de John Owen aparece no centro e o site entra (cerca de 8 s no total). "Pular" ou Esc encerram na hora; não aparece de novo ao recarregar na mesma aba, nem para quem pede menos movimento (`prefers-reduced-motion`), nem nos cases. O fundo é sempre escuro, igual ao do site.
+- **Abertura (home):** na primeira visita de cada aba, a frase de John Owen aparece à esquerda e 15 dados 3D caem e rolam à direita, exatamente onde fica o cubo. Aos 6 s o site entra em volta deles; os dados se juntam em um só, esse dado sobe e gira até a posição e o tamanho exatos do cubo e se transforma nele (11 s no total); depois as palavras pessoas, produto e negócios voltam a girar o cubo. É um vídeo pré-renderizado (MP4 H.264 e WebM VP9, o navegador escolhe), sempre posicionado pelo próprio cubo, no computador e no celular. "Pular", Esc ou rolar a página encerram na hora; não aparece de novo ao recarregar na mesma aba, nem para quem pede menos movimento (`prefers-reduced-motion`), nem para quem escolheu o tema claro, nem nos cases.
 - Tema escuro é o padrão; a escolha do visitante fica salva no navegador (`localStorage`).
 - CSS e JS têm um código do conteúdo no nome (ex.: `css/case.1ecc2bb451.css`). Cada versão nova gera arquivos com nomes novos, então uma página nova nunca carrega um CSS ou JS antigo, nem pelo cache do navegador, nem pelo da hospedagem, nem por um arquivo que o upload não substituiu. O `.htaccess` faz o navegador sempre conferir as páginas HTML e guardar CSS/JS por 1 ano.
 - Respeita `prefers-reduced-motion` (animações viram estados estáticos).

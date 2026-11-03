@@ -335,6 +335,7 @@ class Component extends DCLogic {
   hiOff = () => { this.heroHold = -1; this.heroRestart(); };
   /* eased yaw/pitch shared by the fixed canvas and the inline mobile canvas */
   cubeAngles(time, red) {
+    if (this.cubeLock) { this.ya = HERO_YAW[0]; this.pa = .16; return; }   // the intro die lands exactly on this pose
     var ty = this.yawT === undefined ? -.32 : this.yawT, tp = .16, mo = this.mouse;
     if (!red) {
       ty += Math.sin(time * .21) * .08; tp += Math.sin(time * .16) * .06;
@@ -351,38 +352,65 @@ class Component extends DCLogic {
 
   /* Opening: once per visit (per browser tab), skipped for reduced motion. The dice video plays, the quote comes in
      over the settled dice, then everything fades and the home reveals itself. "Pular" or Esc ends it at any time. */
+  /* intro timeline, in seconds of the video: the quote until TB, then the site; the dice gather and the merged die rises
+     to the cube's pose by TD; the video then fades out while the cube fades in */
   startIntro() {
-    var d = document, root = d.documentElement, el = this.intro;
+    var d = document, w = window, root = d.documentElement, el = this.intro;
     if (!el) return false;
     var seen = false; try { seen = sessionStorage.getItem('ac-intro') === '1'; } catch (e) { seen = true; }
-    if (this.reduce || seen) { root.classList.remove('intro-on'); return false; }
+    if (this.reduce || seen || this.state.theme === 'light') { root.classList.remove('intro-on'); return false; }
     try { sessionStorage.setItem('ac-intro', '1'); } catch (e) {}
     root.classList.add('intro-on');
-    var v = el.querySelector('video'), port = window.innerHeight > window.innerWidth * 1.1;
-    var timers = [], done = false;
-    var finish = () => {
-      if (done) return; done = true; timers.forEach(clearTimeout); d.removeEventListener('keydown', key);
-      el.classList.add('out');
-      setTimeout(() => { root.classList.remove('intro-on'); el.classList.remove('play', 'q', 'out'); v.pause(); v.removeAttribute('src'); this.introDone(); }, 900);
-    };
-    var quote = () => { if (done || el.classList.contains('q')) return; el.classList.add('q'); timers.push(setTimeout(finish, 3800)); };
-    var key = (e) => { if (e.key === 'Escape') finish(); };
+    var box = d.querySelector('.dice'), v = box && box.querySelector('video');
+    if (!v) { root.classList.remove('intro-on'); return false; }
+    var it = this.it = { v: v, box: box, b: false, d: false, t0: performance.now(), TB: 6, TD: 10, ok: false };
+    this.cubeLock = true;
+    var skip = () => this.introFast(), key = (e) => { if (e.key === 'Escape') skip(); };
+    it.off = () => { d.removeEventListener('keydown', key); w.removeEventListener('wheel', it.wheel); w.removeEventListener('touchmove', it.wheel); };
+    it.wheel = () => { if (it.b) skip(); };
     d.addEventListener('keydown', key);
-    el.querySelector('.intro-skip').addEventListener('click', finish);
-    v.addEventListener('playing', () => el.classList.add('play'), { once: true });
-    v.addEventListener('ended', quote, { once: true });
-    v.addEventListener('error', quote, { once: true });
-    timers.push(setTimeout(quote, 7000));           // slow connection: the quote comes anyway
+    w.addEventListener('wheel', it.wheel, { passive: true });
+    w.addEventListener('touchmove', it.wheel, { passive: true });
+    el.querySelector('.intro-skip').addEventListener('click', skip);
+    var fail = () => { if (it.ok || it.fail) return; it.fail = true; el.classList.add('play'); it.failAt = performance.now(); };
+    v.addEventListener('playing', () => { if (it.fail) return; it.ok = true; el.classList.add('play'); box.classList.add('play'); }, { once: true });
+    v.addEventListener('error', fail, { once: true });
+    setTimeout(fail, 2500);                         // slow connection or no autoplay: the quote alone, then the site
     var mp4 = v.canPlayType('video/mp4; codecs="avc1.640028"'), webm = v.canPlayType('video/webm; codecs="vp9"');
-    v.src = v.getAttribute('data-' + (port ? 'port' : 'land') + '-' + (mp4 || !webm ? 'mp4' : 'webm'));
-    var pr = v.play(); if (pr && pr.catch) pr.catch(quote);   // autoplay refused: straight to the quote
+    v.src = v.getAttribute('data-' + (mp4 || !webm ? 'mp4' : 'webm'));
+    var pr = v.play(); if (pr && pr.catch) pr.catch(fail);
     return true;
   }
-  introDone() {
+  /* every frame: keep the video on the cube (desktop: the fixed canvas; phone: the inline hero canvas) and run the phases */
+  introTick(now) {
+    var it = this.it, v = it.v, RR = Math.sqrt(8 / 3), C = null, ox = 0, oy = 0;
+    if (!this.mob) C = this.F && this.F[1] && this.F[1].cube;
+    else if (this.mSt.hero && this.mSt.hero.F && this.mCv.hero) { C = this.mSt.hero.F.cube; var r = this.mCv.hero.getBoundingClientRect(); ox = r.left; oy = r.top; }
+    if (C) {
+      var RH = C.sc * RR, hh = 3.6 * RH, ww = hh * 1280 / 1152, k = Math.round(ox + C.cx - ww / 2) + ',' + Math.round(oy + C.cy - hh / 2) + ',' + Math.round(ww);
+      if (k !== it.k) { it.k = k; v.style.width = ww.toFixed(1) + 'px'; v.style.height = hh.toFixed(1) + 'px'; v.style.transform = 'translate3d(' + (ox + C.cx - ww / 2).toFixed(1) + 'px,' + (oy + C.cy - hh / 2).toFixed(1) + 'px,0)'; }
+      if (this.mob && this.intro) { var q = this.intro.querySelector('.intro-q'), qt = Math.round(oy + this.mCv.hero.clientHeight + 28) + 'px'; if (q && q.style.top !== qt) q.style.top = qt; }
+    }
+    if (it.fail) { var ft = (now - it.failAt) / 1000; if (ft > 4.5) { this.introB(); this.introD(); } }
+    else if (it.ok) { var t = v.currentTime; if (t >= it.TB || v.ended) this.introB(); if (t >= it.TD || v.ended) this.introD(); }
+    if (it.b && !it.d && (window.scrollY || 0) > 2) this.introFast();
+    if (it.d && now - it.dAt > (it.fast ? 350 : 1050)) this.introEnd();
+  }
+  introB() {
+    var it = this.it; if (!it || it.b) return; it.b = true;
+    document.documentElement.classList.add('intro-b');
     this.holdRv = false;
     if (this.io) this.rvEls.forEach((el) => { if (!el.classList.contains('is-in')) this.io.observe(el); });
     else this.rvEls.forEach((el) => el.classList.add('is-in'));
-    this.setHeroStep(0); this.heroRestart();
+    this.setHeroStep(0);
+  }
+  introD() { var it = this.it; if (!it || it.d) return; it.d = true; it.dAt = performance.now(); document.documentElement.classList.add('intro-d'); }
+  introFast() { var it = this.it; if (!it || it.fast) return; it.fast = true; document.documentElement.classList.add('intro-fast'); this.introB(); this.introD(); it.dAt = performance.now(); }
+  introEnd() {
+    var it = this.it; if (!it) return; this.it = null; it.off();
+    document.documentElement.classList.remove('intro-on', 'intro-b', 'intro-d', 'intro-fast');
+    it.v.pause(); it.v.removeAttribute('src'); try { it.v.load(); } catch (e) {}
+    this.cubeLock = false; this.setHeroStep(0); this.heroRestart();
   }
   componentDidMount() {
     var w = window;
@@ -415,8 +443,8 @@ class Component extends DCLogic {
       this.mio = new IntersectionObserver((es) => { es.forEach((e) => { this.mVis[e.target.getAttribute('data-m')] = e.isIntersecting; }); }, { threshold: 0 });
       Object.keys(this.mCv).forEach((k) => this.mio.observe(this.mCv[k]));
     } else { this.mVis = { hero: true, appr: true, exp: true }; }
-    this.setHeroStep(0); this.heroRestart();
-    this.loop = (now) => { this.raf = requestAnimationFrame(this.loop); this.cubeAngles((now - this.t0) / 1000, this.reduce); this.frame(now); this.frameM(now); };
+    this.setHeroStep(0); if (!this.it) this.heroRestart();
+    this.loop = (now) => { this.raf = requestAnimationFrame(this.loop); this.cubeAngles((now - this.t0) / 1000, this.reduce); this.frame(now); this.frameM(now); if (this.it) this.introTick(now); };
     this.raf = requestAnimationFrame(this.loop);
   }
 

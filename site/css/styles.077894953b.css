@@ -22,19 +22,42 @@ html[data-theme="dark"] .theme-btn .bulb{fill:currentColor}
 html[data-theme="light"] .theme-btn .rays{opacity:.9}
 html[data-theme="dark"] .theme-btn .rays{opacity:1;transform:scale(1.08)}
 /* opening: 15 dice fall and settle (pre-rendered video), then the quote, then the site */
-.intro{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:rgb(18,18,18);transition:opacity 900ms var(--ease)}
-html.intro-on .intro{display:flex}
-html.intro-on,html.intro-on body{overflow:hidden}
-.intro.out{opacity:0;pointer-events:none}
-.intro-v{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 600ms var(--ease)}
-.intro.play .intro-v{opacity:1}
-.intro.q .intro-v{opacity:.14;transition-duration:1100ms}
-.intro-q{position:relative;margin:0;padding:0 var(--gx);max-width:min(760px,100%);text-align:center;opacity:0;transform:translateY(14px);transition:opacity 1000ms var(--ease),transform 1000ms var(--ease)}
-.intro.q .intro-q{opacity:1;transform:none}
-.intro-q p{font-size:clamp(24px,2.3vw,38px);line-height:1.18;letter-spacing:-.03em;font-weight:330;color:rgb(237,237,234)}
-.intro-q figcaption{margin-top:var(--space-5);font-family:var(--font-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgb(163,163,158)}
-.intro-skip{position:absolute;right:var(--gx);bottom:var(--space-5);min-height:40px;padding:var(--space-2) var(--space-3);font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgb(163,163,158);transition:color var(--dur-1) var(--ease)}
+/* intro (home, first visit of the tab): the quote on the left, the dice falling where the hero cube lives; the site comes in around them,
+   the dice gather into one die, and that die (rendered in the cube's exact pose and size) melts into the cube */
+.intro{position:fixed;inset:0;z-index:200;display:none}
+html.intro-on .intro{display:block}
+html.intro-on:not(.intro-b),html.intro-on:not(.intro-b) body{overflow:hidden}
+html.intro-on{scrollbar-gutter:stable}
+html.intro-on.intro-b .intro{pointer-events:none}
+.intro-q{--qs:clamp(24px,2.3vw,38px);position:absolute;left:var(--gx);top:50%;width:min(42vw,600px);margin:0;opacity:0;transform:translateY(calc(-50% + 14px));transition:opacity 1000ms var(--ease) 250ms,transform 1000ms var(--ease) 250ms}
+.intro.play .intro-q{opacity:1;transform:translateY(-50%)}
+html.intro-b .intro .intro-q{opacity:0;transform:translateY(calc(-50% - 10px));transition:opacity 600ms var(--ease),transform 600ms var(--ease)}
+.intro-q blockquote{position:relative;margin:0;padding-left:calc(var(--qs) * 1.2)}
+.intro-q blockquote::before{content:"\201C";position:absolute;left:0;top:calc(var(--qs) * -.12);font-size:calc(var(--qs) * 1.5);line-height:1;font-weight:500;color:rgb(163,163,158)}
+.intro-q blockquote::after{content:"";position:absolute;left:calc(var(--qs) * .2);top:calc(var(--qs) * 1.05);bottom:calc(var(--qs) * .2);width:2px;background:rgba(163,163,158,.5)}
+.intro-q p{font-size:var(--qs);line-height:1.32;letter-spacing:-.025em;font-weight:330;color:rgb(237,237,234)}
+.intro-q figcaption{margin-top:calc(var(--qs) * .9);padding-left:calc(var(--qs) * 1.2);font-size:clamp(16px,1.25vw,19px);color:rgb(237,237,234)}
+.intro-skip{position:absolute;right:var(--gx);bottom:var(--space-5);min-height:40px;padding:var(--space-2) var(--space-3);font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgb(163,163,158);transition:color var(--dur-1) var(--ease),opacity 400ms var(--ease)}
 .intro-skip:hover,.intro-skip:focus-visible{color:rgb(237,237,234)}
+html.intro-b .intro-skip{opacity:0;visibility:hidden}
+.dice{position:fixed;inset:0;z-index:0;display:none;pointer-events:none;overflow:hidden}
+html.intro-on .dice{display:block}
+.dice-v{position:absolute;left:0;top:0;width:0;height:0;opacity:0;transition:opacity 500ms var(--ease);
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent),linear-gradient(to bottom,transparent,#000 9%,#000 91%,transparent);-webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent),linear-gradient(to bottom,transparent,#000 9%,#000 91%,transparent);mask-composite:intersect}
+.dice.play .dice-v{opacity:1}
+html.intro-d .dice .dice-v{opacity:0;transition:opacity 1000ms var(--ease)}
+html.intro-on .hdr{transition:opacity 700ms var(--ease),background-color 500ms var(--ease)}
+html.intro-on .layer{transition:opacity 700ms var(--ease)}
+html.intro-on:not(.intro-b) .hdr,html.intro-on:not(.intro-b) .layer{opacity:0;visibility:hidden}
+html.intro-on .net,html.intro-on .m-hero canvas{opacity:0}
+html.intro-d .net,html.intro-d .m-hero canvas{opacity:1;transition:opacity 1000ms var(--ease)}
+html.intro-fast .dice .dice-v,html.intro-fast .net,html.intro-fast .m-hero canvas,html.intro-fast .hdr,html.intro-fast .layer{transition-duration:300ms}
+@media (max-width:680px){
+  .intro-q{--qs:24px;top:auto;right:var(--gx);width:auto;transform:translateY(14px)}
+  .intro.play .intro-q{transform:none}
+  html.intro-b .intro .intro-q{transform:translateY(-10px)}
+}
 .net{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block}
 .layer{position:relative;z-index:1}
 .g{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);padding-inline:var(--gx)}
