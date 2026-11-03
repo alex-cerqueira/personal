@@ -272,7 +272,8 @@ class Component extends DCLogic {
     window.scrollTo({ top: top + this.hsDist * i / 6, behavior: 'auto' });
   });
   refCursor = (el) => { this.cursor = el; };
-  rv = (el) => { if (el && this.rvEls.indexOf(el) < 0) { this.rvEls.push(el); if (this.io) this.io.observe(el); } };
+  rv = (el) => { if (el && this.rvEls.indexOf(el) < 0) { this.rvEls.push(el); if (this.io && !this.holdRv) this.io.observe(el); } };
+  refIntro = (el) => { if (el) this.intro = el; };
   lens = (el) => { if (el && this.lensEls.indexOf(el) < 0) { this.lensEls.push(el); this.rv(el); } };
   par = (el) => { if (el && this.parEls.indexOf(el) < 0) this.parEls.push(el); };
 
@@ -348,16 +349,52 @@ class Component extends DCLogic {
   lensOn3 = () => { this.lensHover = 3; };
   lensOff = () => { this.lensHover = -1; };
 
+  /* Opening: once per visit (per browser tab), skipped for reduced motion. The dice video plays, the quote comes in
+     over the settled dice, then everything fades and the home reveals itself. "Pular" or Esc ends it at any time. */
+  startIntro() {
+    var d = document, root = d.documentElement, el = this.intro;
+    if (!el) return false;
+    var seen = false; try { seen = sessionStorage.getItem('ac-intro') === '1'; } catch (e) { seen = true; }
+    if (this.reduce || seen) { root.classList.remove('intro-on'); return false; }
+    try { sessionStorage.setItem('ac-intro', '1'); } catch (e) {}
+    root.classList.add('intro-on');
+    var v = el.querySelector('video'), port = window.innerHeight > window.innerWidth * 1.1;
+    var timers = [], done = false;
+    var finish = () => {
+      if (done) return; done = true; timers.forEach(clearTimeout); d.removeEventListener('keydown', key);
+      el.classList.add('out');
+      setTimeout(() => { root.classList.remove('intro-on'); el.classList.remove('play', 'q', 'out'); v.pause(); v.removeAttribute('src'); this.introDone(); }, 900);
+    };
+    var quote = () => { if (done || el.classList.contains('q')) return; el.classList.add('q'); timers.push(setTimeout(finish, 3800)); };
+    var key = (e) => { if (e.key === 'Escape') finish(); };
+    d.addEventListener('keydown', key);
+    el.querySelector('.intro-skip').addEventListener('click', finish);
+    v.addEventListener('playing', () => el.classList.add('play'), { once: true });
+    v.addEventListener('ended', quote, { once: true });
+    v.addEventListener('error', quote, { once: true });
+    timers.push(setTimeout(quote, 7000));           // slow connection: the quote comes anyway
+    var mp4 = v.canPlayType('video/mp4; codecs="avc1.640028"'), webm = v.canPlayType('video/webm; codecs="vp9"');
+    v.src = v.getAttribute('data-' + (port ? 'port' : 'land') + '-' + (mp4 || !webm ? 'mp4' : 'webm'));
+    var pr = v.play(); if (pr && pr.catch) pr.catch(quote);   // autoplay refused: straight to the quote
+    return true;
+  }
+  introDone() {
+    this.holdRv = false;
+    if (this.io) this.rvEls.forEach((el) => { if (!el.classList.contains('is-in')) this.io.observe(el); });
+    else this.rvEls.forEach((el) => el.classList.add('is-in'));
+    this.setHeroStep(0); this.heroRestart();
+  }
   componentDidMount() {
     var w = window;
     document.addEventListener('keydown', this.onMenuKey);
     this.reduce = !!(w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches);
     if (!this.reduce && this.root) this.root.classList.add('js');
+    this.holdRv = this.startIntro();
     if ('IntersectionObserver' in w) {
       this.io = new IntersectionObserver((es) => {
         es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); this.io.unobserve(e.target); } });
       }, { threshold: .1, rootMargin: '0px 0px -6% 0px' });
-      this.rvEls.forEach((el) => this.io.observe(el));
+      if (!this.holdRv) this.rvEls.forEach((el) => this.io.observe(el));
     } else this.rvEls.forEach((el) => el.classList.add('is-in'));
     this.onScroll = () => { if (!this.sq) { this.sq = true; requestAnimationFrame(() => { this.sq = false; this.measure(); }); } };
     this.onMove = (e) => {

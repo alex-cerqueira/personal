@@ -11,6 +11,8 @@ ErrorDocument 404 /404.html
 <IfModule mod_mime.c>
   AddType image/webp .webp
   AddType image/svg+xml .svg
+  AddType video/mp4 .mp4
+  AddType video/webm .webm
 </IfModule>
 
 <IfModule mod_deflate.c>
@@ -23,6 +25,8 @@ ErrorDocument 404 /404.html
   ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"
   ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType video/mp4 "access plus 1 year"
+  ExpiresByType video/webm "access plus 1 year"
   # CSS e JS levam um código do conteúdo no nome (ex.: case.1ecc2bb451.css): cada versão é um arquivo novo,
   # então podem ficar em cache por 1 ano sem risco de misturar versões.
   ExpiresByType text/css "access plus 1 year"
