@@ -153,11 +153,10 @@ class Component extends DCLogic {
       this.carIO.observe(f);
     } else { S.vis = true; S.raf = requestAnimationFrame(tick); }
   }
-  /* one scale for every chapter; when it would drop below .8 the chapters stack vertically at full size instead */
+  /* one scale for every chapter, so the same kind of text has the same size in every section */
   fit() {
     var r = this.root, cs = this.chEls.map((c) => c.querySelector('.ch-c')).filter(Boolean), z = 1;
     cs.forEach((cc) => { cc.style.zoom = ''; });
-    this.flat = false;
     if (!r) return;
     r.classList.toggle('hz', !!this.wide);
     if (!this.wide) return;
@@ -165,8 +164,7 @@ class Component extends DCLogic {
     if (hdr) r.style.setProperty('--hh', hdr.offsetHeight + 'px');
     /* layout offsets ignore the reveal transforms, which scrollHeight would count as overflow */
     cs.forEach((cc) => { var need = 0; [].forEach.call(cc.children, (k) => { need = Math.max(need, k.offsetTop + k.offsetHeight); }); need -= cc.offsetTop; if (need > cc.clientHeight + 1) z = Math.min(z, cc.clientHeight / need); });
-    if (z < .8) { this.flat = true; r.classList.remove('hz'); }
-    else if (z < 1) { z = z.toFixed(3); cs.forEach((cc) => { cc.style.zoom = z; }); }
+    if (z < 1) { z = Math.max(.45, z).toFixed(3); cs.forEach((cc) => { cc.style.zoom = z; }); }
   }
   refit = () => { this.fitKey = ''; this.measure(); };
   goChapter(i) {
@@ -226,7 +224,7 @@ class Component extends DCLogic {
     var wide = !!(w.matchMedia && w.matchMedia('(min-width: 1081px)').matches && this.root && this.root.classList.contains('js') && this.run && this.track);
     var fk = wide + ':' + w.innerWidth + 'x' + vh;
     if (fk !== this.fitKey) { this.fitKey = fk; this.wide = wide; this.fit(); }
-    var hz = wide && !this.flat;
+    var hz = wide;
     if (hz !== this.hz && !hz && this.run) { this.run.style.height = ''; this.track.style.transform = ''; }
     this.hz = hz;
     if (hz) {
