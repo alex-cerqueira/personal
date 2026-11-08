@@ -153,15 +153,21 @@ class Component extends DCLogic {
       this.carIO.observe(f);
     } else { S.vis = true; S.raf = requestAnimationFrame(tick); }
   }
+  /* one scale for every chapter; when it would drop below .8 the chapters stack vertically at full size instead */
   fit() {
-    this.chEls.forEach((c) => {
-      var cc = c.querySelector('.ch-c'); if (!cc) return;
-      cc.style.zoom = '';
-      if (!this.hz) return;
-      var need = cc.scrollHeight, avail = cc.clientHeight;
-      if (need > avail + 1) cc.style.zoom = Math.max(.45, avail / need).toFixed(3);
-    });
+    var r = this.root, cs = this.chEls.map((c) => c.querySelector('.ch-c')).filter(Boolean), z = 1;
+    cs.forEach((cc) => { cc.style.zoom = ''; });
+    this.flat = false;
+    if (!r) return;
+    r.classList.toggle('hz', !!this.wide);
+    if (!this.wide) return;
+    var hdr = document.querySelector('.hdr');
+    if (hdr) r.style.setProperty('--hh', hdr.offsetHeight + 'px');
+    cs.forEach((cc) => { var need = cc.scrollHeight, avail = cc.clientHeight; if (need > avail + 1) z = Math.min(z, avail / need); });
+    if (z < .8) { this.flat = true; r.classList.remove('hz'); }
+    else if (z < 1) { z = z.toFixed(3); cs.forEach((cc) => { cc.style.zoom = z; }); }
   }
+  refit = () => { this.fitKey = ''; this.measure(); };
   goChapter(i) {
     if (!this.hz || !this.run) return;
     var top = this.run.getBoundingClientRect().top + window.scrollY - this.hh;
@@ -198,8 +204,8 @@ class Component extends DCLogic {
     document.addEventListener('click', this.onToc);
     this.measure();
     this.initCar();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.fit());
-    setTimeout(() => this.fit(), 600);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(this.refit);
+    setTimeout(this.refit, 600);
   }
 
   componentWillUnmount() {
@@ -216,11 +222,12 @@ class Component extends DCLogic {
     var w = window, y = w.scrollY || 0, vh = w.innerHeight, docH = document.documentElement.scrollHeight;
     if (this.prog) this.prog.style.transform = 'scaleX(' + Math.min(1, Math.max(0, y / Math.max(1, docH - vh))).toFixed(4) + ')';
     var active = 0, n = this.chEls.length;
-    var hz = !!(w.matchMedia && w.matchMedia('(min-width: 1081px)').matches && this.root && this.root.classList.contains('js') && this.run && this.track);
+    var wide = !!(w.matchMedia && w.matchMedia('(min-width: 1081px)').matches && this.root && this.root.classList.contains('js') && this.run && this.track);
+    var fk = wide + ':' + w.innerWidth + 'x' + vh;
+    if (fk !== this.fitKey) { this.fitKey = fk; this.wide = wide; this.fit(); }
+    var hz = wide && !this.flat;
     if (hz !== this.hz && !hz && this.run) { this.run.style.height = ''; this.track.style.transform = ''; }
     this.hz = hz;
-    var fk = hz + ':' + w.innerWidth + 'x' + vh;
-    if (fk !== this.fitKey) { this.fitKey = fk; this.fit(); }
     if (hz) {
       /* web: each chapter holds for a moment, then the next one slides in from the side */
       var hdr = document.querySelector('.hdr'), hh = hdr ? hdr.offsetHeight : 108;
