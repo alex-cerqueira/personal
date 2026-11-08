@@ -111,7 +111,6 @@ a:hover .arr.w{transform:translateX(-6px)}a:hover .arr.e{transform:translateX(6p
 /* body */
 .cbody{padding-top:clamp(80px,12vh,140px);align-items:start}
 .toc{grid-column:1/4;position:sticky;top:132px;align-self:start}
-.toc ol{border-top:1px solid var(--line)}
 .toc a{display:flex;gap:24px;padding:7px 0;color:var(--faint);font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;transition:color 300ms,transform 400ms var(--ease)}
 .toc a:hover{color:var(--ink)}
 .toc a.on{color:var(--ink);transform:translateX(6px)}
@@ -150,7 +149,7 @@ a:hover .arr.w{transform:translateX(-6px)}a:hover .arr.e{transform:translateX(6p
   .hz .crun{position:relative}
   .hz .cbody{position:sticky;top:var(--hh,108px);height:calc(100vh - var(--hh,108px));padding-top:0;align-items:stretch}
   .hz .toc{position:static;align-self:start;padding-top:clamp(28px,6vh,64px)}
-  .hz .toc ol{border-top:0;padding-top:16px}
+  .hz .toc ol{padding-top:16px}
   .hz .toc a{padding-block:clamp(2px,.8vh,7px)}
   .hz .chs{height:100%;overflow:hidden}
   .hz .track{display:flex;height:100%;will-change:transform}
