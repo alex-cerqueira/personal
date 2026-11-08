@@ -15,9 +15,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="css/nodia.79d37c0baa.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
-<link rel="stylesheet" href="css/design-system.6f883f969a.css">
+<link rel="stylesheet" href="css/design-system.b24997a891.css">
 <script>(function(){var d=document.documentElement;try{d.setAttribute("data-theme",localStorage.getItem("ac-theme2")==="light"?"light":"dark")}catch(e){}if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("js")})()</script>
-<script src="js/design-system.98936d8153.js" defer></script>
+<script src="js/design-system.ee8d1b7ab4.js" defer></script>
 </head>
 <body>
 <div class="site" data-ref="refRoot">
@@ -124,7 +124,7 @@
       <div class="ch-h up"><span class="mono n">02</span><h2 id="h02">Problema</h2></div>
       <div class="ch-c">
         <p class="state w6 up d1">Como manter design e código coerentes em 40 componentes, em dois temas, sem perder o critério ao delegar parte do trabalho à IA?</p>
-        <p class="body w5 up d2">Um sistema grande costuma se desfazer em dois lugares: no Figma, onde variantes e estilos divergem, e no código, onde os valores são copiados em vez de referenciados. Com dois temas, o risco dobra, porque cada componente precisa funcionar em light e em dark sem exceções soltas. A IA acelera a construção, mas só ajuda se as regras estiverem explícitas; sem tokens e critérios claros, ela reproduz a inconsistência em escala.</p>
+        <p class="body wf up d2">Um sistema grande costuma se desfazer em dois lugares: no Figma, onde variantes e estilos divergem, e no código, onde os valores são copiados em vez de referenciados. Com dois temas, o risco dobra, porque cada componente precisa funcionar em light e em dark sem exceções soltas. A IA acelera a construção, mas só ajuda se as regras estiverem explícitas; sem tokens e critérios claros, ela reproduz a inconsistência em escala.</p>
       </div>
     </section>
     <section class="ch rv" id="c03" data-ref="ch" data-i="3" aria-labelledby="h03">
@@ -132,7 +132,7 @@
       <div class="ch-c">
         <p class="mono mute w6 up d1">Questão central</p>
         <p class="state w6 up d2">Como podemos construir, com apoio de IA, um design system de 40 componentes, em light e dark, em que Figma e código nasçam das mesmas decisões e permaneçam sincronizados?</p>
-        <ol class="subq w6 up d3">
+        <ol class="subq wf up d3">
           <li><span class="mono mute">Q.01</span><span>Como transformar a linguagem visual do portfólio em tokens que servem aos dois temas?</span></li>
           <li><span class="mono mute">Q.02</span><span>Como usar o MCP do Figma para criar e manter componentes e variantes?</span></li>
           <li><span class="mono mute">Q.03</span><span>Como gerar o código a partir do Figma e versioná-lo no GitHub, também por MCP?</span></li>
@@ -174,7 +174,6 @@
             </tbody>
           </table>
         </div>
-        <p class="note w5 up d3">A IA executa e propõe; a linguagem, o critério de qualidade e a aprovação final são decisões minhas.</p>
       </div>
     </section>
     <section class="ch rv" id="c06" data-ref="ch" data-i="6" aria-labelledby="h06">
@@ -186,8 +185,8 @@
           <div><p class="v">3</p><p class="mono mute">Ferramentas conectadas: Claude Code, Figma e GitHub</p></div>
           <div><p class="v">6</p><p class="mono mute">Famílias de componentes</p></div>
         </div></div>
-        <p class="body w5 up d2">A agenda é prática: quais decisões do portfólio já são tokens? Quais componentes o site já usa, mesmo sem nomeá-los? O que um sistema completo precisa acrescentar, como formulários, feedback e sobreposições? E como manter Figma e código sincronizados com a IA no meio?</p>
-        <p class="note w5 up d3">Os números descrevem o escopo definido para o sistema. Adoção e horas poupadas são números de impacto, no capítulo 11.</p>
+        <p class="body wf up d2">A agenda é prática: quais decisões do portfólio já são tokens? Quais componentes o site já usa, mesmo sem nomeá-los? O que um sistema completo precisa acrescentar, como formulários, feedback e sobreposições? E como manter Figma e código sincronizados com a IA no meio?</p>
+        <p class="note wf up d3">Os números descrevem o escopo definido para o sistema. Adoção e horas poupadas são números de impacto, no capítulo 11.</p>
       </div>
     </section>
     <section class="ch rv" id="c07" data-ref="ch" data-i="7" aria-labelledby="h07">
@@ -228,7 +227,7 @@
             <div class="rh k0">Oportunidades</div><div class="k1">Inventário dos padrões</div><div class="k2">Tokens semânticos com modos</div><div class="k3">Revisão humana a cada família</div><div class="k4">Comparação entre Figma e código</div><div class="k5">Pull requests e histórico</div>
           </div>
         </div>
-        <p class="note w5 up d2">Curva ilustrativa do esforço de revisão ao longo do caso, sem dados medidos. A divisão entre o que a IA executa e o que eu decido está descrita em Metodologia.</p>
+        <p class="note wf up d2">Curva ilustrativa do esforço de revisão ao longo do caso, sem dados medidos. A divisão entre o que a IA executa e o que eu decido está descrita em Metodologia.</p>
       </div>
     </section>
     <section class="ch rv" id="c10" data-ref="ch" data-i="10" aria-labelledby="h10">
@@ -249,8 +248,10 @@
           <div><p class="v tbd"><span class="tag">A medir</span></p><p class="mono mute">Acessos e clones do repositório público no GitHub · adoção</p></div>
           <div><p class="v tbd"><span class="tag">A medir</span></p><p class="mono mute">Horas poupadas ao montar telas com os componentes prontos · economia</p></div>
         </div></div>
-        <p class="body w5 up d2">O impacto do NodIA se mede em adoção e em economia: quantas pessoas acessam e clonam o repositório, e quantas horas de construção de interface os componentes poupam. O repositório foi aberto em 1º de novembro de 2026 e os números ainda estão em coleta. Os 40 componentes, os 2 temas e as 3 ferramentas são números da pesquisa e ficam no capítulo 06.</p>
-        <p class="note w5 up d3">Nenhum número de adoção ou de economia é reivindicado antes de ser medido.</p>
+        <div class="two up d2">
+          <p class="body">O impacto do NodIA se mede em adoção e em economia: quantas pessoas acessam e clonam o repositório, e quantas horas de construção de interface os componentes poupam. O repositório foi aberto em 1º de novembro de 2026 e os números ainda estão em coleta. Os 40 componentes, os 2 temas e as 3 ferramentas são números da pesquisa e ficam no capítulo 06.</p>
+          <p class="body">Nenhum número de adoção ou de economia é reivindicado antes de ser medido.</p>
+        </div>
       </div>
     </section>
     <section class="ch rv" id="c12" data-ref="ch" data-i="12" aria-labelledby="h12">
@@ -270,7 +271,7 @@
             </tbody>
           </table>
         </div>
-        <p class="body w5 up d2">Quatro entregas: a biblioteca no Figma, com variáveis em modos light e dark; o pacote de código dos 40 componentes; uma página de documentação por componente, com dez seções (Overview, Anatomy, Variants &amp; States, Properties, Behavior, Tokens, Accessibility, Responsive, Usage e Handoff); e o registro do fluxo com Claude Code, Figma (MCP) e GitHub (MCP).</p>
+        <p class="body wf up d2">Quatro entregas: a biblioteca no Figma, com variáveis em modos light e dark; o pacote de código dos 40 componentes; uma página de documentação por componente, com dez seções (Overview, Anatomy, Variants &amp; States, Properties, Behavior, Tokens, Accessibility, Responsive, Usage e Handoff); e o registro do fluxo com Claude Code, Figma (MCP) e GitHub (MCP).</p>
       </div>
     </section>
     <section class="ch rv" id="c13" data-ref="ch" data-i="13" aria-labelledby="h13">
@@ -286,7 +287,7 @@
             </tbody>
           </table>
         </div>
-        <p class="body w5 up d2">Esses indicadores mostrariam se o sistema continua coerente conforme cresce e se a IA ganha velocidade sem perder qualidade.</p>
+        <p class="body wf up d3">Esses indicadores mostrariam se o sistema continua coerente conforme cresce e se a IA ganha velocidade sem perder qualidade.</p>
       </div>
     </section>
     <section class="ch rv" id="c14" data-ref="ch" data-i="14" aria-labelledby="h14">

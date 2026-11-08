@@ -43,10 +43,7 @@ class Component extends DCLogic {
   refCar = (el) => { if (el) this.car = el; };
   refCap = (el) => { if (el) this.cap = el; };
 
-  /* Project carousel (NodIA). The cover holds still. Each documentation page is far taller than the 16:9 frame, so it
-     rests at the top for HOLD ms, then travels to the bottom at a slow constant speed (PAN frame-heights per second);
-     only when it ends does the honeycomb carry the next image in. The honeycomb works on two baked frames (the page
-     where it stopped, the next page at its top), so the big SVG is never re-rasterised while the transition runs. */
+  /* Project carousel: the next image grows out of a honeycomb that sweeps in the direction of travel. */
   initCar() {
     var f = this.car;
     if (!f || f.getAttribute('data-car')) return;
@@ -55,46 +52,16 @@ class Component extends DCLogic {
     f.setAttribute('data-car', '1');
     var cv = f.querySelector('.car-cv'), ctx = cv && cv.getContext ? cv.getContext('2d') : null;
     var num = f.querySelector('.car-n b'), bar = f.querySelector('.car-bar i');
-    var reduce = this.reduce, DUR = 5600, TR = 1250, HOLD = 2000, PAN = .22;
-    var S = this.carS = { i: 0, busy: false, wait: 0, el: 0, vis: false, paused: false, last: 0, raf: 0, W: 0, H: 0 }, cache = {};
+    var reduce = this.reduce, DUR = 5600, TR = 1250;
+    var S = this.carS = { i: 0, busy: false, el: 0, vis: false, paused: false, last: 0, raf: 0 };
     var pad = (k) => (k < 9 ? '0' : '') + (k + 1);
-    var tall = (im) => im.getAttribute('data-fit') === 'top';
     var ready = (im) => im.complete && im.naturalWidth > 0;
-    var dpr = () => Math.min(2, window.devicePixelRatio || 1);
-    var size = () => { S.W = f.clientWidth; S.H = f.clientHeight; };
-    var span = (im) => tall(im) ? Math.max(0, S.W * (+im.getAttribute('height')) / (+im.getAttribute('width')) - S.H) : 0;
-    var dur = (im) => tall(im) ? HOLD + span(im) / (PAN * Math.max(1, S.H)) * 1000 : DUR;
-    var off = (im, el) => tall(im) ? Math.min(span(im), Math.max(0, (el - HOLD) / 1000 * PAN * S.H)) : 0;
-    var place = (im, y) => { var q = dpr(); im.style.transform = y > 0 ? 'translate3d(0,' + (-Math.round(y * q) / q) + 'px,0)' : ''; };
-    var load = (j) => { var im = imgs[j]; if (!im.getAttribute('src') && im.getAttribute('data-src')) im.src = im.getAttribute('data-src'); };
-    /* a frame-sized bitmap of slide k with its top edge y px down the page */
-    var snap = (k, y) => {
-      var im = imgs[k], q = dpr(), W = S.W, H = S.H, c = document.createElement('canvas'), g;
-      c.width = Math.round(W * q); c.height = Math.round(H * q); g = c.getContext('2d');
-      g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high';
-      if (tall(im)) {
-        y = Math.round(y * q) / q;
-        var u = W / im.naturalWidth;
-        g.drawImage(im, 0, y / u, im.naturalWidth, H / u, 0, 0, c.width, c.height);
-      } else {
-        var iw = im.naturalWidth, ih = im.naturalHeight, cover = im.getAttribute('data-fit') !== 'contain';
-        var pos = (im.getAttribute('data-pos') || '50% 50%').split(' ').map(parseFloat);
-        var s = cover ? Math.max(W / iw, H / ih) : Math.min(W / iw, H / ih), dw = iw * s, dh = ih * s;
-        if (!cover) { g.fillStyle = getComputedStyle(f).backgroundColor; g.fillRect(0, 0, c.width, c.height); }
-        g.drawImage(im, (W - dw) * pos[0] / 100 * q, (H - dh) * pos[1] / 100 * q, dw * q, dh * q);
-      }
-      return c;
-    };
-    var frameOf = (k, y) => { var key = k + '|' + S.W + 'x' + S.H + '|' + Math.round(y); return cache[key] || (cache[key] = snap(k, y)); };
-    /* while a page rests at the top, bake the two frames the next transition will need */
-    var warm = () => {
-      if (reduce || !ctx || S.busy || !S.W) return;
-      var k = S.i, A = imgs[k], j = (k + 1) % n, B = imgs[j];
-      load(j);
-      if (!ready(A)) return;
-      if (!ready(B)) { if (!S.warming) { S.warming = 1; B.addEventListener('load', () => { S.warming = 0; warm(); }, { once: true }); } return; }
-      setTimeout(() => { if (S.i === k && !S.busy) frameOf(k, span(A)); }, 0);
-      setTimeout(() => { if (S.i === k && !S.busy) frameOf(j, 0); }, 150);
+    var paint = (im, W, H) => {
+      var iw = im.naturalWidth, ih = im.naturalHeight, cover = im.getAttribute('data-fit') !== 'contain';
+      var pos = (im.getAttribute('data-pos') || '50% 50%').split(' ').map(parseFloat);
+      var s = cover ? Math.max(W / iw, H / ih) : Math.min(W / iw, H / ih), dw = iw * s, dh = ih * s;
+      if (!cover) { ctx.fillStyle = getComputedStyle(f).backgroundColor; ctx.fillRect(0, 0, W, H); }
+      ctx.drawImage(im, (W - dw) * pos[0] / 100, (H - dh) * pos[1] / 100, dw, dh);
     };
     var hex = (x, y, r) => {
       ctx.moveTo(x + r, y);
@@ -102,33 +69,21 @@ class Component extends DCLogic {
       ctx.closePath();
     };
     var settle = (j, manual) => {
-      var A = imgs[S.i], B = imgs[j];
-      A.classList.remove('on'); A.setAttribute('aria-hidden', 'true'); place(A, 0);
-      B.classList.add('on'); B.classList.remove('under'); B.removeAttribute('aria-hidden'); place(B, 0);
-      S.i = j; S.el = 0;
+      imgs[S.i].classList.remove('on'); imgs[S.i].setAttribute('aria-hidden', 'true');
+      imgs[j].classList.add('on'); imgs[j].removeAttribute('aria-hidden');
+      S.i = j;
       if (num) num.textContent = pad(j);
-      if (this.cap) { this.cap.setAttribute('aria-live', manual ? 'polite' : 'off'); this.cap.textContent = B.getAttribute('data-cap') || ''; }
-      load((j + 1) % n);
-      clearTimeout(S.wt); S.wt = setTimeout(warm, 500);
+      if (this.cap) { this.cap.setAttribute('aria-live', manual ? 'polite' : 'off'); this.cap.textContent = imgs[j].getAttribute('data-cap') || ''; }
     };
     var go = (d, manual) => {
-      if (S.busy || S.wait) return;
+      if (S.busy) return;
       var j = (S.i + d + n) % n, A = imgs[S.i], B = imgs[j];
-      load(j);
-      if (reduce || !ctx) { settle(j, manual); return; }
-      if (!ready(B)) {
-        /* the next page is still on its way: start as soon as it lands (or give up and swap if it never does) */
-        S.wait = 1;
-        var landed = (ok) => { S.wait = 0; if (ok) go(d, manual); else settle(j, manual); };
-        B.addEventListener('load', () => landed(true), { once: true });
-        B.addEventListener('error', () => landed(false), { once: true });
-        return;
-      }
-      S.busy = true;
-      var W = S.W, H = S.H, q = dpr(), snA = frameOf(S.i, off(A, S.el)), snB = frameOf(j, 0);
       S.el = 0;
-      cv.width = Math.round(W * q); cv.height = Math.round(H * q);
-      ctx.setTransform(q, 0, 0, q, 0, 0);
+      if (reduce || !ctx || !ready(A) || !ready(B)) { settle(j, manual); return; }
+      S.busy = true;
+      var W = f.clientWidth, H = f.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       var R = Math.max(24, Math.min(76, W / 16)), h3 = Math.sqrt(3) * R, cells = [];
       for (var c = -1; c * 1.5 * R < W + R; c++) {
         for (var r = -1; r * h3 < H + h3; r++) {
@@ -137,13 +92,12 @@ class Component extends DCLogic {
           cells.push(x, y, Math.max(0, Math.min(1, u)));
         }
       }
-      place(B, 0); B.classList.add('under');
       var t0 = 0;
       var frame = (now) => {
         if (!t0) t0 = now;
         var t = Math.min(1, (now - t0) / TR), ring = [];
         ctx.clearRect(0, 0, W, H);
-        ctx.drawImage(snA, 0, 0, W, H);
+        paint(A, W, H);
         ctx.save(); ctx.beginPath();
         for (var k = 0; k < cells.length; k += 3) {
           var p = Math.min(1, Math.max(0, (t - cells[k + 2] * .55) / .45));
@@ -152,30 +106,23 @@ class Component extends DCLogic {
           hex(cells[k], cells[k + 1], R * 1.03 * e);
           if (p < 1) ring.push(cells[k], cells[k + 1], R * e, p);
         }
-        ctx.clip(); ctx.drawImage(snB, 0, 0, W, H); ctx.restore();
+        ctx.clip(); paint(B, W, H); ctx.restore();
         ctx.lineWidth = 1;
-        for (var z = 0; z < ring.length; z += 4) {
-          ctx.strokeStyle = 'rgba(255,255,255,' + (Math.sin(Math.PI * ring[z + 3]) * .75).toFixed(3) + ')';
-          ctx.beginPath(); hex(ring[z], ring[z + 1], ring[z + 2]); ctx.stroke();
+        for (var q = 0; q < ring.length; q += 4) {
+          ctx.strokeStyle = 'rgba(255,255,255,' + (Math.sin(Math.PI * ring[q + 3]) * .75).toFixed(3) + ')';
+          ctx.beginPath(); hex(ring[q], ring[q + 1], ring[q + 2]); ctx.stroke();
         }
         if (t < 1) { S.tr = requestAnimationFrame(frame); return; }
         settle(j, manual);
-        cache = {};
-        /* keep the finished frame up for a beat, so the page underneath has painted before the canvas goes */
-        S.tr = requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(() => { cv.classList.remove('on'); S.busy = false; }, 60)));
+        S.tr = requestAnimationFrame(() => { cv.classList.remove('on'); S.busy = false; });
       };
       cv.classList.add('on');
       S.tr = requestAnimationFrame(frame);
     };
     var tick = (now) => {
       var dt = S.last ? Math.min(100, now - S.last) : 0; S.last = now;
-      var A = imgs[S.i], tot = dur(A);
-      if (!S.paused && !S.busy && !S.wait && !document.hidden) {
-        S.el = Math.min(tot, S.el + dt);
-        if (S.el >= tot) go(1, false);
-      }
-      if (!S.busy && tall(A)) place(A, off(A, S.el));
-      if (bar) bar.style.transform = 'scaleX(' + (S.busy ? 0 : Math.min(1, S.el / tot)).toFixed(4) + ')';
+      if (!S.paused && !S.busy && !document.hidden) { S.el += dt; if (S.el >= DUR) go(1, false); }
+      if (bar) bar.style.transform = 'scaleX(' + Math.min(1, S.el / DUR).toFixed(4) + ')';
       S.raf = S.vis ? requestAnimationFrame(tick) : 0;
     };
     f.addEventListener('click', (e) => {
@@ -197,34 +144,31 @@ class Component extends DCLogic {
       var dx = e.clientX - px; px = null;
       if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1, true);
     });
-    size();
-    if (window.ResizeObserver) { this.carRO = new ResizeObserver(() => { size(); cache = {}; }); this.carRO.observe(f); }
-    if (reduce) {
-      /* no motion: the pages sit at the top and the frame itself scrolls, so the whole page can still be read */
-      f.classList.add('rm');
-      var st = f.querySelector('.car-st');
-      if (st) { st.setAttribute('tabindex', '0'); st.setAttribute('role', 'group'); st.setAttribute('aria-label', 'Página do componente — role para ver tudo'); }
-      load(1);
-      return;
-    }
+    if (reduce) return;
     if ('IntersectionObserver' in window) {
       this.carIO = new IntersectionObserver((es) => {
         S.vis = es[0].isIntersecting;
         if (S.vis && !S.raf) { S.last = 0; S.raf = requestAnimationFrame(tick); }
-        if (S.vis && !S.started) { S.started = 1; setTimeout(() => { load(1); warm(); }, 700); }
       }, { threshold: .35 });
       this.carIO.observe(f);
-    } else { S.vis = true; S.raf = requestAnimationFrame(tick); load(1); setTimeout(warm, 700); }
+    } else { S.vis = true; S.raf = requestAnimationFrame(tick); }
   }
+  /* one scale for every chapter; when it would drop below .8 the chapters stack vertically at full size instead */
   fit() {
-    this.chEls.forEach((c) => {
-      var cc = c.querySelector('.ch-c'); if (!cc) return;
-      cc.style.zoom = '';
-      if (!this.hz) return;
-      var need = cc.scrollHeight, avail = cc.clientHeight;
-      if (need > avail + 1) cc.style.zoom = Math.max(.45, avail / need).toFixed(3);
-    });
+    var r = this.root, cs = this.chEls.map((c) => c.querySelector('.ch-c')).filter(Boolean), z = 1;
+    cs.forEach((cc) => { cc.style.zoom = ''; });
+    this.flat = false;
+    if (!r) return;
+    r.classList.toggle('hz', !!this.wide);
+    if (!this.wide) return;
+    var hdr = document.querySelector('.hdr');
+    if (hdr) r.style.setProperty('--hh', hdr.offsetHeight + 'px');
+    /* layout offsets ignore the reveal transforms, which scrollHeight would count as overflow */
+    cs.forEach((cc) => { var need = 0; [].forEach.call(cc.children, (k) => { need = Math.max(need, k.offsetTop + k.offsetHeight); }); need -= cc.offsetTop; if (need > cc.clientHeight + 1) z = Math.min(z, cc.clientHeight / need); });
+    if (z < .8) { this.flat = true; r.classList.remove('hz'); }
+    else if (z < 1) { z = z.toFixed(3); cs.forEach((cc) => { cc.style.zoom = z; }); }
   }
+  refit = () => { this.fitKey = ''; this.measure(); };
   goChapter(i) {
     if (!this.hz || !this.run) return;
     var top = this.run.getBoundingClientRect().top + window.scrollY - this.hh;
@@ -261,8 +205,8 @@ class Component extends DCLogic {
     document.addEventListener('click', this.onToc);
     this.measure();
     this.initCar();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.fit());
-    setTimeout(() => this.fit(), 600);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(this.refit);
+    setTimeout(this.refit, 600);
   }
 
   componentWillUnmount() {
@@ -279,11 +223,12 @@ class Component extends DCLogic {
     var w = window, y = w.scrollY || 0, vh = w.innerHeight, docH = document.documentElement.scrollHeight;
     if (this.prog) this.prog.style.transform = 'scaleX(' + Math.min(1, Math.max(0, y / Math.max(1, docH - vh))).toFixed(4) + ')';
     var active = 0, n = this.chEls.length;
-    var hz = !!(w.matchMedia && w.matchMedia('(min-width: 1081px)').matches && this.root && this.root.classList.contains('js') && this.run && this.track);
+    var wide = !!(w.matchMedia && w.matchMedia('(min-width: 1081px)').matches && this.root && this.root.classList.contains('js') && this.run && this.track);
+    var fk = wide + ':' + w.innerWidth + 'x' + vh;
+    if (fk !== this.fitKey) { this.fitKey = fk; this.wide = wide; this.fit(); }
+    var hz = wide && !this.flat;
     if (hz !== this.hz && !hz && this.run) { this.run.style.height = ''; this.track.style.transform = ''; }
     this.hz = hz;
-    var fk = hz + ':' + w.innerWidth + 'x' + vh;
-    if (fk !== this.fitKey) { this.fitKey = fk; this.fit(); }
     if (hz) {
       /* web: each chapter holds for a moment, then the next one slides in from the side */
       var hdr = document.querySelector('.hdr'), hh = hdr ? hdr.offsetHeight : 108;
